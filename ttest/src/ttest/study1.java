@@ -13,6 +13,7 @@ public class study1 {
 
 	public static int topIndex(int[] scores) {
 
+		int asdf=1;
 		int topIndex = 0;
 		for (int i = 0; i < scores.length - 1; i++) {
 
