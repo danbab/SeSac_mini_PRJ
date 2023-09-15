@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>회원가입</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: rgb(255, 255, 255);
             margin: 0;
             padding: 0;
             display: flex;
@@ -16,7 +16,7 @@
             height: 100vh;
         }
 
-        .login-container {
+        .signup-container {
             background-color: #ffffff;
             padding: 20px;
             border-radius: 5px;
@@ -24,28 +24,28 @@
             width: 300px;
         }
 
-        .login-container h2 {
+        .signup-container h2 {
             text-align: center;
             margin-bottom: 20px;
         }
 
-        .login-form {
+        .signup-form {
             display: flex;
             flex-direction: column;
         }
 
-        .login-form label {
+        .signup-form label {
             margin-bottom: 5px;
         }
 
-        .login-form input {
+        .signup-form input {
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 3px;
         }
 
-        .login-form button {
+        .signup-form button {
             padding: 10px;
             background-color: #007bff;
             color: #fff;
@@ -54,22 +54,25 @@
             cursor: pointer;
         }
 
-        .login-form button:hover {
+        .signup-form button:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form class="login-form" action="login.php" method="post">
-            <label for="username">Username:</label>
+    <div class="signup-container">
+        <h2>회원가입</h2>
+        <form class="signup-form" action="register.php" method="post">
+            <label for="username">사용자명:</label>
             <input type="text" id="username" name="username" required>
 
-            <label for="password">Password:</label>
+            <label for="email">이메일:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">비밀번호:</label>
             <input type="password" id="password" name="password" required>
 
-            <button type="submit">Login</button>
+            <button type="submit">가입</button>
         </form>
     </div>
 </body>
