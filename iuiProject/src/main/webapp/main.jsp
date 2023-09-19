@@ -1,9 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
+<jsp:useBean id="service" class="iuiProject.MemberDAO"/>
+<jsp:useBean id="member" class="iuiProject.MemberDTO"/>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IUI</title>
+<style>
         /* 스타일링 */
         body {
             font-family: Arial, sans-serif;
@@ -102,6 +109,7 @@
         
         
         
+        
 
         .close-button {
             position: absolute;
@@ -114,12 +122,13 @@
     </style>
 </head>
 <body>
-    <header>
+<header>
+		
         <div class="login-button" onclick="toggleLoginPopup()">로그인</div>
         <div class="register-button" onclick="toggleRegisterPopup()">회원가입</div>
     </header>
     <div>
-         <a href="Main.html">
+         <a href="main.jsp">
 			 <img src="logo.jpg" width="350" height="175" alt="iui 홈페이지">
 		 </a>
     </div>
@@ -142,30 +151,7 @@
         </div>
     </div>
     
-    <!-- 회원가입 팝업 -->
-    <div id="register-popup" class="popup">
-        <div class="popup-content">
-            <span class="close-button" onclick="toggleRegisterPopup()">&times;</span>
-            <h2>회원가입</h2>
-            <br>
-            <form class="login-form" action="Main.html" method="post">
-                <label for="id">아이디:</label>
-                <input type="text" id="id" name="id" required>
-
-                <label for="pw">비밀번호:</label>
-                <input type="password" id="pw" name="pw" required>
-                
-                <label for="nickname">닉네임:</label>
-                <input type="text" id="nickname" name="nickname" required>
-                
-                <label for="Email">Email:</label>
-                <input type="email" id="email" name="email" required><br>
-
-                <button type="submit" onclick="registerAction()">회원가입</button><br>
-                <button type="reset">초기화</button>
-            </form>
-        </div>
-    </div>
+   
 
     <!-- 나머지 콘텐츠 -->
     <p>이곳에 나머지 웹 페이지 내용을 추가하세요.</p>
@@ -177,6 +163,8 @@
         var registerPopup = document.getElementById('register-popup');
         var usernameInput = document.getElementById('id'); // 아이디 입력 필드
         var passwordInput = document.getElementById('pw'); // 비밀번호 입력 필드
+        usernameInput.value = '';
+        passwordInput.value = '';
 
         if (loginPopup.style.display === 'block') {
             loginPopup.style.display = 'none';
@@ -191,32 +179,13 @@
     }
 
     function toggleRegisterPopup() {
-        var loginPopup = document.getElementById('login-popup');
-        var registerPopup = document.getElementById('register-popup');
-        var idInput = document.getElementById('id'); // 사용자 이름 입력 필드
-        var pwInput = document.getElementById('pw'); // 비밀번호 입력 필드
-        var nicknameInput = document.getElementById('nickname');
-        var emailInput = document.getElementById('email');
-		
-        if (registerPopup.style.display === 'block') {
-            registerPopup.style.display = 'none';
-            // 팝업이 닫힐 때 입력 필드 초기화
-            idInput.value = '';
-            pwInput.value = '';
-            nicknameInput.value='';
-            emailInput.value='';
-        } else {
-            registerPopup.style.display = 'block';
-            // 로그인 팝업 닫기
-            loginPopup.style.display = 'none';
-        }
+    	  window.location.href = 'register.jsp';
     }
     
-    function registerAction(){
-		alert("회원가입에 성공하였습니다");
-	}
-</script>
+    
+   
 
+</script>
 
 </body>
 </html>

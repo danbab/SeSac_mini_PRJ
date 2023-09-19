@@ -1,7 +1,5 @@
 package iuiProject;
 
-import java.util.*;
-
 public class MemberDTO {
 	private int memberNo;
 
@@ -18,6 +16,16 @@ public class MemberDTO {
 	public MemberDTO() {
 		super();
 	}
+
+	
+	public MemberDTO(String id, String pw, String email, String nickname) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.email = email;
+		this.nickname = nickname;
+	}
+
 
 	public MemberDTO(int memberNo, String id, String pw, String email, String nickname, int status) {
 		super();
@@ -75,6 +83,13 @@ public class MemberDTO {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+
+	@Override
+	public String toString() {
+		return "MemberDTO [memberNo=" + memberNo + ", id=" + id + ", pw=" + pw + ", email=" + email + ", nickname="
+				+ nickname + ", status=" + status + "]";
 	}
 
 	/*
