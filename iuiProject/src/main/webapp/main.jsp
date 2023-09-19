@@ -9,8 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="styles.css">
 <title>IUI</title>
-<style>
+<!-- <style>
         /* 스타일링 */
         body {
             font-family: Arial, sans-serif;
@@ -119,7 +120,7 @@
             font-size: 24px;
             color: #333;
         }
-    </style>
+    </style> -->
 </head>
 <body>
 <header>
@@ -128,10 +129,10 @@
         <div class="register-button" onclick="toggleRegisterPopup()">회원가입</div>
     </header>
     <div>
-         <a href="main.jsp">
-			 <img src="logo.jpg" width="350" height="175" alt="iui 홈페이지">
-		 </a>
-    </div>
+		<a href="main.jsp"> <img src="logo.jpg" width="200" height="100"
+			alt="iui 홈페이지">
+		</a>
+	</div>
 
     <!-- 로그인 팝업 -->
     <div id="login-popup" class="popup">
@@ -139,11 +140,10 @@
             <span class="close-button" onclick="toggleLoginPopup()">&times;</span>
             <h2>로그인</h2>
             <br>
-            <form class="login-form" action="Main.html" method="post">
-                <!--<label for="username">아이디:</label>-->
+            <form class="login-form" action="main.jsp" method="post">
+                <label for="id">아이디:</label>
                 <input type="text" id="id" name="id" placeholder="아이디" required>
-
-                <!--<label for="password">비밀번호:</label>-->
+                <label for="password">비밀번호:</label>
                 <input type="password" id="pw" name="pw"  placeholder="비밀번호" required>
 				<br>
                 <button type="submit">로그인</button>
@@ -151,10 +151,49 @@
         </div>
     </div>
     
-   
-
-    <!-- 나머지 콘텐츠 -->
-    <p>이곳에 나머지 웹 페이지 내용을 추가하세요.</p>
+    <aside>
+		<div class="dropdown">
+			<a href="#">아이유의 음원 목록</a>
+			<a href="#">앨범명1</a>
+			<div class="dropdown-content">
+				<a href="#">수록곡 1</a>
+				<a href="#">수록곡 2</a>
+				<a href="#">수록곡 3</a>
+				<a href="#">수록곡 4</a>
+				<a href="#">수록곡 5</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<a href="#">앨범명2</a>
+			<div class="dropdown-content">
+				<a href="#">수록곡 1</a>
+				<a href="#">수록곡 2</a>
+				<a href="#">수록곡 3</a>
+				<a href="#">수록곡 4</a>
+				<a href="#">수록곡 5</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<a href="#">앨범명3</a>
+			<div class="dropdown-content">
+				<a href="#">수록곡 1</a>
+				<a href="#">수록곡 2</a>
+				<a href="#">수록곡 3</a>
+				<a href="#">수록곡 4</a>
+				<a href="#">수록곡 5</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<a href="#">앨범명4</a>
+			<div class="dropdown-content">
+				<a href="#">수록곡 1</a>
+				<a href="#">수록곡 2</a>
+				<a href="#">수록곡 3</a>
+				<a href="#">수록곡 4</a>
+				<a href="#">수록곡 5</a>
+			</div>
+		</div>
+	</aside>
 
     <!-- JavaScript 스크립트 -->
     <script>
@@ -181,11 +220,6 @@
     function toggleRegisterPopup() {
     	  window.location.href = 'register.jsp';
     }
-    
-    
-   
-
-</script>
-
+	</script>
 </body>
 </html>
