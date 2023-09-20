@@ -1,9 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
+<jsp:useBean id="service" class="iuiProject.MemberDAO"/>
+<jsp:useBean id="member" class="iuiProject.MemberDTO"/>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="styles.css">
+<title>IUI</title>
+<!-- <style>
         /* 스타일링 */
         body {
             font-family: Arial, sans-serif;
@@ -101,6 +109,8 @@
         }
         
         
+        
+        
 
         .close-button {
             position: absolute;
@@ -110,30 +120,30 @@
             font-size: 24px;
             color: #333;
         }
-    </style>
+    </style> -->
 </head>
 <body>
-    <header>
-        <div class="login-button" onclick="toggleLoginPopup()">로그인</div>
-        <div class="register-button" onclick="toggleRegisterPopup()">회원가입</div>
-    </header>
-    <div>
-         <a href="testmain.html">
-			 <img src="logo.jpg" width="350" height="175" alt="iui 홈페이지">
-		 </a>
-    </div>
+	<header>
 
-    <!-- 로그인 팝업 -->
+		<div class="login-button" onclick="toggleLoginPopup()">로그인</div>
+		<div class="register-button" onclick="toggleRegisterPopup()">회원가입</div>
+	</header>
+	<div>
+		<a href="testmain.jsp"> <img src="logo.jpg" width="200" height="100"
+			alt="iui 홈페이지" style="position: fixed;  margin-top: 49px;">
+		</a>
+	</div>
+
+	<!-- 로그인 팝업 -->
     <div id="login-popup" class="popup">
         <div class="popup-content">
             <span class="close-button" onclick="toggleLoginPopup()">&times;</span>
             <h2>로그인</h2>
             <br>
-            <form class="login-form" action="testmain.html" method="post">
-                <!--<label for="username">아이디:</label>-->
+            <form class="login-form" action="main.jsp" method="post">
+                <label for="id">아이디:</label>
                 <input type="text" id="id" name="id" placeholder="아이디" required>
-
-                <!--<label for="password">비밀번호:</label>-->
+                <label for="password">비밀번호:</label>
                 <input type="password" id="pw" name="pw"  placeholder="비밀번호" required>
 				<br>
                 <button type="submit">로그인</button>
@@ -141,33 +151,53 @@
         </div>
     </div>
     
-    <!-- 회원가입 팝업 -->
-    <div id="register-popup" class="popup">
-        <div class="popup-content">
-            <span class="close-button" onclick="toggleRegisterPopup()">&times;</span>
-            <h2>회원가입</h2>
-            <br>
-            <form class="login-form" action="testmain.html" method="post">
-                <label for="username">아이디:</label>
-                <input type="text" id="id" name="id" required>
-
-                <label for="password">비밀번호:</label>
-                <input type="password" id="pw" name="pw" required>
-                
-                <label for="nickname">닉네임:</label>
-                <input type="text" id="nickname" name="nickname" required>
-                
-                <label for="Email">Email:</label>
-                <input type="email" id="email" name="email" required><br>
-
-                <button type="submit">회원가입</button><br>
-                <button type="reset">초기화</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- 나머지 콘텐츠 -->
-    <p>이곳에 나머지 웹 페이지 내용을 추가하세요.</p>
+    <aside>
+		<div class="dropdown">
+			<a href="#">아이유의 음원 목록</a>
+			<a href="#">앨범명1</a>
+			<div class="dropdown-content">
+				<a href="#">수록곡 1</a>
+				<a href="#">수록곡 2</a>
+				<a href="#">수록곡 3</a>
+				<a href="#">수록곡 4</a>
+				<a href="#">수록곡 5</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<a href="#">앨범명2</a>
+			<div class="dropdown-content">
+				<a href="#">수록곡 1</a>
+				<a href="#">수록곡 2</a>
+				<a href="#">수록곡 3</a>
+				<a href="#">수록곡 4</a>
+				<a href="#">수록곡 5</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<a href="#">앨범명3</a>
+			<div class="dropdown-content">
+				<a href="#">수록곡 1</a>
+				<a href="#">수록곡 2</a>
+				<a href="#">수록곡 3</a>
+				<a href="#">수록곡 4</a>
+				<a href="#">수록곡 5</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<a href="#">앨범명4</a>
+			<div class="dropdown-content">
+				<a href="#">수록곡 1</a>
+				<a href="#">수록곡 2</a>
+				<a href="#">수록곡 3</a>
+				<a href="#">수록곡 4</a>
+				<a href="#">수록곡 5</a>
+			</div>
+		</div>
+	</aside>
+	
+	<section>
+	<jsp:include page="testview.jsp" />
+	</section>
 
     <!-- JavaScript 스크립트 -->
     <script>
@@ -176,6 +206,8 @@
         var registerPopup = document.getElementById('register-popup');
         var usernameInput = document.getElementById('id'); // 아이디 입력 필드
         var passwordInput = document.getElementById('pw'); // 비밀번호 입력 필드
+        usernameInput.value = '';
+        passwordInput.value = '';
 
         if (loginPopup.style.display === 'block') {
             loginPopup.style.display = 'none';
@@ -190,28 +222,8 @@
     }
 
     function toggleRegisterPopup() {
-        var loginPopup = document.getElementById('login-popup');
-        var registerPopup = document.getElementById('register-popup');
-        var idInput = document.getElementById('id'); // 사용자 이름 입력 필드
-        var pwInput = document.getElementById('pw'); // 비밀번호 입력 필드
-        var nicknameInput = document.getElementById('nickname');
-        var emailInput = document.getElementById('email');
-		
-        if (registerPopup.style.display === 'block') {
-            registerPopup.style.display = 'none';
-            // 팝업이 닫힐 때 입력 필드 초기화
-            idInput.value = '';
-            pwInput.value = '';
-            nicknameInput.value='';
-            emailInput.value='';
-        } else {
-            registerPopup.style.display = 'block';
-            // 로그인 팝업 닫기
-            loginPopup.style.display = 'none';
-        }
+    	  window.location.href = 'register.jsp';
     }
-</script>
-
-
+	</script>
 </body>
 </html>
