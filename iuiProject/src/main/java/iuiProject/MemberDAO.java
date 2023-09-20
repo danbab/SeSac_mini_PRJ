@@ -12,7 +12,7 @@ public class MemberDAO {
 	private String password = "hr";
 	private static final String jdbcclass = "oracle.jdbc.OracleDriver";
 	private ConnectionPool pool;
-	private ResultSet rs;
+	
 	
 
 	public MemberDAO() {
@@ -66,26 +66,60 @@ public class MemberDAO {
 	public int login(String id, String pw) throws SQLException, ClassNotFoundException {
 		Connection conn = pool.getConnection();
 		String SQL = "SELECT pw FROM MEMBER WHERE id = ?";
-		PreparedStatement pstmt = conn.prepareStatement(SQL);
-
+		
+		int result=0;
 		try {
-			pstmt = conn.prepareStatement(SQL);
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
+			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				if (rs.getString(1).equals(pw)) {
-					return 1; // 로그인 성공
+					System.out.println("로그인 성공");
+					result = 1; // 로그인 성공
 				} else {
-					return 0; // 비밀번호 불일치
+					System.out.println("비밀번호 불일치");
+					result = 0; // 비밀번호 불일치
 				}
+			} else {
+				System.out.println("회원정보 없음");
+				result = -1; // 아이디가 없음
 			}
-			return -1; // 아이디가 없음
+			pstmt.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		pstmt.close();
+		
 		pool.releaseConnection(conn);
-		return -2; // 데이터베이스 오류
+		return result; // 데이터베이스 오류
 	}
+	
+	//ID,PW 매칭 후 블랙리스트인 사람이면 거부
+	public MemberDTO select(String id, String pw) throws SQLException, ClassNotFoundException {
+	    Connection conn = pool.getConnection();
+	    String sql = "select * from member where id=? and pw=?";
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setString(1, id);
+	    pstmt.setString(2, pw);
+	    MemberDTO member = null;
+	    ResultSet rs = pstmt.executeQuery(); // executeQuery 메서드 인자 제거
+	    while (rs.next()) {
+	    	if (rs.getInt("status") > 0) {
+	            member = new MemberDTO(rs.getInt("member_no"), rs.getString("id"), rs.getString("pw"), rs.getString("email"), 
+	                rs.getString("nickname"), rs.getInt("status"));
+	        } else {
+	            // 이 사람은 블랙리스트임
+	            member = null;
+	        }
+	    }
+	    System.out.println(member);
+	    rs.close();
+	    pstmt.close();
+	    pool.releaseConnection(conn);
+	    return member;
+	}
+
+	
+	
 }

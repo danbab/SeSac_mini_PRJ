@@ -73,23 +73,23 @@ body {
 <body>
 	<header>
 		<div>
-			<a href="main.jsp"> <img src="logo.jpg" width="200" height="100" alt="iui 홈페이지"></a>
+			<a href="main.jsp"> <img src="logo.jpg" width="200" height="100"
+				alt="iui 홈페이지"></a>
 		</div>
 	</header>
-	
+
 	<div class="signup-container">
 		<h2>회원가입</h2>
 		<form class="signup-form" action="registerAction.jsp" method="GET">
-			<label for="id">아이디:</label> 
-			<input type="text" id="id" name="id" placeholder="아이디" required>
-			<label for="pw">비밀번호:</label>
-			<input type="password" id="pw" name="pw"  placeholder="비밀번호" required> 
-			<label for="pw">비밀번호 확인:</label> 
-			<input type="password" id="pwc" name="pwc" placeholder="비밀번호 확인" required> 
-			<label for="nickname">닉네임:</label> 
-			<input type="text" id="nickname" name="nickname" placeholder="닉네임" required> 
-			<label for="Email">Email: </label> 
-			<input type="email" id="email" name="email" placeholder="이메일" required><br>
+			<label for="id">아이디:</label> <input type="text" id="id" name="id"
+				placeholder="아이디" required> <label for="pw">비밀번호:</label> <input
+				type="password" id="pw" name="pw" placeholder="비밀번호" required>
+			<label for="pw">비밀번호 확인:</label> <input type="password" id="pwc"
+				name="pwc" placeholder="비밀번호 확인" required> <label
+				for="nickname">닉네임:</label> <input type="text" id="nickname"
+				name="nickname" placeholder="닉네임" required> <label
+				for="Email">Email: </label> <input type="email" id="email"
+				name="email" placeholder="이메일" required><br>
 
 			<button type="submit">가입</button>
 			<br>
