@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-<jsp:useBean id="service" class="iuiProject.MemberDAO"/>
-<jsp:useBean id="member" class="iuiProject.MemberDTO"/>
+
 
 <!DOCTYPE html>
 <html>
@@ -10,8 +9,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="styles.css">
-<title>IUI</title>
+<title>IUI.main</title>
 </head>
+
 <body>
 	<header>
 		<div class="login-button" onclick="toggleLoginPopup()">로그인</div>
@@ -30,7 +30,7 @@
             <span class="close-button" onclick="toggleLoginPopup()">&times;</span>
             <h2>로그인</h2>
             <br>
-            <form class="login-form" action="main.jsp" method="post">
+            <form class="login-form" action="loginAction.jsp" method="GET">
                 <label for="id">아이디:</label>
                 <input type="text" id="id" name="id" placeholder="아이디" required>
                 <label for="password">비밀번호:</label>
