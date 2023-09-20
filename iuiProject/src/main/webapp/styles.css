@@ -26,14 +26,39 @@ body {
 	padding: 0;
 }
 
-header {
+/*header {
+	
 	background-color: rgb(128, 128, 255);
 	color: rgb(46, 46, 46);
 	padding: 10px;
 	display: flex;
 	justify-content: flex-end;
-	/* 로그인 바를 오른쪽 정렬합니다. */
+}*/
+
+header {
+        position: fixed; /* 헤더를 고정합니다. */
+        top: 0;
+        left: 0;
+        background-color: rgb(128, 128, 255);
+        color: rgb(46, 46, 46);
+        padding: 10px;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        z-index: 1000;
+    }
+
+
+
+section {
+	margin-top: 49px;
+		float: right;
+		width: 82.5%;
+		display: flex;
+		justify-content: flex-start;
 }
+
+
 
 .login-button {
 	cursor: pointer;
@@ -52,6 +77,7 @@ header {
 	color: rgb(255, 255, 255);
 	border: none;
 	border-radius: 5px;
+	margin-right: 20px;
 }
 
 /* 팝업 스타일링 v1 */
@@ -128,7 +154,7 @@ header {
 aside {
 	position: fixed;
 	left: 0;
-	top: 150px;
+	top: 149px;
 	width: 200px;
 	background-color: rgb(128, 128, 255);
 	color: #fff;
@@ -148,10 +174,6 @@ aside a:hover {
 	background-color: rgb(128, 128, 128);
 }
 
-section {
-	float: right;
-    width: 70%;
-}
 
 /* Dropdown menu styles */
 .dropdown {

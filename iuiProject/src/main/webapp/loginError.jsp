@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Error 404</title>
 </head>
 <body>
-<img src="image/LILAC.webp" width="700px">
+Error 404<br>
+로그인 실패<br>
+<a href = "main.jsp">메인 화면</a>
 </body>
 </html>

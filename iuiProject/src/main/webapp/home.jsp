@@ -1,175 +1,99 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" errorPage="loginError.jsp"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-<jsp:useBean id="service" class="iuiProject.MemberDAO"/>
-<jsp:useBean id="member" class="iuiProject.MemberDTO"/>
+<jsp:useBean id="service" type="iuiProject.MemberDAO" scope = "application"/>
+<jsp:useBean id="user" type="iuiProject.MemberDTO" scope="session"/>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IUI</title>
-<style>
-        /* 스타일링 */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-          
+<link rel="stylesheet" type="text/css" href="styles.css">
+<title>IUI.home</title>
 
-        header {
-            background-color: rgb(255, 255, 255);
-            color: #fff;
-            padding: 10px;
-            display: flex;
-            justify-content: flex-end; /* 로그인 바를 오른쪽 정렬합니다. */
-        }
-
-        .login-button {
-            cursor: pointer;
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-        
-        .register-button {
-            cursor: pointer;
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-        }
-
-        /* 팝업 스타일링 v1 */
-        .popup {
-            
-			display: none;
-            position: fixed;
-            top: 50%; /* 화면 상단에서 50% 위치에 배치합니다. */
-            left: 50%; /* 화면 왼쪽에서 50% 위치에 배치합니다. */
-            transform: translate(-50%, -50%); /* 팝업을 수평 및 수직으로 중앙에 배치합니다. */
-            width: 300px; /* 팝업의 크기 조절 */
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1;
-            justify-content: center;
-            align-items: center;
-           
-        }
-        
-
-        .popup-content {
-                       
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            width: 300px;
-            position: relative;
-            
-        }
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .login-form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .login-form label {
-            margin-bottom: 5px;
-        }
-
-        .login-form input {
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-
-        .login-form button {
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .login-form button:hover {
-            background-color: #0056b3;
-        }
-        
-        
-        
-        
-
-        .close-button {
-            position: absolute;
-            top: 5%;
-            right: 5%;
-            cursor: pointer;
-            font-size: 24px;
-            color: #333;
-        }
-    </style>
 </head>
 <body>
-<header>
-		<div>환영합니다</div>
-        <div class="login-button" onclick="toggleLogoutPopup()">로그아웃</div>
-        <div class="register-button" onclick="toggleRegisterPopup()">정보수정</div>
-    </header>
-    <div>
-         <a href="home.jsp">
-			 <img src="logo.jpg" width="350" height="175" alt="iui 홈페이지">
-		 </a>
-    </div>
+<jsp:setProperty property="*" name="member"/>
+	<header>
+		<div style="margin-right: 10px; margin-top:5px;  "><%=user.getNickname()%>님 </div>
+		<div class="login-button" onclick="logout()">로그아웃</div>
+		<div class="register-button" onclick="infoMod()">정보수정</div>
+	</header>
+	<div>
+		<a href="home.jsp"> <img src="logo.jpg" width="200" height="100"
+			alt="iui 홈페이지" style="position: fixed;  margin-top: 49px;">
+		</a>
+	</div>
 
-    <!-- 로그인 팝업 -->
-    <div id="login-popup" class="popup">
-        <div class="popup-content">
-            <span class="close-button" onclick="toggleLoginPopup()">&times;</span>
-            <h2>로그인</h2>
-            <br>
-            <form class="login-form" action="Main.html" method="post">
-                <!--<label for="username">아이디:</label>-->
-                <input type="text" id="id" name="id" placeholder="아이디" required>
-
-                <!--<label for="password">비밀번호:</label>-->
-                <input type="password" id="pw" name="pw"  placeholder="비밀번호" required>
-				<br>
-                <button type="submit">로그인</button>
-            </form>
-        </div>
-    </div>
+	
     
-    
-
-    <!-- 나머지 콘텐츠 -->
-    <p>이곳에 나머지 웹 페이지 내용을 추가하세요.</p>
+    <aside>
+		<div class="dropdown">
+			<a href="#">아이유의 음원 목록</a>
+			<a href="#">앨범명1</a>
+			<div class="dropdown-content">
+				<a href="#">수록곡 1</a>
+				<a href="#">수록곡 2</a>
+				<a href="#">수록곡 3</a>
+				<a href="#">수록곡 4</a>
+				<a href="#">수록곡 5</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<a href="#">앨범명2</a>
+			<div class="dropdown-content">
+				<a href="#">수록곡 1</a>
+				<a href="#">수록곡 2</a>
+				<a href="#">수록곡 3</a>
+				<a href="#">수록곡 4</a>
+				<a href="#">수록곡 5</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<a href="#">앨범명3</a>
+			<div class="dropdown-content">
+				<a href="#">수록곡 1</a>
+				<a href="#">수록곡 2</a>
+				<a href="#">수록곡 3</a>
+				<a href="#">수록곡 4</a>
+				<a href="#">수록곡 5</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<a href="#">앨범명4</a>
+			<div class="dropdown-content">
+				<a href="#">수록곡 1</a>
+				<a href="#">수록곡 2</a>
+				<a href="#">수록곡 3</a>
+				<a href="#">수록곡 4</a>
+				<a href="#">수록곡 5</a>
+			</div>
+		</div>
+	</aside>
+	
+	<section>
+	<jsp:include page="view.jsp" />
+	</section>
 
     <!-- JavaScript 스크립트 -->
     <script>
-    function toggleLogoutPopup() {
-       
+    function logout() {
+        // 서버에 로그아웃 요청을 보내고, 성공적으로 로그아웃되면 리다이렉트 처리
+        fetch('logout.jsp', { // 로그아웃을 처리할 서블릿의 URL을 넣으세요.
+            method: 'GET',
+        }).then(response => {
+            if (response.status === 200) {
+                window.location.href = 'main.jsp'; // 로그아웃 후 이동할 페이지 URL을 넣으세요.
+            }
+        }).catch(error => {
+            console.error('로그아웃 요청 중 오류 발생:', error);
+        });
     }
 
-    function toggleRegisterPopup() {
-       
+    function infoMod() {
+    	 window.location.href = 'register.jsp';
     }
-    
-    
-   
-
-</script>
-
+	</script>
 </body>
 </html>
