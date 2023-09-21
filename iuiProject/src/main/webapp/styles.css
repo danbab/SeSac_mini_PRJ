@@ -26,15 +26,6 @@ body {
 	padding: 0;
 }
 
-/*header {
-	
-	background-color: rgb(128, 128, 255);
-	color: rgb(46, 46, 46);
-	padding: 10px;
-	display: flex;
-	justify-content: flex-end;
-}*/
-
 header {
 	position: fixed;
 	/* 헤더를 고정합니다. */
@@ -218,8 +209,6 @@ aside a img {
 	display: block;
 }
 
-
-
 .signup-container {
 	background-color: #ffffff;
 	padding: 20px;
@@ -259,5 +248,52 @@ aside a img {
 }
 
 .signup-form button:hover {
+	background-color: #0056b3;
+}
+
+.modifyInfo-container {
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	width: 300px;
+}
+
+.modifyInfo-container h2 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.modifyInfo-form {
+	left: auto;
+	right: auto;
+	top: auto;
+	bottom: auto;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+.modifyInfo-form label {
+	margin-bottom: 5px;
+}
+
+.modifyInfo-form input {
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+.modifyInfo-form button {
+	padding: 10px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.modifyInfo-form button:hover {
 	background-color: #0056b3;
 }

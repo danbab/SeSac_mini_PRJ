@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*"%>
-<%-- <jsp:useBean id="service" type="iuiProject.MemberDAO" scope="application"/> --%>
+<jsp:useBean id="service" type="iuiProject.MemberDAO" scope="application"/>
 <jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session"/>
 
 <!DOCTYPE html>
@@ -9,55 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>회원정보 수정</title>
-<!-- 외부 CSS 파일 링크 -->
-<!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
-<style>
-.modifyInfo-container {
-	background-color: #ffffff;
-	padding: 20px;
-	border-radius: 5px;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-	width: 300px;
-}
-
-.modifyInfo-container h2 {
-	text-align: center;
-	margin-bottom: 20px;
-}
-
-.modifyInfo-form {
-	display: flex;
-	flex-direction: column;
-}
-
-.modifyInfo-form label {
-	margin-bottom: 5px;
-}
-
-.modifyInfo-form input {
-	padding: 10px;
-	margin-bottom: 10px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-}
-
-.modifyInfo-form button {
-	padding: 10px;
-	background-color: #007bff;
-	color: #fff;
-	border: none;
-	border-radius: 3px;
-	cursor: pointer;
-}
-
-.modifyInfo-form button:hover {
-	background-color: #0056b3;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 	<header>
-		<div>
+		<div class="logo">
 			<img src="logo.jpg" width="200" height="100">
 		</div>
 	</header>
