@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,12 +11,10 @@
 </head>
 <body>
 
-		<div>
-			<a href="main.jsp"> <img src="logo.jpg" width="200" height="100"
-				alt="iui 홈페이지">
-			</a>
-		</div>
-	
+	<div class="register-logo">
+		<a href="main.jsp"> <img src="logo.jpg"	alt="iui 홈페이지">
+		</a>
+	</div>
 
 	<div class="signup-container">
 		<h2>회원가입</h2>

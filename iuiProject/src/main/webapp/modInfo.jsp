@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*"%>
-<%-- <% request.setCharacterEncoding("UTF-8"); %>
- --%><jsp:useBean id="service" type="iuiProject.MemberDAO" scope="application"/>
+<jsp:useBean id="service" type="iuiProject.MemberDAO" scope="application"/>
 <jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session"/>
 
 <!DOCTYPE html>
@@ -10,21 +8,16 @@
 <head>
 <meta charset="UTF-8">
 <title>회원정보 수정</title>
-<!-- 외부 CSS 파일 링크 -->
 <link rel="stylesheet" type="text/css" href="styles.css">
-
 </head>
 <body>
-
-<%= member.toString() %>
-	<header>
-		<div>
-			<img src="logo.jpg" width="200" height="100">
-		</div>
-	</header>
-	<div class="modifyInfo-container">
+	<div class="modInfo-logo">
+		<a href="home.jsp"> <img src="logo.jpg"	alt="iui 홈페이지">
+		</a>
+	</div>
+	<div class="modInfo-container">
 		<h2>회원정보 수정</h2>
-		<form class="modifyInfo-form" action="modInfoAction.jsp" method="POST">
+		<form class="modInfo-form" action="modInfoAction.jsp" method="POST">
 			<label for="id">아이디:</label> 
 			<input type="text" id="id" name="id" placeholder="아이디" 
 			value="<%= member.getId()%>" readonly required>

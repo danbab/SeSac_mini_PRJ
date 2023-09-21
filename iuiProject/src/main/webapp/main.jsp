@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-
 
 <!DOCTYPE html>
 <html>
@@ -38,7 +36,7 @@
     <aside>
 		<div>
 			<a href="main.jsp" style="padding: 0; margin: 0; width: 200px; height: 100px;"> 
-			<img src="logo.jpg"  style="padding: 0; margin: 0;" width="200" height="100"
+			<img src="logo.jpg"  style="padding: 0; margin: 0;" width="200px" height="100px"
 				   alt="iui 홈페이지">
 			</a>
 		</div>

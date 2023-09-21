@@ -1,4 +1,4 @@
-/* 스타일링 */
+/* 폰트 로드 */
 @font-face {
 	font-family: 'PartialSansKR-Regular';
 	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/PartialSansKR-Regular.woff2') format('woff2');
@@ -20,27 +20,20 @@
 	font-style: normal;
 }
 
+/* 전체 스타일 */
 body {
 	font-family: 'TTTtangsbudaejjigaeB';
 	margin: 0;
 	padding: 0;
 }
 
-/*header {
-	
-	background-color: rgb(128, 128, 255);
-	color: rgb(46, 46, 46);
-	padding: 10px;
-	display: flex;
-	justify-content: flex-end;
-}*/
-
+/* 헤더 스타일 */
 header {
 	position: fixed;
-	/* 헤더를 고정합니다. */
 	top: 0;
 	left: 0;
 	background-color: rgb(128, 128, 255);
+	/* 연보라색 배경색상 */
 	color: rgb(46, 46, 46);
 	padding: 10px;
 	display: flex;
@@ -49,6 +42,7 @@ header {
 	z-index: 1000;
 }
 
+/* 섹션 스타일 */
 section {
 	position: relative;
 	border: 5px solid rgb(128, 128, 255);
@@ -60,17 +54,18 @@ section {
 	justify-content: center;
 }
 
-
-.card-title{
+.card-title {
 	width: 213px;
 	height: 24px;
-	
 }
-.col-md-3{
+
+.col-md-3 {
 	margin-bottom: 11px;
 }
 
-.login-button {
+/* 로그인 및 회원가입 버튼 스타일 */
+.login-button,
+.register-button {
 	cursor: pointer;
 	padding: 5px 10px;
 	background-color: rgb(64, 128, 128);
@@ -80,27 +75,20 @@ section {
 	margin-right: 10px;
 }
 
-.register-button {
-	cursor: pointer;
-	padding: 5px 10px;
-	background-color: rgb(64, 128, 128);
-	color: rgb(255, 255, 255);
-	border: none;
-	border-radius: 5px;
+/* 버튼 호버 효과 */
+.login-button:hover,
+.register-button:hover {
+	background-color: rgb(0, 128, 128);
 }
 
-/* 팝업 스타일링 v1 */
+/* 팝업 스타일 */
 .popup {
 	display: none;
 	position: fixed;
 	top: 50%;
-	/* 화면 상단에서 50% 위치에 배치합니다. */
 	left: 50%;
-	/* 화면 왼쪽에서 50% 위치에 배치합니다. */
 	transform: translate(-50%, -50%);
-	/* 팝업을 수평 및 수직으로 중앙에 배치합니다. */
 	width: 300px;
-	/* 팝업의 크기 조절 */
 	background-color: rgba(0, 0, 0, 0.7);
 	z-index: 1;
 	justify-content: center;
@@ -114,7 +102,6 @@ section {
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 	width: 300px;
 	position: relative;
-
 }
 
 .login-container h2 {
@@ -160,6 +147,7 @@ section {
 	color: #333;
 }
 
+/* 사이드바 스타일 */
 aside {
 	position: fixed;
 	left: 0;
@@ -169,7 +157,6 @@ aside {
 	color: #fff;
 	height: 100%;
 	overflow: auto;
-	/*padding-top: 20px;*/
 }
 
 aside a {
@@ -177,7 +164,7 @@ aside a {
 	text-decoration: none;
 	color: #fff;
 	display: block;
-	width: fit-content;
+	width: auto;
 }
 
 aside a:hover {
@@ -186,14 +173,11 @@ aside a:hover {
 }
 
 aside a img {
-    padding: 0;
-    margin: 0;
-   
-    /*border: none;  이미지 주변의 테두리(border)도 제거하려면 추가 */
+	padding: 0;
+	margin: 0;
 }
 
-
-/* Dropdown menu styles */
+/* 드롭다운 메뉴 스타일 */
 .dropdown {
 	position: relative;
 	display: inline-block;
@@ -217,46 +201,19 @@ aside a img {
 	display: block;
 }
 
-.modifyInfo-container {
-	background-color: #ffffff;
-	padding: 20px;
-	border-radius: 5px;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-	width: 300px;
-}
-
-.modifyInfo-container h2 {
-	text-align: center;
-	margin-bottom: 20px;
-}
-
-.modifyInfo-form {
-	display: flex;
-	flex-direction: column;
-}
-
-.modifyInfo-form label {
-	margin-bottom: 5px;
-}
-
-.modifyInfo-form input {
+/* 로고 및 회원가입 폼 스타일 */
+.register-logo {
+	background-color: rgb(128, 128, 255);
+	/* 연보라색 배경색상 (연하게 조정) */
 	padding: 10px;
-	margin-bottom: 10px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
+	/* 상하좌우 여백 추가 */
 }
 
-.modifyInfo-form button {
-	padding: 10px;
-	background-color: #007bff;
-	color: #fff;
-	border: none;
-	border-radius: 3px;
-	cursor: pointer;
-}
 
-.modifyInfo-form button:hover {
-	background-color: #0056b3;
+.register-logo a img {
+	width: auto;
+	height: 80px;
+	/* 로고 이미지 크기 축소 */
 }
 
 .signup-container {
@@ -264,6 +221,11 @@ aside a img {
 	padding: 20px;
 	border-radius: 5px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	display: block;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	width: 300px;
 }
 
@@ -289,6 +251,7 @@ aside a img {
 }
 
 .signup-form button {
+	font-family: 'TTTtangsbudaejjigaeB';
 	padding: 10px;
 	background-color: #007bff;
 	color: #fff;
@@ -298,5 +261,67 @@ aside a img {
 }
 
 .signup-form button:hover {
+	background-color: #0056b3;
+}
+
+.modInfo-container {
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	display: block;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 300px;
+}
+
+.modInfo-container h2 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.modInfo-logo {
+	background-color: rgb(128, 128, 255);
+	/* 연보라색 배경색상 (연하게 조정) */
+	padding: 10px;
+	/* 상하좌우 여백 추가 */
+}
+
+
+.modInfo-logo a img {
+	width: auto;
+	height: 80px;
+	/* 로고 이미지 크기 축소 */
+}
+
+.modInfo-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.modInfo-form label {
+	margin-bottom: 5px;
+}
+
+.modInfo-form input {
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+.modInfo-form button {
+	font-family: 'TTTtangsbudaejjigaeB';
+	padding: 10px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.modInfo-form button:hover {
 	background-color: #0056b3;
 }

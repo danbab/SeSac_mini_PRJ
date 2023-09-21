@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" errorPage="loginError.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="loginError.jsp"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
 <jsp:useBean id="service" type="iuiProject.MemberDAO" scope = "application"/>
 <jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session"/>
@@ -14,7 +13,6 @@
 
 </head>
 <body>
-<%-- <jsp:setProperty property="*" name="member"/> --%>
 	<header>
 		<div style="margin-right: 10px; margin-top:5px;"> <%=member.getNickname()%>님 </div>
 		<div class="login-button" onclick="logout()">로그아웃</div>
@@ -25,12 +23,15 @@
     <aside>
 		<div>
 			<a href="home.jsp" style="padding: 0; margin: 0; width: 200px; height: 100px;"> 
-			<img src="logo.jpg" style="padding: 0; margin: 0;" width="200"
-				height="100" alt="iui 홈페이지">
+			<img src="logo.jpg"  style="padding: 0; margin: 0;" width="200px" height="100px"
+				   alt="iui 홈페이지">
 			</a>
 		</div>
+
+		<div>
+    		<a href="#">아이유의 음원 목록</a>
+    	</div>
 		<div class="dropdown">
-			<a href="#">아이유의 음원 목록</a>
 			<a href="#">앨범명1</a>
 			<div class="dropdown-content">
 				<a href="#">수록곡 1</a>
