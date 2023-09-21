@@ -22,8 +22,7 @@
 					<div class="card-body">
 						<h5 class="card-title">조각집</h5>
 						<!-- 모달 트리거 버튼 -->
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#albumModal">앨범 정보</button>
+						<button type="button" class="btn btn-primary" onclick="test(1005)">앨범 정보</button>
 					</div>
 				</div>
 			</div>
@@ -33,8 +32,7 @@
 					<div class="card-body">
 						<h5 class="card-title">strawberry moon</h5>
 						<!-- 모달 트리거 버튼 -->
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#albumModal">앨범 정보</button>
+						<button type="button" class="btn btn-primary" onclick="test(1004)">앨범 정보</button>
 					</div>
 				</div>
 			</div>
@@ -45,8 +43,7 @@
 					<div class="card-body">
 						<h5 class="card-title">라일락</h5>
 						<!-- 모달 트리거 버튼 -->
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#albumModal">앨범 정보</button>
+						<button type="button" class="btn btn-primary" onclick="test(1003)">앨범 정보</button>
 					</div>
 				</div>
 			</div>
@@ -56,8 +53,7 @@
 					<div class="card-body">
 						<h5 class="card-title">Into the I-LAND</h5>
 						<!-- 모달 트리거 버튼 -->
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#albumModal">앨범 정보</button>
+						<button type="button" class="btn btn-primary" onclick="test(1002)">앨범 정보</button>
 					</div>
 				</div>
 			</div>
@@ -68,8 +64,7 @@
 					<div class="card-body">
 						<h5 class="card-title">에잇</h5>
 						<!-- 모달 트리거 버튼 -->
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#albumModal">앨범 정보</button>
+						<button type="button" class="btn btn-primary" onclick="test(1001)">앨범 정보</button>
 					</div>
 				</div>
 			</div>
@@ -79,8 +74,7 @@
 					<div class="card-body">
 						<h5 class="card-title">마음을 드려요</h5>
 						<!-- 모달 트리거 버튼 -->
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#albumModal">앨범 정보</button>
+						<button type="button" class="btn btn-primary" onclick="test(1000)">앨범정보</button>
 					</div>
 				</div>
 			</div>
@@ -133,21 +127,26 @@
 		</div>
 	</div>
 	<script>
-	function test() {
+	function test(i) {
 	    // AJAX 요청 생성
 	    var xhr = new XMLHttpRequest();
+	    const target = "?albumId="+i;
+	    console.log(target);
 	    
 	    // 요청을 보낼 페이지 URL 설정
-	    xhr.open('GET', 'login.html', true);
+	    xhr.open('GET', 'albumView.jsp'+target, true);
+	      
 
 	    // 요청이 완료되면 실행될 함수 정의
 	    xhr.onload = function () {
 	        if (xhr.status === 200) {
 	            // 응답으로 받은 HTML을 section 요소에 삽입
 	            document.querySelector('section').innerHTML = xhr.responseText;
+	            history.pushState(null, null, '?albumId=' + i);
 	        } else {
 	            alert('페이지 로드 중 오류가 발생했습니다.');
-	        }
+/* 	            window.location.href = 'main.jsp';
+ */	        }
 	    };
 	    
 	    // 요청 보내기

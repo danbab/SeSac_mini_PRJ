@@ -18,7 +18,6 @@ function showAlertAndRedirect(message, redirectTo) {
 <jsp:setProperty property="*" name="member"/>
 
 <%
-String nick = request.getParameter("nickname");
 // 회원가입 로직 수행
 System.out.println("여기는 registerAction: "+ member.toString());
 int result = service.join(member);
@@ -26,7 +25,7 @@ int result = service.join(member);
 if (result == 1) { // 회원가입이 성공한 경우
 %>
 <body onload="showAlertAndRedirect('회원가입이 완료되었습니다.', 'main.jsp');">
-가져온 닉네임:<%=nick  %>
+
 
 result:<%=result %><br>
 아이디:<%=member.getId() %><br>

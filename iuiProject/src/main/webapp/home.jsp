@@ -84,12 +84,15 @@
             method: 'GET',
         }).then(response => {
             if (response.status === 200) {
+            	alert('로그아웃 완료');
                 window.location.href = 'main.jsp'; // 로그아웃 후 이동할 페이지 URL을 넣으세요.
             }
         }).catch(error => {
             console.error('로그아웃 요청 중 오류 발생:', error);
         });
-    }
+    } 
+    
+   
 
     function modInfo() {
     	 window.location.href = 'modInfo.jsp';

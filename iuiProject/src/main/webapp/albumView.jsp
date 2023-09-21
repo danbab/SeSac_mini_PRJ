@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Error 404</title>
+<title>Insert title here</title>
 </head>
+<%
+int albumId=Integer.parseInt(request.getParameter("albumId"));
+%>
 <body>
-Error 404<br>
-로그인 정보없음<br>
-<a href = "main.jsp">메인 화면</a>
+여기는 <%=albumId %>의 view 페이지 입니다
 </body>
 </html>
