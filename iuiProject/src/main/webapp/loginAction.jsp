@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-<jsp:useBean id="service" class="iuiProject.MemberDAO" scope = "application"/>
+<jsp:useBean id="service" class="iuiProject.MemberDAO"
+	scope="application" />
 
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@
 	if (result == 1) {
 		MemberDTO member = service.select(id, pw);
 		System.out.println("select :: " + member);
-		session.setAttribute("user", member);
+		session.setAttribute("member", member);
 		response.sendRedirect("home.jsp");
 	} else if (result == 0) {
 		// 비밀번호 불일치 처리
@@ -39,5 +40,9 @@
 	<%
 	}
 	%>
+	<script>
+		alert("비밀번호가 일치하지 않습니다. 메인페이지로 돌아갑니다");
+		location.href = "main.jsp"
+	</script>
 </body>
 </html>
