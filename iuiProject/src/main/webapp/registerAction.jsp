@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-<jsp:useBean id="member" class="iuiProject.MemberDTO"></jsp:useBean>
-<jsp:useBean id="service" class="iuiProject.MemberDAO"></jsp:useBean>
+<jsp:useBean id="member" class="iuiProject.MemberDTO"/>
+<jsp:useBean id="service" class="iuiProject.MemberDAO"/>
 <!DOCTYPE html>
 <html> 
 <head>
@@ -20,7 +20,7 @@ function showAlertAndRedirect(message, redirectTo) {
 <%
 String nick = request.getParameter("nickname");
 // 회원가입 로직 수행
-System.out.println("여기는 registerAction: "+member.toString());
+System.out.println("여기는 registerAction: "+ member.toString());
 int result = service.join(member);
 
 if (result == 1) { // 회원가입이 성공한 경우
@@ -43,7 +43,6 @@ result:<%=result %><br>
 비밀번호:<%=member.getPw() %><br>
 닉네임:<%=member.getNickname() %><br>
 이메일:<%=member.getEmail() %>
-
 </body>
 <%
 }
