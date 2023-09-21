@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="service" type="iuiProject.MemberDAO" scope="application" />
