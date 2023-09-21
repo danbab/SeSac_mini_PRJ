@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" errorPage="loginError.jsp"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
 <jsp:useBean id="service" type="iuiProject.MemberDAO" scope = "application"/>
-<jsp:useBean id="user" type="iuiProject.MemberDTO" scope="session"/>
+<jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session"/>
 
 <!DOCTYPE html>
 <html>
@@ -14,19 +14,17 @@
 
 </head>
 <body>
-<jsp:setProperty property="*" name="member"/>
+<%-- <jsp:setProperty property="*" name="member"/> --%>
 	<header>
-		<div style="margin-right: 10px; margin-top:5px;  "><%=user.getNickname()%>님 </div>
+		<div style="margin-right: 10px; margin-top:5px;"> <%=member.getNickname()%>님 </div>
 		<div class="login-button" onclick="logout()">로그아웃</div>
-		<div class="register-button" onclick="infoMod()">정보수정</div>
+		<div class="register-button" onclick="modInfo()">정보수정</div>
 	</header>
 	<div>
 		<a href="home.jsp"> <img src="logo.jpg" width="200" height="100"
-			alt="iui 홈페이지" style="position: fixed;  margin-top: 49px;">
+			alt="iui 홈페이지" style="position: fixed;  margin-top: auto;">
 		</a>
 	</div>
-
-	
     
     <aside>
 		<div class="dropdown">
@@ -73,7 +71,7 @@
 	</aside>
 	
 	<section>
-	<jsp:include page="view.jsp" />
+	<jsp:include page="view.jsp"/>
 	</section>
 
     <!-- JavaScript 스크립트 -->
@@ -91,8 +89,8 @@
         });
     }
 
-    function infoMod() {
-    	 window.location.href = 'register.jsp';
+    function modInfo() {
+    	 window.location.href = 'modInfo.jsp';
     }
 	</script>
 </body>
