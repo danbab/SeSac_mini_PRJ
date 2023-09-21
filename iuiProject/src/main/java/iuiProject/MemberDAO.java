@@ -132,8 +132,7 @@ public class MemberDAO {
 		pstmt.setString(2, member.getNickname());
 		pstmt.setString(3, member.getEmail());
 		pstmt.setInt(4, member.getMemberNo());
-		
-		int result = pstmt.executeUpdate(sql);
+		int result = pstmt.executeUpdate();
 		pstmt.close();
 		pool.releaseConnection(conn);
 		return result;

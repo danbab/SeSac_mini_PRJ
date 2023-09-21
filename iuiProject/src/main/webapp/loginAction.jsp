@@ -34,7 +34,7 @@
 	// 아이디가 없음 처리
 	%>
 	<script>
-		alert("계정이 없으시군요. 회원가입 페이지로 이동합니다");
+		alert("계정이 없으시군요. 회원가입 페이지로 이동할게요.");
 		location.href = "register.jsp"
 	</script>
 	<%

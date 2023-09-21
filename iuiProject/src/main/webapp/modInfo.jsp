@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*"%>
-<jsp:useBean id="service" type="iuiProject.MemberDAO" scope="application"/>
+<%-- <% request.setCharacterEncoding("UTF-8"); %>
+ --%><jsp:useBean id="service" type="iuiProject.MemberDAO" scope="application"/>
 <jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session"/>
 
 <!DOCTYPE html>
@@ -14,6 +15,8 @@
 
 </head>
 <body>
+
+<%= member.toString() %>
 	<header>
 		<div>
 			<img src="logo.jpg" width="200" height="100">
