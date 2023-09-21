@@ -11,14 +11,13 @@
 <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-	<header>
-		<div class="logo">
-			<img src="logo.jpg" width="200" height="100">
-		</div>
-	</header>
-	<div class="modifyInfo-container">
+	<div class="modInfo-logo">
+		<a href="home.jsp"> <img src="logo.jpg"	alt="iui 홈페이지">
+		</a>
+	</div>
+	<div class="modInfo-container">
 		<h2>회원정보 수정</h2>
-		<form class="modifyInfo-form" action="modInfoAction.jsp" method="POST">
+		<form class="modInfo-form" action="modInfoAction.jsp" method="POST">
 			<label for="id">아이디:</label> 
 			<input type="text" id="id" name="id" placeholder="아이디" 
 			value="<%= member.getId()%>" readonly required>

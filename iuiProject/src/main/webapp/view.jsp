@@ -7,7 +7,7 @@
 <title>IUI 앨범뷰</title>
 <!-- 부트스트랩 CSS 링크 -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>

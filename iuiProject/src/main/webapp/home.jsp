@@ -23,12 +23,15 @@
     <aside>
 		<div>
 			<a href="home.jsp" style="padding: 0; margin: 0; width: 200px; height: 100px;"> 
-			<img src="logo.jpg" style="padding: 0; margin: 0;" width="200"
-				height="100" alt="iui 홈페이지">
+			<img src="logo.jpg"  style="padding: 0; margin: 0;" width="200px" height="100px"
+				   alt="iui 홈페이지">
 			</a>
 		</div>
+
+		<div>
+    		<a href="#">아이유의 음원 목록</a>
+    	</div>
 		<div class="dropdown">
-			<a href="#">아이유의 음원 목록</a>
 			<a href="#">앨범명1</a>
 			<div class="dropdown-content">
 				<a href="#">수록곡 1</a>
