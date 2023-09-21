@@ -20,15 +20,15 @@
 		<div class="login-button" onclick="logout()">로그아웃</div>
 		<div class="register-button" onclick="infoMod()">정보수정</div>
 	</header>
-	<div>
-		<a href="home.jsp"> <img src="logo.jpg" width="200" height="100"
-			alt="iui 홈페이지" style="position: fixed;  margin-top: 49px;">
-		</a>
-	</div>
-
-	
+		
     
     <aside>
+		<div>
+			<a href="home.jsp" style="padding: 0; margin: 0; width: 200px; height: 100px;"> 
+			<img src="logo.jpg" style="padding: 0; margin: 0;" width="200"
+				height="100" alt="iui 홈페이지">
+			</a>
+		</div>
 		<div class="dropdown">
 			<a href="#">아이유의 음원 목록</a>
 			<a href="#">앨범명1</a>

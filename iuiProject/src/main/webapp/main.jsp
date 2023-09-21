@@ -18,12 +18,6 @@
 		<div class="register-button" onclick="toggleRegisterPopup()">회원가입</div>
 	</header>
 	
-	<div>
-		<a href="main.jsp"> <img src="logo.jpg" width="200" height="100"
-			alt="iui 홈페이지" style="position: fixed; margin-top: auto;">
-		</a>
-	</div>
-
 	<!-- 로그인 팝업 -->
     <div id="login-popup" class="popup">
         <div class="popup-content">
@@ -42,7 +36,14 @@
     </div>
     
     <aside>
-    	<div>
+		<div>
+			<a href="main.jsp" style="padding: 0; margin: 0; width: 200px; height: 100px;"> 
+			<img src="logo.jpg"  style="padding: 0; margin: 0;" width="200" height="100"
+				   alt="iui 홈페이지">
+			</a>
+		</div>
+
+		<div>
     		<a href="#">아이유의 음원 목록</a>
     	</div>
 		<div class="dropdown">
