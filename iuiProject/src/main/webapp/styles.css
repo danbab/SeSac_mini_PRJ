@@ -61,12 +61,13 @@ section {
 }
 
 
-.card-title{
+.card-title {
 	width: 213px;
 	height: 24px;
-	
+
 }
-.col-md-3{
+
+.col-md-3 {
 	margin-bottom: 11px;
 }
 
@@ -186,10 +187,10 @@ aside a:hover {
 }
 
 aside a img {
-    padding: 0;
-    margin: 0;
-   
-    /*border: none;  이미지 주변의 테두리(border)도 제거하려면 추가 */
+	padding: 0;
+	margin: 0;
+
+	/*border: none;  이미지 주변의 테두리(border)도 제거하려면 추가 */
 }
 
 
@@ -217,47 +218,7 @@ aside a img {
 	display: block;
 }
 
-.modifyInfo-container {
-	background-color: #ffffff;
-	padding: 20px;
-	border-radius: 5px;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-	width: 300px;
-}
 
-.modifyInfo-container h2 {
-	text-align: center;
-	margin-bottom: 20px;
-}
-
-.modifyInfo-form {
-	display: flex;
-	flex-direction: column;
-}
-
-.modifyInfo-form label {
-	margin-bottom: 5px;
-}
-
-.modifyInfo-form input {
-	padding: 10px;
-	margin-bottom: 10px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-}
-
-.modifyInfo-form button {
-	padding: 10px;
-	background-color: #007bff;
-	color: #fff;
-	border: none;
-	border-radius: 3px;
-	cursor: pointer;
-}
-
-.modifyInfo-form button:hover {
-	background-color: #0056b3;
-}
 
 .signup-container {
 	background-color: #ffffff;

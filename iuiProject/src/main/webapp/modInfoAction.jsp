@@ -23,12 +23,12 @@
 
 	<%
 	// 사용자가 입력한 정보 가져오기
-	String newPw = request.getParameter("newPw");
+	String newpw = request.getParameter("newpw");
 	String nickname = request.getParameter("nickname");
 	String email = request.getParameter("email");
 
 	// 사용자 정보 업데이트 로직 수행
-	member.setPw(newPw);
+	member.setPw(newpw);
 	member.setNickname(nickname);
 	member.setEmail(email);
 

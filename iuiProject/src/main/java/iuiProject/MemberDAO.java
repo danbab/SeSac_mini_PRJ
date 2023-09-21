@@ -125,6 +125,7 @@ public class MemberDAO {
 	
 	//회원정보 수정
 	public int updateMemberInfo(MemberDTO member) throws SQLException {
+		System.out.println(member.toString());
 		Connection conn = pool.getConnection();
 		String sql = "UPDATE member SET pw = ?, nickname = ?, email = ? WHERE member_no = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -134,6 +135,7 @@ public class MemberDAO {
 		pstmt.setInt(4, member.getMemberNo());
 		
 		int result = pstmt.executeUpdate(sql);
+		
 		pstmt.close();
 		pool.releaseConnection(conn);
 		return result;
