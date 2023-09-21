@@ -22,7 +22,7 @@
 		if (result == 1) {
 			MemberDTO member = service.select(id, pw);
 			System.out.println("select :: " + member);
-			session.setAttribute("user", member);
+			session.setAttribute("member", member);
 			response.sendRedirect("home.jsp");
 		} else if (result == 0) {
 			// 비밀번호 불일치 처리
