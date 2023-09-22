@@ -43,10 +43,10 @@ album = albumService.selectAlbum(albumId);
 		}
 		%>
 	</div>
-
+	
 	<div class="song-container">
 		<div class="song-info">
-			<table>
+			<table border="1">
 				<th>트랙</th>
 				<th>곡명</th>
 				<th>작사</th>
