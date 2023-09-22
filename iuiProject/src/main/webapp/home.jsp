@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="loginError.jsp"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-<jsp:useBean id="service" type="iuiProject.MemberDAO" scope = "application"/>
+<jsp:useBean id="memberservice" type="iuiProject.MemberDAO" scope = "application"/>
 <jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session"/>
 
 <!DOCTYPE html>

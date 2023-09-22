@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-<jsp:useBean id="service" class="iuiProject.MemberDAO" scope="application" />
+<jsp:useBean id="memberService" class="iuiProject.MemberDAO" scope="application" />
 
 <!DOCTYPE html>
 <html>
@@ -13,9 +13,9 @@
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 
-	int result = service.login(id, pw);
+	int result = memberService.login(id, pw);
 	if (result == 1) {
-		MemberDTO member = service.select(id, pw);
+		MemberDTO member = memberService.select(id, pw);
 		System.out.println("select :: " + member);
 		session.setAttribute("member", member);
 		response.sendRedirect("home.jsp");
