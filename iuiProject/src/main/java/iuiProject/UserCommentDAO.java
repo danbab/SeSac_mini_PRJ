@@ -55,7 +55,7 @@ public class UserCommentDAO {
 	// 댓글 업데이트
 	public int updateComment(UserCommentDTO comment) throws SQLException {
 		Connection conn = pool.getConnection();
-		String sql = "UPDATE user_comment SET text = ?, timestamp = ? WHERE commentId = ?";
+		String sql = "UPDATE user_comment SET text = ?, timestamp = ? WHERE comment_id = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, comment.getText());
 		pstmt.setTimestamp(2, comment.getTimestamp());
@@ -73,7 +73,7 @@ public class UserCommentDAO {
 	// 댓글 삭제
 	public int deleteComment(int commentId) throws SQLException {
 		Connection conn = pool.getConnection();
-		String sql = "DELETE FROM user_comment WHERE commentId = ?";
+		String sql = "DELETE FROM user_comment WHERE comment_id = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, commentId);
 		int result = pstmt.executeUpdate();
@@ -90,20 +90,22 @@ public class UserCommentDAO {
 	public List<UserCommentDTO> getCommentsByAlbum(int albumId) throws SQLException, ClassNotFoundException {
 		Connection conn = pool.getConnection();
 		List<UserCommentDTO> comments = new ArrayList<>();
-		String sql = "SELECT * FROM user_comment WHERE albumId = ?";
+		String sql = "SELECT * FROM user_comment WHERE album_id = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, albumId);
 		ResultSet rs = pstmt.executeQuery();
 		UserCommentDTO comment = null;
 		while (rs.next()) {
 					comment = new UserCommentDTO(
-					rs.getInt("commentId"), 
-					rs.getInt("albumId"),
-					rs.getInt("memberNo"), 
+					rs.getInt("comment_id"), 
+					rs.getInt("album_id"),
+					rs.getInt("member_no"), 
 					rs.getString("text"), 
 					rs.getTimestamp("timestamp"));
 					comments.add(comment);
 		}
+		
+		rs.close();
 		pstmt.close();
 		pool.releaseConnection(conn);
 		return comments;
