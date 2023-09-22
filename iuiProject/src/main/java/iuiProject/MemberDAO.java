@@ -123,7 +123,6 @@ public class MemberDAO {
 
 		pstmt.close();
 		pool.releaseConnection(conn);
-
 		return result;
 	}
 }
