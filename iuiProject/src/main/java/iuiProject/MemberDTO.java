@@ -13,6 +13,7 @@ public class MemberDTO {
 
 	private String nickname;
 
+	//2:관리자 1:일반 0:블랙
 	private int status;
 
 	public MemberDTO() {

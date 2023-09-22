@@ -34,52 +34,23 @@
 		</div>
 
 		<div>
-    		<a href="#">아이유의 음원 목록</a>
+    		<a href="admin.jsp">관리자 페이지</a>
     	</div>
 		<div class="dropdown">
-			<a href="#">앨범명1</a>
+			<a href="#">회원 리스트</a>
 			<div class="dropdown-content">
-				<a href="#">수록곡 1</a>
-				<a href="#">수록곡 2</a>
-				<a href="#">수록곡 3</a>
-				<a href="#">수록곡 4</a>
-				<a href="#">수록곡 5</a>
+				<a href="#">전체 회원</a>
+				<a href="#">블랙리스트</a>
+				
 			</div>
 		</div>
 		<div class="dropdown">
-			<a href="#">앨범명2</a>
-			<div class="dropdown-content">
-				<a href="#">수록곡 1</a>
-				<a href="#">수록곡 2</a>
-				<a href="#">수록곡 3</a>
-				<a href="#">수록곡 4</a>
-				<a href="#">수록곡 5</a>
-			</div>
-		</div>
-		<div class="dropdown">
-			<a href="#">앨범명3</a>
-			<div class="dropdown-content">
-				<a href="#">수록곡 1</a>
-				<a href="#">수록곡 2</a>
-				<a href="#">수록곡 3</a>
-				<a href="#">수록곡 4</a>
-				<a href="#">수록곡 5</a>
-			</div>
-		</div>
-		<div class="dropdown">
-			<a href="#">앨범명4</a>
-			<div class="dropdown-content">
-				<a href="#">수록곡 1</a>
-				<a href="#">수록곡 2</a>
-				<a href="#">수록곡 3</a>
-				<a href="#">수록곡 4</a>
-				<a href="#">수록곡 5</a>
-			</div>
+			<a href="#">정보수정 요청</a>
 		</div>
 	</aside>
 	
 	<section>
-	<jsp:include page="view.jsp"/>
+	<jsp:include page="adminview.jsp"/>
 	</section>
 
     <!-- JavaScript 스크립트 -->

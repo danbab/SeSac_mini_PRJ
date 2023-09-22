@@ -12,7 +12,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 	<div class="container">
-		<h3 align="center">아이유 앨범 갤러리</h3>
+		<h3 align="center" style="margin-top:10px;">아이유 앨범 갤러리</h3>
 		<div class="row">
 			<!-- 앨범 재킷 카드 -->
 			<div class="col-md-3">
