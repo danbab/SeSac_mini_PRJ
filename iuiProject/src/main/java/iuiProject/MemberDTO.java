@@ -1,5 +1,7 @@
 package iuiProject;
 
+import java.util.Objects;
+
 public class MemberDTO {
 	private int memberNo;
 
@@ -17,7 +19,6 @@ public class MemberDTO {
 		super();
 	}
 
-	
 	public MemberDTO(String id, String pw, String email, String nickname) {
 		super();
 		this.id = id;
@@ -25,7 +26,6 @@ public class MemberDTO {
 		this.email = email;
 		this.nickname = nickname;
 	}
-
 
 	public MemberDTO(int memberNo, String id, String pw, String email, String nickname, int status) {
 		super();
@@ -85,25 +85,27 @@ public class MemberDTO {
 		this.status = status;
 	}
 
-
 	@Override
 	public String toString() {
 		return "MemberDTO [memberNo=" + memberNo + ", id=" + id + ", pw=" + pw + ", email=" + email + ", nickname="
 				+ nickname + ", status=" + status + "]";
 	}
 
-	/*
-	 * @Override public String toString() { return "MemberDTO [memberNo=" + memberNo
-	 * + ", id=" + id + "]"; }
-	 * 
-	 * @Override public int hashCode() { return Objects.hash(email, id, memberNo,
-	 * nickname, pw, status); }
-	 * 
-	 * @Override public boolean equals(Object obj) { if (this == obj) return true;
-	 * if (obj == null) return false; if (getClass() != obj.getClass()) return
-	 * false; MemberDTO other = (MemberDTO) obj; return Objects.equals(email,
-	 * other.email) && Objects.equals(id, other.id) && memberNo == other.memberNo &&
-	 * Objects.equals(nickname, other.nickname) && Objects.equals(pw, other.pw) &&
-	 * status == other.status; }
-	 */
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, id, memberNo, nickname, pw, status);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MemberDTO other = (MemberDTO) obj;
+		return Objects.equals(email, other.email) && Objects.equals(id, other.id) && memberNo == other.memberNo
+				&& Objects.equals(nickname, other.nickname) && Objects.equals(pw, other.pw) && status == other.status;
+	}
 }

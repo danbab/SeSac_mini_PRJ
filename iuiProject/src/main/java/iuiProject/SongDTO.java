@@ -32,7 +32,7 @@ public class SongDTO {
 		this.playtime = playtime;
 		this.titleCheck = titleCheck;
 	}
-
+	
 	public int getAlbumId() {
 		return albumId;
 	}
@@ -89,19 +89,32 @@ public class SongDTO {
 		this.titleCheck = titleCheck;
 	}
 
-	/*
-	 * @Override public String toString() { return "SongDTO [albumId=" + albumId +
-	 * "]"; }
-	 * 
-	 * @Override public int hashCode() { return Objects.hash(albumId, composer,
-	 * playtime, title, titleCheck, trackNo, writer); }
-	 * 
-	 * @Override public boolean equals(Object obj) { if (this == obj) return true;
-	 * if (obj == null) return false; if (getClass() != obj.getClass()) return
-	 * false; SongDTO other = (SongDTO) obj; return albumId == other.albumId &&
-	 * Objects.equals(composer, other.composer) && Objects.equals(playtime,
-	 * other.playtime) && Objects.equals(title, other.title) && titleCheck ==
-	 * other.titleCheck && trackNo == other.trackNo && Objects.equals(writer,
-	 * other.writer); }
-	 */
+	@Override
+	public String toString() {
+		return "SongDTO [albumId=" + albumId + ", trackNo=" + trackNo + ", title=" + title + ", writer=" + writer
+				+ ", composer=" + composer + ", playtime=" + playtime + ", titleCheck=" + titleCheck + ", getAlbumId()="
+				+ getAlbumId() + ", getTrackNo()=" + getTrackNo() + ", getTitle()=" + getTitle() + ", getWriter()="
+				+ getWriter() + ", getComposer()=" + getComposer() + ", getPlaytime()=" + getPlaytime()
+				+ ", getTitleCheck()=" + getTitleCheck() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(albumId, composer, playtime, title, titleCheck, trackNo, writer);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SongDTO other = (SongDTO) obj;
+		return albumId == other.albumId && Objects.equals(composer, other.composer)
+				&& Objects.equals(playtime, other.playtime) && Objects.equals(title, other.title)
+				&& titleCheck == other.titleCheck && trackNo == other.trackNo && Objects.equals(writer, other.writer);
+	}
 }

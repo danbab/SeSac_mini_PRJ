@@ -31,11 +31,10 @@ public class MemberDAO {
 	// 회원가입 기능
 	public int join(MemberDTO member) throws SQLException {
 		Connection conn = pool.getConnection();
-		System.out.println("이곳은 DAO " + member.toString());
-		String SQL = "INSERT INTO member (id, pw, email, nickname, member_no, status) VALUES (?, ?, ?, ?, member_no.nextval, 1)";
-		PreparedStatement pstmt = conn.prepareStatement(SQL);
+		String sql = "INSERT INTO member (id, pw, email, nickname, member_no, status) VALUES (?, ?, ?, ?, member_no.nextval, 1)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
 
-		pstmt = conn.prepareStatement(SQL);
+		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, member.getId());
 		pstmt.setString(2, member.getPw());
 		pstmt.setString(3, member.getEmail());
@@ -92,13 +91,12 @@ public class MemberDAO {
 		while (rs.next()) {
 			if (rs.getInt("status") > 0) {
 				member = new MemberDTO(
-						rs.getInt("member_no"),
-						rs.getString("id"),
+						rs.getInt("member_no"), 
+						rs.getString("id"), 
 						rs.getString("pw"),
-						rs.getString("email"),
-						rs.getString("nickname"),
-						rs.getInt("status")
-						);
+						rs.getString("email"), 
+						rs.getString("nickname"), 
+						rs.getInt("status"));
 			} else {
 				// 이 사람은 블랙리스트임
 				member = null;
@@ -110,8 +108,8 @@ public class MemberDAO {
 		pool.releaseConnection(conn);
 		return member;
 	}
-	
-	//회원정보 수정
+
+	// 회원정보 수정
 	public int updateMemberInfo(MemberDTO member) throws SQLException {
 		System.out.println(member.toString());
 		Connection conn = pool.getConnection();
@@ -122,10 +120,10 @@ public class MemberDAO {
 		pstmt.setString(3, member.getEmail());
 		pstmt.setInt(4, member.getMemberNo());
 		int result = pstmt.executeUpdate();
-		
+
 		pstmt.close();
 		pool.releaseConnection(conn);
-		
+
 		return result;
 	}
 }
