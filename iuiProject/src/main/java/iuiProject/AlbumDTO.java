@@ -89,19 +89,30 @@ public class AlbumDTO {
 		this.albumCover = albumCover;
 	}
 
-	/*
-	 * @Override public String toString() { return "AlbumDTO [albumId=" + albumId +
-	 * "]"; }
-	 * 
-	 * @Override public int hashCode() { return Objects.hash(albumCover, albumId,
-	 * albumIntro, albumName, albumType, numberSongs, releaseDate); }
-	 * 
-	 * @Override public boolean equals(Object obj) { if (this == obj) return true;
-	 * if (obj == null) return false; if (getClass() != obj.getClass()) return
-	 * false; AlbumDTO other = (AlbumDTO) obj; return Objects.equals(albumCover,
-	 * other.albumCover) && albumId == other.albumId && Objects.equals(albumIntro,
-	 * other.albumIntro) && Objects.equals(albumName, other.albumName) &&
-	 * Objects.equals(albumType, other.albumType) && numberSongs ==
-	 * other.numberSongs && Objects.equals(releaseDate, other.releaseDate); }
-	 */
+	@Override
+	public String toString() {
+		return "AlbumDTO [albumId=" + albumId + ", albumName=" + albumName + ", releaseDate=" + releaseDate
+				+ ", albumType=" + albumType + ", numberSongs=" + numberSongs + ", albumIntro=" + albumIntro
+				+ ", albumCover=" + albumCover + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(albumCover, albumId, albumIntro, albumName, albumType, numberSongs, releaseDate);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AlbumDTO other = (AlbumDTO) obj;
+		return Objects.equals(albumCover, other.albumCover) && albumId == other.albumId
+				&& Objects.equals(albumIntro, other.albumIntro) && Objects.equals(albumName, other.albumName)
+				&& Objects.equals(albumType, other.albumType) && numberSongs == other.numberSongs
+				&& Objects.equals(releaseDate, other.releaseDate);
+	}
 }

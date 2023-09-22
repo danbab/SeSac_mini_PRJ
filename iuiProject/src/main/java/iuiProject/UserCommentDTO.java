@@ -67,18 +67,27 @@ public class UserCommentDTO {
 		this.timestamp = timestamp;
 	}
 
-	/*
-	 * @Override public String toString() { return "UserCommentDTO [commentId=" +
-	 * commentId + ", text=" + text + ", timestamp=" + timestamp + "]"; }
-	 * 
-	 * @Override public int hashCode() { return Objects.hash(albumId, commentId,
-	 * memberNo, text, timestamp); }
-	 * 
-	 * @Override public boolean equals(Object obj) { if (this == obj) return true;
-	 * if (obj == null) return false; if (getClass() != obj.getClass()) return
-	 * false; UserCommentDTO other = (UserCommentDTO) obj; return albumId ==
-	 * other.albumId && commentId == other.commentId && memberNo == other.memberNo
-	 * && Objects.equals(text, other.text) && Objects.equals(timestamp,
-	 * other.timestamp); }
-	 */
+	@Override
+	public String toString() {
+		return "UserCommentDTO [commentId=" + commentId + ", albumId=" + albumId + ", memberNo=" + memberNo + ", text="
+				+ text + ", timestamp=" + timestamp + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(albumId, commentId, memberNo, text, timestamp);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserCommentDTO other = (UserCommentDTO) obj;
+		return albumId == other.albumId && commentId == other.commentId && memberNo == other.memberNo
+				&& Objects.equals(text, other.text) && Objects.equals(timestamp, other.timestamp);
+	}
 }
