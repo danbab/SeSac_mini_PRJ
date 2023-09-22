@@ -12,7 +12,7 @@
 <body>
 
 	<div class="register-logo">
-		<a href="main.jsp"> <img src="logo.jpg"	alt="iui 홈페이지">
+		<a href="main.jsp"> <img src="image/logo2.webp"	alt="iui 홈페이지">
 		</a>
 	</div>
 

@@ -34,10 +34,9 @@
     </div>
     
     <aside>
-		<div>
-			<a href="main.jsp" style="padding: 0; margin: 0; width: 200px; height: 100px;"> 
-			<img src="logo.jpg"  style="padding: 0; margin: 0;" width="200px" height="100px"
-				   alt="iui 홈페이지">
+		<div class="logo">
+			<a href="main.jsp" > 
+			<img src="image/logo2.webp" alt="iui 홈페이지">
 			</a>
 		</div>
 

@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="modInfo-logo">
-		<a href="home.jsp"> <img src="logo.jpg"	alt="iui 홈페이지">
+		<a href="home.jsp"> <img src="image/logo2.webp"	alt="iui 홈페이지">
 		</a>
 	</div>
 	<div class="modInfo-container">
