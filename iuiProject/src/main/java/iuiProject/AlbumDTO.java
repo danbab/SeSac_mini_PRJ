@@ -20,7 +20,8 @@ public class AlbumDTO {
 	public AlbumDTO() {
 		super();
 	}
-
+	
+	
 	public AlbumDTO(int albumId, String albumName, Date releaseDate, String albumType, int numberSongs,
 			String albumIntro, String albumCover) {
 		super();

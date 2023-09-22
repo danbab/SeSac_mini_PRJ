@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
 <jsp:useBean id="member" class="iuiProject.MemberDTO" />
-<jsp:useBean id="service" class="iuiProject.MemberDAO" />
+<jsp:useBean id="memberService" class="iuiProject.MemberDAO" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +19,7 @@
 <%
 // 회원가입 로직 수행
 System.out.println("여기는 registerAction: " + member.toString());
-int result = service.join(member);
+int result = memberService.join(member);
 
 if (result == 1) { // 회원가입이 성공한 경우
 %>

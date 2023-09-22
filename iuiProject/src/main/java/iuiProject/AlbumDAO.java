@@ -34,7 +34,7 @@ public class AlbumDAO {
     // 앨범 추가
     public boolean addAlbum(AlbumDTO album) throws SQLException {
     	Connection conn = pool.getConnection();
-        String sql = "INSERT INTO albums (albumId, albumName, releaseDate, albumType, numberSongs, albumIntro, albumCover) " +
+        String sql = "INSERT INTO album (album_Id, album_name, release_date, album_Type, number_songs, album_intro, album_cover) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
         	pstmt.setInt(1, album.getAlbumId());
@@ -56,31 +56,33 @@ public class AlbumDAO {
     // 앨범 조회 by ID
     public AlbumDTO selectAlbum(int albumId) throws SQLException {
     	Connection conn = pool.getConnection();
-        String sql = "SELECT * FROM albums WHERE albumId = ?";
+        String sql = "SELECT * FROM album WHERE album_id = ?";
+        AlbumDTO album=null;
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, albumId);
 
             ResultSet resultSet = pstmt.executeQuery();
-            resultSet.close();
-            pstmt.close();
-            pool.releaseConnection(conn);
             
             if (resultSet.next()) {
-                return mapResultSetToAlbum(resultSet);
+                album = mapResultSetToAlbum(resultSet);
             }
+            resultSet.close();
+            pstmt.close();
+            
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
         
-        
-        return null;
+        pool.releaseConnection(conn);
+        return album;
     }
 
     // 모든 앨범 조회
     public List<AlbumDTO> getAllAlbums() throws SQLException {
     	Connection conn = pool.getConnection();
         List<AlbumDTO> albums = new ArrayList<>();
-        String sql = "SELECT * FROM albums";
+        String sql = "SELECT * FROM album";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             ResultSet resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
@@ -100,13 +102,13 @@ public class AlbumDAO {
     // ResultSet에서 AlbumDTO 객체로 매핑
     private AlbumDTO mapResultSetToAlbum(ResultSet resultSet) throws SQLException {
     	Connection conn = pool.getConnection();
-    	int albumId = resultSet.getInt("albumId");
-        String albumName = resultSet.getString("albumName");
-        Date releaseDate = resultSet.getDate("releaseDate");
-        String albumType = resultSet.getString("albumType");
-        int numberSongs = resultSet.getInt("numberSongs");
-        String albumIntro = resultSet.getString("albumIntro");
-        String albumCover = resultSet.getString("albumCover");
+    	int albumId = resultSet.getInt("album_id");
+        String albumName = resultSet.getString("album_name");
+        Date releaseDate = resultSet.getDate("release_date");
+        String albumType = resultSet.getString("album_type");
+        int numberSongs = resultSet.getInt("number_songs");
+        String albumIntro = resultSet.getString("album_intro");
+        String albumCover = resultSet.getString("album_cover");
        
 		pool.releaseConnection(conn);
         
@@ -116,8 +118,8 @@ public class AlbumDAO {
     // 앨범 업데이트
     public boolean updateAlbum(AlbumDTO album) throws SQLException {
     	Connection conn = pool.getConnection();
-        String sql = "UPDATE albums SET albumName = ?, releaseDate = ?, albumType = ?, numberSongs = ?, albumIntro = ?, albumCover = ? " +
-                     "WHERE albumId = ?";
+        String sql = "UPDATE album SET album_Name = ?, release_Date = ?, album_Type = ?, number_Songs = ?, album_Intro = ?, album_Cover = ? " +
+                     "WHERE album_Id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, album.getAlbumName());
             pstmt.setDate(2, new java.sql.Date(album.getReleaseDate().getTime()));
@@ -142,7 +144,7 @@ public class AlbumDAO {
     // 앨범 삭제
     public boolean deleteAlbum(int albumId) throws SQLException {
     	Connection conn = pool.getConnection();
-        String sql = "DELETE FROM albums WHERE albumId = ?";
+        String sql = "DELETE FROM album WHERE album_Id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, albumId);
 

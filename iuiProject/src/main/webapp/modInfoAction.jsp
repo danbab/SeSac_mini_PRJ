@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="service" type="iuiProject.MemberDAO" scope="application" />
+<jsp:useBean id="memberService" type="iuiProject.MemberDAO" scope="application" />
 <jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session" />
 
 <!DOCTYPE html>
@@ -32,7 +32,7 @@
 	member.setEmail(email);
 	System.out.println("modinfoAction에서 member 확인"+member.toString());
 
-	int result = service.updateMemberInfo(member);
+	int result = memberService.updateMemberInfo(member);
 	%>
 
 <body onload="showAlertAndRedirect('<%=(result == 1) ? "회원정보가 수정되었습니다." : "회원정보 수정에 실패하였습니다. 다시 시도해주세요."%>',

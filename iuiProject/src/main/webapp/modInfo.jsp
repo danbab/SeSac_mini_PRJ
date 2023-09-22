@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*"%>
-<jsp:useBean id="service" type="iuiProject.MemberDAO" scope="application"/>
+<jsp:useBean id="memberService" type="iuiProject.MemberDAO" scope="application"/>
 <jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session"/>
 
 <!DOCTYPE html>
