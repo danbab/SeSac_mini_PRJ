@@ -2,6 +2,8 @@
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
 <jsp:useBean id="album" class="iuiProject.AlbumDTO"></jsp:useBean>
 <jsp:useBean id="albumService" class="iuiProject.AlbumDAO"></jsp:useBean>
+<jsp:useBean id="song" class="iuiProject.AlbumDTO"></jsp:useBean>
+<jsp:useBean id="songService" class="iuiProject.AlbumDAO"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="styles.css">

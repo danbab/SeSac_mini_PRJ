@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="loginError.jsp"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-<jsp:useBean id="memberservice" type="iuiProject.MemberDAO" scope = "application"/>
+<jsp:useBean id="memberService" type="iuiProject.MemberDAO" scope = "application"/>
 <jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session"/>
 
 <!DOCTYPE html>
@@ -21,10 +21,9 @@
 
     
     <aside>
-		<div>
-			<a href="home.jsp" style="padding: 0; margin: 0; width: 200px; height: 100px;"> 
-			<img src="logo.jpg"  style="padding: 0; margin: 0;" width="200px" height="100px"
-				   alt="iui 홈페이지">
+		<div class="logo">
+			<a href="home.jsp" > 
+			<img src="image/logo2.webp" alt="iui 홈페이지">
 			</a>
 		</div>
 
