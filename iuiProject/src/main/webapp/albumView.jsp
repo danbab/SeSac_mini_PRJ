@@ -1,16 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-<<<<<<< HEAD
 <jsp:useBean id="album" class="iuiProject.AlbumDTO"/>
 <jsp:useBean id="albumService" class="iuiProject.AlbumDAO"/>
 <jsp:useBean id="song" class="iuiProject.SongDTO"/>
 <jsp:useBean id="songService" class="iuiProject.SongDAO"/>
-=======
-<jsp:useBean id="album" class="iuiProject.AlbumDTO"></jsp:useBean>
-<jsp:useBean id="albumService" class="iuiProject.AlbumDAO"></jsp:useBean>
-<jsp:useBean id="song" class="iuiProject.AlbumDTO"></jsp:useBean>
-<jsp:useBean id="songService" class="iuiProject.AlbumDAO"></jsp:useBean>
->>>>>>> branch 'main' of https://github.com/danbab/SeSac_mini_PRJ.git
+
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="styles.css">
