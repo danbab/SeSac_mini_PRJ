@@ -82,14 +82,14 @@ public class AlbumDAO {
     public List<AlbumDTO> getAllAlbums() throws SQLException {
     	Connection conn = pool.getConnection();
         List<AlbumDTO> albums = new ArrayList<>();
-        String sql = "SELECT * FROM album";
+        String sql = "SELECT * FROM album ORDER BY release_date desc" ;
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             ResultSet resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
                 albums.add(mapResultSetToAlbum(resultSet));
-                resultSet.close();
-                pstmt.close();
-            }
+               
+            } resultSet.close();
+            pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
