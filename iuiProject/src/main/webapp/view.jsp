@@ -66,18 +66,18 @@
 	    xhr.send();
 	}
 	
-
-	// 이전 페이지로 돌아가는 이벤트 핸들러
-	window.onpopstate = function(event) {
-	    if (event.state && event.state.page === "album") {
-	        test(event.state.albumId);
-	    } else {
-	        // 이전 페이지가 없거나 album 페이지가 아닌 경우 메인 페이지로 이동
-	        if(member==null){
-	        	window.location.href = 'main.jsp';
-	        }else window.location.href = 'home.jsp';
-	    }
-	};
+		// 이전 페이지로 돌아가는 이벤트 핸들러
+		window.onpopstate = function(event) {
+			if (event.state && event.state.page === "album") {
+				test(event.state.albumId);
+			} else {
+				// 이전 페이지가 없거나 album 페이지가 아닌 경우 메인 페이지로 이동
+				if (member == null) {
+					window.location.href = 'main.jsp';
+				} else
+					window.location.href = 'home.jsp';
+			}
+		};
 	</script>
 	<!-- 부트스트랩 JavaScript 및 j Query 스크립트 링크 -->
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

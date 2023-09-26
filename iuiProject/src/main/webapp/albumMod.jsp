@@ -39,8 +39,9 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 			<div class="album-intro">
 				<textarea rows="8" cols="80"><%=album.getAlbumIntro()%></textarea>
 			</div>
-			<button type = "button" class="btn btn-primary" 
-			         onclick="albumview('albumModAction.jsp?albumId=<%=album.getAlbumId()%>')">수정요청</button>
+			<button type="button" class="btn btn-primary"
+				onclick="albumview('albumModAction.jsp?albumId=<%=album.getAlbumId()%>')">수정완료
+			</button>
 		</div>
 		<%
 		} else {

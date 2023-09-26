@@ -151,6 +151,7 @@ public class MemberDAO {
 		
 		return members;
 	}
+	
 	public ArrayList<MemberDTO> getAllBlacks() throws SQLException{
 		ArrayList<MemberDTO> blacks = new ArrayList<MemberDTO>();
 		Connection conn = pool.getConnection();

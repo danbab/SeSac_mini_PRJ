@@ -379,6 +379,10 @@ aside a img {
 	line-height: 19px;
 }
 
+.song-container {
+	text-align: center;
+}
+
 .comment-container th {
 	text-align: center;
 }

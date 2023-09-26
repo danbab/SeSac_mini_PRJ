@@ -18,6 +18,7 @@ function revokeblack(member_no) {
 }
 </script>
 </head>
+
 <body>
  <h1>관리자 페이지</h1>
     

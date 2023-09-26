@@ -38,8 +38,10 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 			<div class="album-intro">
 				<textarea rows="8" cols="80" readonly><%=album.getAlbumIntro()%></textarea>
 			</div>
-			<button type="button" class="btn btn-primary" 
-						 onclick="albumview('albumMod.jsp?albumId=<%=album.getAlbumId()%>')">정보수정</button>
+			<%if (member != null) {%>
+			<button type="button" class="btn btn-primary"
+				onclick="albumview('albumMod.jsp?albumId=<%=album.getAlbumId()%>')">정보수정</button>
+			<%}%>
 		</div>
 		<%
 		} else {
@@ -101,9 +103,7 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 				name="nickname" value="<%=member.getNickname()%>" readonly required><br>
 			<!-- 댓글 내용 입력란 -->
 			<label for="comment">내용:</label>
-			<textarea id="commentText" name="comment" rows="4" cols="100"
-				required></textarea>
-			<br>
+			<textarea id="commentText" name="comment" rows="4" cols="100" required></textarea><br>
 
 			<!-- 댓글 작성, 수정, 삭제 버튼 -->
 			<div class="comment-sub-upd-del-btn">
@@ -118,19 +118,17 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 	</div>
 
 	<script>
-
-
-	 
-	 window.onpopstate = function(event) {
-    if (event.state && event.state.page === "album") {
-        test(event.state.albumId);
-    } else {
-        // 이전 페이지가 없거나 album 페이지가 아닌 경우 메인 페이지로 이동
-        if(member==null){
-        	window.location.href = 'main.jsp';
-        }else window.location.href = 'home.jsp';
-    }
-};
-</script>  
+		window.onpopstate = function(event) {
+			if (event.state && event.state.page === "album") {
+				test(event.state.albumId);
+			} else {
+				// 이전 페이지가 없거나 album 페이지가 아닌 경우 메인 페이지로 이동
+				if (member == null) {
+					window.location.href = 'main.jsp';
+				} else
+					window.location.href = 'home.jsp';
+			}
+		};
+	</script>
 </body>
 </html>
