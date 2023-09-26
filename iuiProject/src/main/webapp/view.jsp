@@ -15,10 +15,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<%
-List<AlbumDTO> albums = albumService.getAllAlbums();
-
-%>
+<% List<AlbumDTO> albums = albumService.getAllAlbums(); %>
 	<div class="container">
 		<h3 align="center" style="margin-top:10px;">아이유 앨범 갤러리</h3>
 		<div class="row">
@@ -30,11 +27,12 @@ List<AlbumDTO> albums = albumService.getAllAlbums();
 					<div class="card-body">
 						<h5 class="card-title"><%=a.getAlbumName()%></h5>
 						<!-- 모달 트리거 버튼 -->
-						<button type="button" class="btn btn-primary" onclick="test(<%=a.getAlbumId()%>)">앨범 정보</button>
+						<button type="button" class="btn btn-primary" 
+						 onclick="albumview('albumView.jsp?albumId=<%=a.getAlbumId()%>')">앨범 정보</button>
 					</div>
 				</div>
 			</div>
-			<% }%>
+			<%}%>
 			
 			
 			
@@ -45,14 +43,16 @@ List<AlbumDTO> albums = albumService.getAllAlbums();
 MemberDTO member = (MemberDTO) session.getAttribute("member");
 	%>
 	<script>
-	function test(i) {
+	function albumview(i) {
+		console.log('함수가 albumId와 함께 호출되었습니다:', i);
 	    // AJAX 요청 생성
-	    var xhr = new XMLHttpRequest();
-	    const target = "?albumId=" + i;
+	    const xhr = new XMLHttpRequest();
+	 //   const target = 'albumView.jsp?albumId=' + i;
+	    const target = i;
 	    console.log(target);
 	    
 	    // 요청을 보낼 페이지 URL 설정
-	    xhr.open('GET', 'albumView.jsp' + target, true);
+	    xhr.open('GET', target, true);
 
 	    // 요청이 완료되면 실행될 함수 정의
 	    xhr.onload = function () {
@@ -60,7 +60,7 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 	            // 응답으로 받은 HTML을 section 요소에 삽입
 	            document.querySelector('section').innerHTML = xhr.responseText;
 	            // 이전 페이지로 돌아가기 기능 활성화
-	            window.history.pushState({ page: "album", albumId: i }, null, target);
+	            /* window.history.pushState({ page: "album", albumId: i }, null, target); */
 	        } else {
 	            alert('페이지 로드 중 오류가 발생했습니다.');
 	        }
@@ -69,6 +69,7 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 	    // 요청 보내기
 	    xhr.send();
 	}
+	
 
 	// 이전 페이지로 돌아가는 이벤트 핸들러
 	window.onpopstate = function(event) {

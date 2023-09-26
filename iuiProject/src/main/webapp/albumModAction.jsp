@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-<jsp:useBean id="album" type="iuiProject.AlbumDTO" scope="session" />
-<jsp:useBean id="albumService" type="iuiProject.AlbumDAO" scope="session" />
-<jsp:useBean id="song" class="iuiProject.SongDTO"  />
-<jsp:useBean id="songService" class="iuiProject.SongDAO"  />
+<jsp:useBean id="album" class="iuiProject.AlbumDTO" scope="session" />
+<jsp:useBean id="albumService" class="iuiProject.AlbumDAO" scope="session" />
+<jsp:useBean id="song" class="iuiProject.SongDTO" scope="request" />
+<jsp:useBean id="songService" class="iuiProject.SongDAO" scope="request" />
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"
@@ -40,7 +40,7 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 				<textarea rows="8" cols="80"><%=album.getAlbumIntro()%></textarea>
 			</div>
 			<button type = "button" class="btn btn-primary" 
-			         onclick="albumview('albumModAction.jsp?albumId=<%=album.getAlbumId()%>')">수정요청</button>
+			         onclick="albuminfomod(<%=albumId%>)">수정완료</button>
 		</div>
 		<%
 		} else {

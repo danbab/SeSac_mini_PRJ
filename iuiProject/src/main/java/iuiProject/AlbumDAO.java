@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AlbumDAO {
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -157,5 +160,25 @@ public class AlbumDAO {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    
+    public Map<String, List<AlbumDTO>> loadAlbumByYear(List<AlbumDTO> albums) {
+    	Map<String, List<AlbumDTO>> years = new HashMap<>();
+    	SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
+    	for(AlbumDTO a : albums) {
+    		Date releaseDate = a.getReleaseDate();
+            String yyyy = yearFormat.format(releaseDate);
+            
+            if (years.containsKey(yyyy)) {
+                years.get(yyyy).add(a); // 이미 연도가 있는 경우, 해당 연도의 리스트에 추가
+            } else {
+                List<AlbumDTO> yearAlbums = new ArrayList<>();
+                yearAlbums.add(a);
+                years.put(yyyy, yearAlbums); // 연도가 없는 경우, 새로운 연도로 매핑
+            }
+    	}
+    	System.out.println(years.toString());
+    	return years;
     }
 }

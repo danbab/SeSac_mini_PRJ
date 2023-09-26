@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-
+<%@ page import="iuiProject.*,java.sql.*,java.util.*"%>
+<jsp:useBean id="album" class="iuiProject.AlbumDTO" scope="session"/>
+<jsp:useBean id="albumService" class="iuiProject.AlbumDAO" scope="session"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,8 @@
 <link rel="stylesheet" type="text/css" href="styles.css">
 <title>IUI.main</title>
 </head>
-
+<% List<AlbumDTO> albums = albumService.getAllAlbums(); %>
+<% Map<String, List<AlbumDTO>> years= albumService.loadAlbumByYear(albums); %>
 <body>
 	<header>
 		<div class="login-button" onclick="toggleLoginPopup()">로그인</div>
@@ -40,50 +42,28 @@
 			</a>
 		</div>
 
-		<div>
+		<div class="dropdown">
     		<a href="#">아이유의 음원 목록</a>
+    		<div class="dropdown-content">
+				<% for(AlbumDTO a : albums){ %>
+				<a href="#" onclick="albumview('albumView.jsp?albumId=<%=a.getAlbumId()%>')"><%=a.getAlbumName()%></a>
+				<%}%>
+				
+			</div>
     	</div>
     	
+		<% for(String year : years.keySet()) { %>
 		<div class="dropdown">
-			<a href="#">앨범명1</a>
+			<a href="#"><%=year%>년</a>
 			<div class="dropdown-content">
-				<a href="#">수록곡 1</a>
-				<a href="#">수록곡 2</a>
-				<a href="#">수록곡 3</a>
-				<a href="#">수록곡 4</a>
-				<a href="#">수록곡 5</a>
+				<a href="#" onclick="loadAlbumsByYear('<%=year%>')"><%=year%>년
+					앨범</a>
+				<%
+				}
+				%>
 			</div>
 		</div>
-		<div class="dropdown">
-			<a href="#">앨범명2</a>
-			<div class="dropdown-content">
-				<a href="#">수록곡 1</a>
-				<a href="#">수록곡 2</a>
-				<a href="#">수록곡 3</a>
-				<a href="#">수록곡 4</a>
-				<a href="#">수록곡 5</a>
-			</div>
-		</div>
-		<div class="dropdown">
-			<a href="#">앨범명3</a>
-			<div class="dropdown-content">
-				<a href="#">수록곡 1</a>
-				<a href="#">수록곡 2</a>
-				<a href="#">수록곡 3</a>
-				<a href="#">수록곡 4</a>
-				<a href="#">수록곡 5</a>
-			</div>
-		</div>
-		<div class="dropdown">
-			<a href="#">앨범명4</a>
-			<div class="dropdown-content">
-				<a href="#">수록곡 1</a>
-				<a href="#">수록곡 2</a>
-				<a href="#">수록곡 3</a>
-				<a href="#">수록곡 4</a>
-				<a href="#">수록곡 5</a>
-			</div>
-		</div>
+
 	</aside>
 	
 	<section>
@@ -111,10 +91,39 @@
             registerPopup.style.display = 'none';
         }
     }
+    
+    function albumview(i) {
+		console.log('함수가 albumId와 함께 호출되었습니다:', i);
+	    // AJAX 요청 생성
+	    const xhr = new XMLHttpRequest();
+	 //   const target = 'albumView.jsp?albumId=' + i;
+	    const target = i;
+	    console.log(target);
+	    
+	    // 요청을 보낼 페이지 URL 설정
+	    xhr.open('GET', target, true);
+
+	    // 요청이 완료되면 실행될 함수 정의
+	    xhr.onload = function () {
+	        if (xhr.status === 200) {
+	            // 응답으로 받은 HTML을 section 요소에 삽입
+	            document.querySelector('section').innerHTML = xhr.responseText;
+	            // 이전 페이지로 돌아가기 기능 활성화
+	            /* window.history.pushState({ page: "album", albumId: i }, null, target); */
+	        } else {
+	            alert('페이지 로드 중 오류가 발생했습니다.');
+	        }
+	    };
+	    
+	    // 요청 보내기
+	    xhr.send();
+	}
 
     function toggleRegisterPopup() {
     	  window.location.href = 'register.jsp';
     }
+    
+    
 	</script>
 </body>
 </html>
