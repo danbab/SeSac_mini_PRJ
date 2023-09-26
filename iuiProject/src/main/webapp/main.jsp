@@ -55,13 +55,12 @@
 		<% for(String year : years.keySet()) { %>
 		<div class="dropdown">
 			<a href="#"><%=year%>년</a>
-			<div class="dropdown-content">
-				<a href="#" onclick="loadAlbumsByYear('<%=year%>')"><%=year%>년
-					앨범</a>
+			<%-- <div class="dropdown-content">
+				<a href="#" onclick="loadAlbumsByYear('<%=year%>')"><%=year%>년앨범</a> --%>
 				<%
 				}
 				%>
-			</div>
+			<!-- </div> -->
 		</div>
 
 	</aside>
