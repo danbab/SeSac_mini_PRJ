@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-<jsp:useBean id="album" class="iuiProject.AlbumDTO" />
-<jsp:useBean id="albumService" class="iuiProject.AlbumDAO" />
+<jsp:useBean id="album" type="iuiProject.AlbumDTO" scope="session" />
+<jsp:useBean id="albumService" type="iuiProject.AlbumDAO"
+	scope="session" />
 <jsp:useBean id="song" class="iuiProject.SongDTO" />
 <jsp:useBean id="songService" class="iuiProject.SongDAO" />
-<jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session"/>
-<jsp:setProperty property="*" name="member"/>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="styles.css">
@@ -15,13 +14,15 @@
 <meta charset="UTF-8">
 <title>앨범 정보 페이지</title>
 </head>
-<%
-int albumId = Integer.parseInt(request.getParameter("albumId"));
-album = albumService.selectAlbum(albumId);
-%>
+
 <body>
 	<!-- 앨범 정보 -->
 	<div class="album-container">
+		<%
+		int albumId = Integer.parseInt(request.getParameter("albumId"));
+		album = albumService.selectAlbum(albumId);
+		MemberDTO member = (MemberDTO) session.getAttribute("member");
+		%>
 		<%
 		if (album != null) {
 		%>
@@ -38,6 +39,7 @@ album = albumService.selectAlbum(albumId);
 			<div class="album-intro">
 				<textarea rows="8" cols="80" readonly><%=album.getAlbumIntro()%></textarea>
 			</div>
+			<button type="button" onclick="test(<%=albumId%>)">정보수정</button>
 		</div>
 		<%
 		} else {
@@ -59,21 +61,22 @@ album = albumService.selectAlbum(albumId);
 					<th>작곡</th>
 					<th>재생시간</th>
 					<th>타이틀</th>
-					<%
-					for (int i = 0; i < album.getNumberSongs(); i++) {
-						song = songService.selectSong(albumId, i + 1);
-					%>
-					<tr>
-						<td><%=song.getTrackNo()%></td>
-						<td><%=song.getTitle()%></td>
-						<td><%=song.getWriter()%></td>
-						<td><%=song.getComposer()%></td>
-						<td><%=song.getPlaytime()%></td>
-						<td><%=song.getTitleCheck() == 0 ? "" : "&#10003"%></td>
-					</tr>
-					<%
-					}
-					%>
+				</thead>
+				<%
+				for (int i = 0; i < album.getNumberSongs(); i++) {
+					song = songService.selectSong(albumId, i + 1);
+				%>
+				<tr>
+					<td><%=song.getTrackNo()%></td>
+					<td><%=song.getTitle()%></td>
+					<td><%=song.getWriter()%></td>
+					<td><%=song.getComposer()%></td>
+					<td><%=song.getPlaytime()%></td>
+					<td><%=song.getTitleCheck() == 0 ? "" : "&#10003"%></td>
+				</tr>
+				<%
+				}
+				%>
 			</table>
 		</div>
 	</div>
@@ -90,7 +93,9 @@ album = albumService.selectAlbum(albumId);
 		</table>
 
 		<!-- 댓글 작성 폼 -->
-		<% if (member.getStatus() == 1) { %>
+		<%
+		if (member != null && member.getStatus() == 1) {
+		%>
 		<form class="comment-form">
 			<!-- 댓글 ID (수정 시 사용) -->
 			<input type="hidden" id="commentId" name="commentId" value="">
@@ -98,16 +103,58 @@ album = albumService.selectAlbum(albumId);
 				name="nickname" value="<%=member.getNickname()%>" readonly required><br>
 			<!-- 댓글 내용 입력란 -->
 			<label for="comment">내용:</label>
-			<textarea id="commentText" name="comment" rows="4" cols="100" required></textarea><br>
+			<textarea id="commentText" name="comment" rows="4" cols="100"
+				required></textarea>
+			<br>
 
 			<!-- 댓글 작성, 수정, 삭제 버튼 -->
 			<div class="comment-sub-upd-del-btn">
-				<input type="button" value="댓글 작성">
-				<input type="button" value="댓글 수정">
-				<input type="button" value="댓글 삭제">
+				<input type="button" value="댓글 작성"> <input type="button"
+					value="댓글 수정"> <input type="button" value="댓글 삭제">
 			</div>
 		</form>
-		<% } %>
+		<%
+		}
+		%>
 	</div>
+
+	<script>
+        function test(i) {
+            // AJAX 요청 생성
+            var xhr = new XMLHttpRequest();
+            const target = "albumMod.jsp?albumId=" + i; // albumMod.jsp로 변경
+            console.log(target);
+
+            // 요청을 보낼 페이지 URL 설정
+            xhr.open('GET', target, true);
+
+            // 요청이 완료되면 실행될 함수 정의
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // 응답으로 받은 HTML을 album-container 요소에 삽입
+                    document.querySelector('.album-container').innerHTML = xhr.responseText;
+                    // 이전 페이지로 돌아가기 기능 활성화
+                    window.history.pushState({ page: "album", albumId: i }, null, target);
+                    console.log(xhr.status);
+                } else {
+                    alert('페이지 로드 중 오류가 발생했습니다.');
+                }
+            };
+
+            // 요청 보내기
+            xhr.send();
+        }
+
+        window.onpopstate = function(event) {
+            if (event.state && event.state.page === "album") {
+                test(event.state.albumId);
+            } else {
+                // 이전 페이지가 없거나 album 페이지가 아닌 경우 메인 페이지로 이동
+                if (member == null) {
+                    window.location.href = 'main.jsp';
+                } else window.location.href = 'home.jsp';
+            }
+        };
+    </script>
 </body>
 </html>

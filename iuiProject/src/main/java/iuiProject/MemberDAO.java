@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MemberDAO {
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -111,7 +112,6 @@ public class MemberDAO {
 
 	// 회원정보 수정
 	public int updateMemberInfo(MemberDTO member) throws SQLException {
-		System.out.println(member.toString());
 		Connection conn = pool.getConnection();
 		String sql = "UPDATE member SET pw = ?, nickname = ?, email = ? WHERE member_no = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -125,4 +125,81 @@ public class MemberDAO {
 		pool.releaseConnection(conn);
 		return result;
 	}
+	
+	public ArrayList<MemberDTO> getAllMembers() throws SQLException{
+		ArrayList<MemberDTO> members = new ArrayList<MemberDTO>();
+		Connection conn = pool.getConnection();
+		String sql = "SELECT * FROM member";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		MemberDTO member = null;
+		while (rs.next()) {
+			if (rs.getInt("status") > 0 &&rs.getInt("status")!=2) {
+				member = new MemberDTO(
+						rs.getInt("member_no"), 
+						rs.getString("id"), 
+						rs.getString("pw"),
+						rs.getString("email"), 
+						rs.getString("nickname"), 
+						rs.getInt("status"));
+				members.add(member);
+			} 
+		}
+		rs.close();
+		pstmt.close();
+		pool.releaseConnection(conn);
+		
+		return members;
+	}
+	public ArrayList<MemberDTO> getAllBlacks() throws SQLException{
+		ArrayList<MemberDTO> blacks = new ArrayList<MemberDTO>();
+		Connection conn = pool.getConnection();
+		String sql = "SELECT * FROM member";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		MemberDTO member = null;
+		while (rs.next()) {
+			if (rs.getInt("status") <= 0&&rs.getInt("status")!=2) {
+				member = new MemberDTO(
+						rs.getInt("member_no"), 
+						rs.getString("id"), 
+						rs.getString("pw"),
+						rs.getString("email"), 
+						rs.getString("nickname"), 
+						rs.getInt("status"));
+				blacks.add(member);
+			} 
+		}
+		rs.close();
+		pstmt.close();
+		pool.releaseConnection(conn);
+		
+		return blacks;
+	}
+	
+	public int addBlack(int memberNo) throws SQLException {
+		Connection conn = pool.getConnection();
+		String sql = "UPDATE member SET status = 0 WHERE member_no = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, memberNo);
+		int result = pstmt.executeUpdate();
+
+		pstmt.close();
+		pool.releaseConnection(conn);
+		return result;
+	}
+	
+	public int revokeBlack(int memberNo) throws SQLException {
+		Connection conn = pool.getConnection();
+		String sql = "UPDATE member SET status = 1 WHERE member_no = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, memberNo);
+		int result = pstmt.executeUpdate();
+
+		pstmt.close();
+		pool.releaseConnection(conn);
+		return result;
+	}
 }
+
+
