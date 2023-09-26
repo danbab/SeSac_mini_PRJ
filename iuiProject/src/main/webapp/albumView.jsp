@@ -1,35 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-<jsp:useBean id="album" class="iuiProject.AlbumDTO"/>
-<jsp:useBean id="albumService" class="iuiProject.AlbumDAO"/>
-<jsp:useBean id="song" class="iuiProject.SongDTO"/>
-<jsp:useBean id="songService" class="iuiProject.SongDAO"/>
-
+<jsp:useBean id="album" class="iuiProject.AlbumDTO" />
+<jsp:useBean id="albumService" class="iuiProject.AlbumDAO" />
+<jsp:useBean id="song" class="iuiProject.SongDTO" />
+<jsp:useBean id="songService" class="iuiProject.SongDAO" />
+<jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session"/>
+<jsp:setProperty property="*" name="member"/>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="styles.css">
 
 <head>
-    <meta charset="UTF-8">
-    <title>앨범 정보 페이지</title>
+<meta charset="UTF-8">
+<title>앨범 정보 페이지</title>
 </head>
 <%
 int albumId = Integer.parseInt(request.getParameter("albumId"));
 album = albumService.selectAlbum(albumId);
-
 %>
 <body>
+	<!-- 앨범 정보 -->
 	<div class="album-container">
-		<% if (album != null) { %>
+		<%
+		if (album != null) {
+		%>
 		<div class="album-cover">
-			<img src="image/<%= album.getAlbumCover() %>" alt="앨범 커버">
+			<img src="image/<%=album.getAlbumCover()%>" alt="앨범 커버">
 		</div>
 
 		<div class="album-info">
 			<h1><%=album.getAlbumName()%></h1>
 			<p>앨범타입: <%=album.getAlbumType()%></p>
-			<p><strong>발매일:</strong><%=album.getReleaseDate()%></p>
-			<p><strong>곡 수:</strong><%=album.getNumberSongs()%></p>
+			<p><strong>발매일: </strong><%=album.getReleaseDate()%></p>
+			<p><strong>곡 수: </strong><%=album.getNumberSongs()%></p>
 			<p><strong>앨범소개</strong></p>
 			<div class="album-intro">
 				<textarea rows="8" cols="80" readonly><%=album.getAlbumIntro()%></textarea>
@@ -43,34 +47,67 @@ album = albumService.selectAlbum(albumId);
 		}
 		%>
 	</div>
-	
+
+	<!-- 곡 정보 -->
 	<div class="song-container">
 		<div class="song-info">
-			<table border="1">
-				<th>트랙</th>
-				<th>곡명</th>
-				<th>작사</th>
-				<th>작곡</th>
-				<th>재생시간</th>
-				<th>타이틀</th>
-				<%
-				for (int i = 0; i < album.getNumberSongs(); i++) {
-					song = songService.selectSong(albumId, i + 1);
-				%>
-				<tr>
-					<td><%=song.getTrackNo()%></td>
-					<td><%=song.getTitle()%></td>
-					<td><%=song.getWriter()%></td>
-					<td><%=song.getComposer()%></td>
-					<td><%=song.getPlaytime()%></td>
-					<td><%=song.getTitleCheck() == 0 ? "" : "&#10003"%></td>
-				</tr>
-				<%
-				}
-				%>
+			<table class="table" border="1">
+				<thead class="table-light">
+					<th>트랙</th>
+					<th>곡명</th>
+					<th>작사</th>
+					<th>작곡</th>
+					<th>재생시간</th>
+					<th>타이틀</th>
+					<%
+					for (int i = 0; i < album.getNumberSongs(); i++) {
+						song = songService.selectSong(albumId, i + 1);
+					%>
+					<tr>
+						<td><%=song.getTrackNo()%></td>
+						<td><%=song.getTitle()%></td>
+						<td><%=song.getWriter()%></td>
+						<td><%=song.getComposer()%></td>
+						<td><%=song.getPlaytime()%></td>
+						<td><%=song.getTitleCheck() == 0 ? "" : "&#10003"%></td>
+					</tr>
+					<%
+					}
+					%>
 			</table>
 		</div>
 	</div>
-</body>
 
+	<!-- 댓글 컨테이너 -->
+	<div class="comment-container">
+		<h4>댓글 작성</h4>
+		<table class="table" border="1">
+			<thead class="table-light">
+				<th>사용자</th>
+				<th>댓글 내용</th>
+				<th>작성일자</th>
+			</thead>
+		</table>
+
+		<!-- 댓글 작성 폼 -->
+		<% if (member.getStatus() == 1) { %>
+		<form class="comment-form">
+			<!-- 댓글 ID (수정 시 사용) -->
+			<input type="hidden" id="commentId" name="commentId" value="">
+			<label for="nickname">닉네임:</label> <input type="text" id="nickname"
+				name="nickname" value="<%=member.getNickname()%>" readonly required><br>
+			<!-- 댓글 내용 입력란 -->
+			<label for="comment">내용:</label>
+			<textarea id="commentText" name="comment" rows="4" cols="100" required></textarea><br>
+
+			<!-- 댓글 작성, 수정, 삭제 버튼 -->
+			<div class="comment-sub-upd-del-btn">
+				<input type="button" value="댓글 작성">
+				<input type="button" value="댓글 수정">
+				<input type="button" value="댓글 삭제">
+			</div>
+		</form>
+		<% } %>
+	</div>
+</body>
 </html>

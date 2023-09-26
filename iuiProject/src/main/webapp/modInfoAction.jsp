@@ -40,7 +40,7 @@
 	result:<%=result%><br>
     아이디:<%=member.getId()%><br>
     새 비밀번호:<%=member.getPw()%><br>
-    닉네임:<%=member.getNickname()%><br> 
+    닉네임:<%=member.getNickname()%><br>
     이메일:<%=member.getEmail()%>
 </body>
 </html>
