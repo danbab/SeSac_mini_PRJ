@@ -59,26 +59,13 @@
 			<div class="dropdown">
 			<a href="#"><%=year%>년</a>
 			<div class="dropdown-content">
-			<% for (int i=0;i<years.get(year).size();i++){%>
+			<% for (int i=years.get(year).size(); i>0; i++){%>
 				<a href="#" onclick="albumview('albumView.jsp?albumId=<%=years.get(year).get(i).getAlbumId()%>')">
 				<%=years.get(year).get(i).getAlbumName()%></a>
 			<% }%>			
     		</div>
     		<%}%>
 			</div>
-    	
-		<%-- <% for(String year : yearList) {%>
-			<div class="dropdown">
-			<a href="#" onmouseover="showDropdown('<%=year%>')" 
-						onmouseout="hideDropdown('<%=year%>')"><%=year%>년</a>
-			<div class="dropdown-content" id="<%=year%>-dropdown">
-			<% for (int i=0;i<years.get(year).size();i++){%>
-				<a href="#"><%=years.get(year).get(i).getAlbumName()%></a>
-			<% }%>			
-    		</div>
-    		<%}%>
-			</div> --%>
-
 	</aside>
 	
 	<section>
