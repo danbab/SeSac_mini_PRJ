@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
 <jsp:useBean id="album" type="iuiProject.AlbumDTO" scope="session" />
-<jsp:useBean id="albumService" type="iuiProject.AlbumDAO"
-	scope="session" />
+<jsp:useBean id="albumService" type="iuiProject.AlbumDAO" scope="session" />
 <jsp:useBean id="song" class="iuiProject.SongDTO" />
 <jsp:useBean id="songService" class="iuiProject.SongDAO" />
 <!DOCTYPE html>
@@ -16,13 +15,13 @@
 </head>
 <%
 int albumId = Integer.parseInt(request.getParameter("albumId"));
+album = null;
 album = albumService.selectAlbum(albumId);
 MemberDTO member = (MemberDTO) session.getAttribute("member");
 %>
 <body>
 	<!-- 앨범 정보 -->
 	<div class="album-container">
-		
 		<%
 		if (album != null) {
 		%>
@@ -83,7 +82,7 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 
 	<!-- 댓글 컨테이너 -->
 	<div class="comment-container">
-		<h4>댓글 작성</h4>
+		<h4>댓글</h4>
 		<table class="table" border="1">
 			<thead class="table-light">
 				<th>사용자</th>
@@ -92,10 +91,8 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 			</thead>
 		</table>
 
-		<!-- 댓글 작성 폼 -->
-		<%
-		if (member != null && member.getStatus() == 1) {
-		%>
+		<!-- 댓글 작성 폼(로그인한 회원만 댓글작성창 뜸) -->
+		<%if (member != null && member.getStatus() == 1) {%>
 		<form class="comment-form">
 			<!-- 댓글 ID (수정 시 사용) -->
 			<input type="hidden" id="commentId" name="commentId" value="">

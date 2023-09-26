@@ -56,7 +56,7 @@ List<AlbumDTO> albums = albumService.getAllAlbums();
 	            // 응답으로 받은 HTML을 section 요소에 삽입
 	            document.querySelector('section').innerHTML = xhr.responseText;
 	            // 이전 페이지로 돌아가기 기능 활성화
-	            window.history.pushState({ page: "album", albumId: i }, null, target);
+// 	            window.history.pushState({ page: "album", albumId: i }, null, target);
 	        } else {
 	            alert('페이지 로드 중 오류가 발생했습니다.');
 	        }

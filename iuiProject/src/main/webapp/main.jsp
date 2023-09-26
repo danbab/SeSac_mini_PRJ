@@ -44,7 +44,6 @@
 		<div>
     		<a href="#">아이유의 음원 목록</a>
     	</div>
-
 		<div class="dropdown">
 			<a href="#">앨범명1</a>
 			<div class="dropdown-content">
