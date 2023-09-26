@@ -14,15 +14,15 @@
 <meta charset="UTF-8">
 <title>앨범 정보 페이지</title>
 </head>
-
+<%
+int albumId = Integer.parseInt(request.getParameter("albumId"));
+album = albumService.selectAlbum(albumId);
+MemberDTO member = (MemberDTO) session.getAttribute("member");
+%>
 <body>
 	<!-- 앨범 정보 -->
 	<div class="album-container">
-		<%
-		int albumId = Integer.parseInt(request.getParameter("albumId"));
-		album = albumService.selectAlbum(albumId);
-		MemberDTO member = (MemberDTO) session.getAttribute("member");
-		%>
+		
 		<%
 		if (album != null) {
 		%>
@@ -109,8 +109,9 @@
 
 			<!-- 댓글 작성, 수정, 삭제 버튼 -->
 			<div class="comment-sub-upd-del-btn">
-				<input type="button" value="댓글 작성"> <input type="button"
-					value="댓글 수정"> <input type="button" value="댓글 삭제">
+				<input type="button" value="댓글 작성"> 
+				<input type="button" value="댓글 수정"> 
+				<input type="button" value="댓글 삭제">
 			</div>
 		</form>
 		<%

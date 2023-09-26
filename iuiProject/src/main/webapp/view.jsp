@@ -40,7 +40,6 @@ List<AlbumDTO> albums = albumService.getAllAlbums();
 		</div>
 	</div>
 	
-	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 	function test(i) {
 	    // AJAX 요청 생성
