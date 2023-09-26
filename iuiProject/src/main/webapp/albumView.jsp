@@ -2,8 +2,8 @@
 <%@ page import="iuiProject.*,java.sql.*,java.util.*"%>
 <jsp:useBean id="album" type="iuiProject.AlbumDTO" scope="session" />
 <jsp:useBean id="albumService" type="iuiProject.AlbumDAO" scope="session" />
-<jsp:useBean id="song" class="iuiProject.SongDTO"/>
-<jsp:useBean id="songService" class="iuiProject.SongDAO"/>
+<jsp:useBean id="song" class="iuiProject.SongDTO" scope="session"/>
+<jsp:useBean id="songService" class="iuiProject.SongDAO" scope="session"/>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"
@@ -82,7 +82,7 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 	</div>
 
 	<!-- 댓글 컨테이너 -->
-	<div class="comment-container">
+	<div class="comment-container" style="overflow:auto;">
 		<h4>댓글</h4>
 		<table class="table" border="1">
 			<thead class="table-light">
@@ -106,7 +106,7 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 			<br>
 
 			<!-- 댓글 작성, 수정, 삭제 버튼 -->
-			<div class="comment-sub-upd-del-btn">
+			<div class="comment-sub-upd-del-btn" style="margin-bottom: 5px;">
 				<input type="button" value="댓글 작성"> 
 				<input type="button" value="댓글 수정"> 
 				<input type="button" value="댓글 삭제">

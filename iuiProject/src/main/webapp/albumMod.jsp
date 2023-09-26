@@ -2,8 +2,8 @@
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
 <jsp:useBean id="album" type="iuiProject.AlbumDTO" scope="session" />
 <jsp:useBean id="albumService" type="iuiProject.AlbumDAO" scope="session" />
-<jsp:useBean id="song" class="iuiProject.SongDTO"  />
-<jsp:useBean id="songService" class="iuiProject.SongDAO"  />
+<jsp:useBean id="song" type="iuiProject.SongDTO"  scope="session"/>
+<jsp:useBean id="songService" type="iuiProject.SongDAO"  scope="session"/>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"

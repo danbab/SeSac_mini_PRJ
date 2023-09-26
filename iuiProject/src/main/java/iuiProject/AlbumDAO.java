@@ -178,7 +178,6 @@ public class AlbumDAO {
                 years.put(yyyy, yearAlbums); // 연도가 없는 경우, 새로운 연도로 매핑
             }
     	}
-    	System.out.println(years.toString());
     	return years;
     }
 }
