@@ -6,8 +6,9 @@
 <title>Error 404</title>
 </head>
 <body>
-Error 404<br>
-로그인 정보없음<br>
-<a href = "main.jsp">메인 화면</a>
+	Error 404
+	<br> 로그인 정보없음
+	<br>
+	<a href="main.jsp">메인 화면</a>
 </body>
 </html>

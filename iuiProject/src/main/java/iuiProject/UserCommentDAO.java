@@ -51,23 +51,24 @@ public class UserCommentDAO {
 		} else
 			return 0;
 	}
-
+	
 	// 댓글 업데이트
 	public int updateComment(UserCommentDTO comment) throws SQLException {
-		Connection conn = pool.getConnection();
-		String sql = "UPDATE user_comment SET text = ?, timestamp = ? WHERE comment_id = ?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, comment.getText());
-		pstmt.setTimestamp(2, comment.getTimestamp());
-		pstmt.setInt(3, comment.getCommentId());
-		int result = pstmt.executeUpdate();
+	    Connection conn = pool.getConnection();
+	    String sql = "UPDATE user_comment SET text = ?, timestamp = ? WHERE comment_id = ?";
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setString(1, comment.getText());
+	    pstmt.setTimestamp(2, comment.getTimestamp());
+	    pstmt.setInt(3, comment.getCommentId());
+	    int result = pstmt.executeUpdate();
 
-		pstmt.close();
-		pool.releaseConnection(conn);
-		if (result > 0) {
-			return 1;
-		} else
-			return 0;
+	    pstmt.close();
+	    pool.releaseConnection(conn);
+	    if (result > 0) {
+	        return 1;
+	    } else {
+	        return 0;
+	    }
 	}
 
 	// 댓글 삭제
