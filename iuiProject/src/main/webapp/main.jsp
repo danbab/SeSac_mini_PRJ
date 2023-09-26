@@ -59,7 +59,7 @@
 			<div class="dropdown">
 			<a href="#"><%=year%>년</a>
 			<div class="dropdown-content">
-			<% for (int i=years.get(year).size(); i>0; i++){%>
+			<% for (int i=years.get(year).size()-1 ;i>=0; i--){%>
 				<a href="#" onclick="albumview('albumView.jsp?albumId=<%=years.get(year).get(i).getAlbumId()%>')">
 				<%=years.get(year).get(i).getAlbumName()%></a>
 			<% }%>			
