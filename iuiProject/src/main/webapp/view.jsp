@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.*"%>
-<jsp:useBean id="album" class="iuiProject.AlbumDTO" scope="session"/>
-<jsp:useBean id="albumService" class="iuiProject.AlbumDAO" scope="session"/>
+<jsp:useBean id="album" type="iuiProject.AlbumDTO" scope="session"/>
+<jsp:useBean id="albumService" type="iuiProject.AlbumDAO" scope="session"/>
 
 <!DOCTYPE html>
 <html>

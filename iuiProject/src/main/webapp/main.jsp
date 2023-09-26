@@ -12,7 +12,9 @@
 <title>IUI.main</title>
 </head>
 <% List<AlbumDTO> albums = albumService.getAllAlbums(); %>
-<% Map<String, List<AlbumDTO>> years= albumService.loadAlbumByYear(albums); %>
+<% Map<String, List<AlbumDTO>> years= albumService.loadAlbumByYear(albums);%>
+<% List<String> yearList = new ArrayList<String>(years.keySet());%>
+<% Collections.sort(yearList);%>
 <body>
 	<header>
 		<div class="login-button" onclick="toggleLoginPopup()">로그인</div>
@@ -47,22 +49,35 @@
     		<a href="#">아이유의 음원 목록</a>
     		<div class="dropdown-content">
 				<% for(AlbumDTO a : albums){ %>
-				<a href="#" onclick="albumview('albumView.jsp?albumId=<%=a.getAlbumId()%>')"><%=a.getAlbumName()%></a>
+				<a href="#" onclick="albumview('albumView.jsp?albumId=<%=a.getAlbumId()%>')">
+				   <%=a.getAlbumName()%></a>
 				<%}%>
-				
 			</div>
     	</div>
-    	
-		<% for(String year : years.keySet()) { %>
-		<div class="dropdown">
+		
+		<% for(String year : yearList) {%>
+			<div class="dropdown">
 			<a href="#"><%=year%>년</a>
-			<%-- <div class="dropdown-content">
-				<a href="#" onclick="loadAlbumsByYear('<%=year%>')"><%=year%>년앨범</a> --%>
-				<%
-				}
-				%>
-			<!-- </div> -->
-		</div>
+			<div class="dropdown-content">
+			<% for (int i=0;i<years.get(year).size();i++){%>
+				<a href="#" onclick="albumview('albumView.jsp?albumId=<%=years.get(year).get(i).getAlbumId()%>')">
+				<%=years.get(year).get(i).getAlbumName()%></a>
+			<% }%>			
+    		</div>
+    		<%}%>
+			</div>
+    	
+		<%-- <% for(String year : yearList) {%>
+			<div class="dropdown">
+			<a href="#" onmouseover="showDropdown('<%=year%>')" 
+						onmouseout="hideDropdown('<%=year%>')"><%=year%>년</a>
+			<div class="dropdown-content" id="<%=year%>-dropdown">
+			<% for (int i=0;i<years.get(year).size();i++){%>
+				<a href="#"><%=years.get(year).get(i).getAlbumName()%></a>
+			<% }%>			
+    		</div>
+    		<%}%>
+			</div> --%>
 
 	</aside>
 	
@@ -121,6 +136,22 @@
 
     function toggleRegisterPopup() {
     	  window.location.href = 'register.jsp';
+    }
+    
+
+    function showDropdown(year) {
+        // 모든 드롭다운을 숨김
+        var allDropdowns = document.querySelectorAll('.dropdown-content');
+        for (var i = 0; i < allDropdowns.length; i++) {
+            allDropdowns[i].style.display = "none";
+        }
+        // 특정 드롭다운만 선택하여 보여줌
+        document.getElementById(year + "-dropdown").style.display = "block";
+    }
+
+    function hideDropdown(year) {
+       /*  마우스가 드롭다운 영역을 벗어날 때 활성화된 드롭다운을 숨김 */
+        document.getElementById(year + "-dropdown").style.display = "none";
     }
     
     
