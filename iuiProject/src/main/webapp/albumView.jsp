@@ -4,8 +4,8 @@
 <jsp:useBean id="albumService" type="iuiProject.AlbumDAO" scope="session" />
 <jsp:useBean id="song" class="iuiProject.SongDTO" scope="session"/>
 <jsp:useBean id="songService" class="iuiProject.SongDAO" scope="session"/>
-<jsp:useBean id="comment" class="iuiProject.UserCommentDTO" scope="session"/>
 <jsp:useBean id="commentService" class="iuiProject.UserCommentDAO" scope="session"/>
+<jsp:useBean id="memberService" type="iuiProject.MemberDAO" scope="application" />
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"
@@ -20,7 +20,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 int albumId = Integer.parseInt(request.getParameter("albumId"));
 album = albumService.selectAlbum(albumId);
 MemberDTO member = (MemberDTO) session.getAttribute("member");
-MemberDTO memberNo = (MemberDTO) session.getAttribute("memberNo");
+memberService = (MemberDAO) session.getAttribute("memberService");
 %>
 <body>
 	<!-- 앨범 정보 -->
@@ -91,19 +91,43 @@ MemberDTO memberNo = (MemberDTO) session.getAttribute("memberNo");
 	<!-- 댓글 컨테이너 -->
 	<div class="comment-container">
 		<h4>댓글</h4>
+		<div>
 		<table class="table" border="1">
 			<thead class="table-light">
 				<th>사용자</th>
 				<th>댓글 내용</th>
 				<th>작성일자</th>
 			</thead>
-		</table>
-
+			<%
+			List<UserCommentDTO> comments =commentService.getCommentsByAlbum(albumId);
+			if(comments.size() != 0) {	
+			for (int i = 0; i < comments.size(); i++) {
+					UserCommentDTO comment = comments.get(i);
+					System.out.println("여기는 멤버"+member.toString());
+					System.out.println("여기는 서비스"+memberService.toString());
+				%>
+				<tr>
+					<td><%=memberService.findNicknameByMemberNo(comment.getMemberNo())%></td>
+					<td><%=comment.getText()%></td>
+					<td><%=comment.getTimestamp()%></td>
+				</tr>
+				<%
+				}
+					} else {
+				%>
+				<p>댓글이 없습니다.</p>
+				<%
+				}
+				%>
+			</table>
+		</div>
+		
 		<!-- 댓글 작성 폼(로그인한 회원만 댓글작성창 뜸) -->
 		<%if (member != null && member.getStatus() == 1) {%>
 		<form class="comment-form">
 			<!-- 댓글 ID (수정 시 사용) -->
 			<input type="hidden" id="albumId" name="albumId" value="<%=albumId%>">
+			<input type="hidden" id="memberNo" name="memberNo" value="<%=member.getMemberNo()%>">
 			<label for="nickname">닉네임:</label>
 			<input type="text" id="nickname" name="nickname" value="<%=member.getNickname()%>" readonly required><br>
 			<!-- 댓글 내용 입력란 -->
@@ -111,18 +135,18 @@ MemberDTO memberNo = (MemberDTO) session.getAttribute("memberNo");
 			<textarea id="comment" name="comment" rows="4" cols="100" required></textarea><br>
 
 			<!-- 댓글 작성, 수정, 삭제 버튼 -->
-			<div class="comment-sub-upd-del-btn" style="margin-bottom: 5px;">
-				<input type="button" value="댓글 작성">
-				<input type="button" value="댓글 수정">
-				<input type="button" value="댓글 삭제">
+
+			<div class="comment-sub-upd-del-btn">
+				<button class="btn btn-primary"
+				onclick="submitCommentAndShowAlbumView(<%=albumId%>)">댓글 작성
+				</button>
+<!-- 				<input type="button" value="댓글 수정"> -->
+<!-- 				<input type="button" value="댓글 삭제"> -->
 			</div>
 		</form>
 		<%
 		}
 		%>
 	</div>
-
-
-	
 </body>
 </html>

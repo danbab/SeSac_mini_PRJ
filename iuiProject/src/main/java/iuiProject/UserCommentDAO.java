@@ -51,6 +51,31 @@ public class UserCommentDAO {
 			return 0;
 	}
 	
+	// 댓글 조회
+	public UserCommentDTO selectComment(int commentId) throws SQLException, ClassNotFoundException {
+	    Connection conn = pool.getConnection();
+	    UserCommentDTO comment = null;
+	    String sql = "SELECT * FROM user_comment WHERE comment_id = ?";
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setInt(1, commentId);
+	    ResultSet rs = pstmt.executeQuery();
+
+	    if (rs.next()) {
+	        comment = new UserCommentDTO(
+	                rs.getInt("comment_id"),
+	                rs.getInt("album_id"),
+	                rs.getInt("member_no"),
+	                rs.getString("text"),
+	                rs.getTimestamp("timestamp1"));
+	    }
+
+	    rs.close();
+	    pstmt.close();
+	    pool.releaseConnection(conn);
+	    return comment;
+	}
+
+	
 	// 댓글 업데이트
 	public int updateComment(UserCommentDTO comment) throws SQLException {
 	    Connection conn = pool.getConnection();
