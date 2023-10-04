@@ -104,7 +104,6 @@ MemberDTO memberNo = (MemberDTO) session.getAttribute("memberNo");
 		<form class="comment-form">
 			<!-- 댓글 ID (수정 시 사용) -->
 			<input type="hidden" id="albumId" name="albumId" value="<%=albumId%>">
-			<input type="hidden" id="commentId" name="commentId" value="<%=comment.getCommentId()%>">
 			<label for="nickname">닉네임:</label>
 			<input type="text" id="nickname" name="nickname" value="<%=member.getNickname()%>" readonly required><br>
 			<!-- 댓글 내용 입력란 -->
@@ -112,15 +111,9 @@ MemberDTO memberNo = (MemberDTO) session.getAttribute("memberNo");
 			<textarea id="comment" name="comment" rows="4" cols="100" required></textarea><br>
 
 			<!-- 댓글 작성, 수정, 삭제 버튼 -->
-<<<<<<< HEAD
-			<div class="comment-sub-upd-del-btn">
-				<input type="button" value="댓글 작성">
-				<input type="button" value="댓글 수정"> 
-=======
 			<div class="comment-sub-upd-del-btn" style="margin-bottom: 5px;">
 				<input type="button" value="댓글 작성">
 				<input type="button" value="댓글 수정">
->>>>>>> refs/remotes/origin/main
 				<input type="button" value="댓글 삭제">
 			</div>
 		</form>
@@ -128,14 +121,8 @@ MemberDTO memberNo = (MemberDTO) session.getAttribute("memberNo");
 		}
 		%>
 	</div>
-<<<<<<< HEAD
-	<!-- 부트스트랩 JavaScript 및 j Query 스크립트 링크 -->
-	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-=======
+
 
 	
->>>>>>> refs/remotes/origin/main
 </body>
 </html>
