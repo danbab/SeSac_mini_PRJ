@@ -12,7 +12,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <head>
 <meta charset="UTF-8">
-<title>앨범 정보 페이지</title>
+<title>albumView.jsp</title>
 </head>
 <%
 int albumId = Integer.parseInt(request.getParameter("albumId"));
@@ -103,12 +103,12 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 				name="nickname" value="<%=member.getNickname()%>" readonly required><br>
 			<!-- 댓글 내용 입력란 -->
 			<label for="comment">내용:</label>
-			<textarea id="commentText" name="comment" rows="4" cols="100" required></textarea><br>
+			<textarea id="comment" name="comment" rows="4" cols="100" required></textarea><br>
 
 			<!-- 댓글 작성, 수정, 삭제 버튼 -->
 			<div class="comment-sub-upd-del-btn" style="margin-bottom: 5px;">
-				<input type="button" value="댓글 작성"> 
-				<input type="button" value="댓글 수정"> 
+				<input type="button" value="댓글 작성">
+				<input type="button" value="댓글 수정">
 				<input type="button" value="댓글 삭제">
 			</div>
 		</form>
@@ -117,18 +117,6 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 		%>
 	</div>
 
-	<script>
-		window.onpopstate = function(event) {
-			if (event.state && event.state.page === "album") {
-				test(event.state.albumId);
-			} else {
-				// 이전 페이지가 없거나 album 페이지가 아닌 경우 메인 페이지로 이동
-				if (member == null) {
-					window.location.href = 'main.jsp';
-				} else
-					window.location.href = 'home.jsp';
-			}
-		};
-	</script>
+	
 </body>
 </html>

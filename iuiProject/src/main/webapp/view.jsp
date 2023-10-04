@@ -78,6 +78,49 @@
 					window.location.href = 'home.jsp';
 			}
 		};
+		
+		 function updateAlbumAndShowAlbumView(albumId) {
+		        // updateAlbum 함수 호출
+		        updateAlbum(albumId, function() {
+		            // updateAlbum이 완료되면 albumView 함수 호출
+		            albumview('albumView.jsp?albumId=' + albumId);
+		        });
+		    }
+		  function updateAlbum(i,callback) {
+	            var newAlbumName = document.getElementById("new_albumName").value;
+	            var newAlbumType = document.getElementById("new_albumType").value; 
+	            var newReleaseDate = document.getElementById("new_releaseDate").value;
+	            var newNumberSongs = document.getElementById("new_numberSongs").value;
+	            var newAlbumIntro = document.getElementById("new_albumIntro").value;
+	            var newAlbumId = i;
+
+	            // AJAX를 사용하여 albumModAction.jsp로 데이터 전송
+	            var xhr = new XMLHttpRequest();
+	            xhr.open("POST", "albumModAction.jsp", true);
+	            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+	            xhr.onreadystatechange = function() {
+	                if (xhr.readyState == 4 && xhr.status == 200) {
+	                    // 성공적으로 응답을 받았을 때의 동작
+	                    alert("앨범이 성공적으로 수정되었습니다.");
+	                    if (callback && typeof callback === 'function') {
+	                        callback();
+	                    }
+	                }
+	            };
+
+	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
+	            var data = "newAlbumName=" + encodeURIComponent(newAlbumName) +
+	                       "&newAlbumType=" + encodeURIComponent(newAlbumType) +
+	                       "&newReleaseDate=" + encodeURIComponent(newReleaseDate) +
+	                       "&newNumberSongs=" + encodeURIComponent(newNumberSongs) +
+	                       "&newAlbumIntro=" + encodeURIComponent(newAlbumIntro)+
+	                       "&newAlbumId=" + encodeURIComponent(i);
+
+	            xhr.send(data);
+	        }
+		
+		
+		
 	</script>
 	<!-- 부트스트랩 JavaScript 및 j Query 스크립트 링크 -->
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
