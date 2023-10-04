@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
+<%@ page import="iuiProject.*,java.sql.*,java.util.Date,java.text.*"%>
 <jsp:useBean id="album" type="iuiProject.AlbumDTO" scope="session" />
 <jsp:useBean id="albumService" type="iuiProject.AlbumDAO" scope="session" />
 <jsp:useBean id="song" type="iuiProject.SongDTO"  scope="session"/>
 <jsp:useBean id="songService" type="iuiProject.SongDAO"  scope="session"/>
+
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"
@@ -12,12 +13,12 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <head>
     <meta charset="UTF-8">
-    <title>앨범 정보 수정 페이지</title>
+    <title>albumMod.jsp</title>
 </head>
 <%
+MemberDTO member = (MemberDTO) session.getAttribute("member");
 int albumId = Integer.parseInt(request.getParameter("albumId"));
 album = albumService.selectAlbum(albumId);
-MemberDTO member = (MemberDTO) session.getAttribute("member");
 %>
 <body>
 	<div class="album-container">
@@ -37,19 +38,15 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 			value="<%= album.getNumberSongs()%>" required></p>
 			<p>앨범소개</p>
 			<div class="album-intro">
-				<textarea rows="8" cols="80"><%=album.getAlbumIntro()%></textarea>
+				<textarea rows="8" cols="80" id="new_albumIntro"><%=album.getAlbumIntro()%></textarea>
 			</div>
 			<button type="button" class="btn btn-primary"
-				onclick="albumview('albumModAction.jsp?albumId=<%=album.getAlbumId()%>')">수정완료
+				onclick="updateAlbumAndShowAlbumView(<%=albumId%>);">수정완료
 			</button>
 		</div>
-		<%
-		} else {
-		%>
+		<%	} else { %>
 		<p>앨범을 찾을 수 없습니다.</p>
-		<%
-		}
-		%>
+		<% } %>
 	</div>
 	
 	<div class="song-container">
@@ -92,5 +89,6 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 			</table>
 		</div>
 	</div>
+	
 </body>
 </html>

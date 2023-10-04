@@ -121,7 +121,7 @@ public class AlbumDAO {
     // 앨범 업데이트
     public boolean updateAlbum(AlbumDTO album) throws SQLException {
     	Connection conn = pool.getConnection();
-        String sql = "UPDATE album SET album_Name = ?, release_Date = ?, album_Type = ?, number_Songs = ?, album_Intro = ?, album_Cover = ? " +
+        String sql = "UPDATE album SET album_Name = ?, release_Date = ?, album_Type = ?, number_Songs = ?, album_Intro = ?" +
                      "WHERE album_Id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, album.getAlbumName());
@@ -129,8 +129,7 @@ public class AlbumDAO {
             pstmt.setString(3, album.getAlbumType());
             pstmt.setInt(4, album.getNumberSongs());
             pstmt.setString(5, album.getAlbumIntro());
-            pstmt.setString(6, album.getAlbumCover());
-            pstmt.setInt(7, album.getAlbumId());
+            pstmt.setInt(6, album.getAlbumId());
 
             int rowsAffected = pstmt.executeUpdate();
             
