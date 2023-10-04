@@ -383,7 +383,7 @@ aside a img {
 	text-align: center;
 }
 
-.comment-container th {
+.comment-container th, tr {
 	text-align: center;
 }
 

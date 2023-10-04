@@ -5,7 +5,6 @@
 <jsp:useBean id="song" class="iuiProject.SongDTO" scope="session"/>
 <jsp:useBean id="songService" class="iuiProject.SongDAO" scope="session"/>
 <jsp:useBean id="commentService" class="iuiProject.UserCommentDAO" scope="session"/>
-<jsp:useBean id="memberService" type="iuiProject.MemberDAO" scope="application" />
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"
@@ -20,7 +19,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 int albumId = Integer.parseInt(request.getParameter("albumId"));
 album = albumService.selectAlbum(albumId);
 MemberDTO member = (MemberDTO) session.getAttribute("member");
-memberService = (MemberDAO) session.getAttribute("memberService");
+MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 %>
 <body>
 	<!-- 앨범 정보 -->
@@ -103,13 +102,20 @@ memberService = (MemberDAO) session.getAttribute("memberService");
 			if(comments.size() != 0) {	
 			for (int i = 0; i < comments.size(); i++) {
 					UserCommentDTO comment = comments.get(i);
-					System.out.println("여기는 멤버"+member.toString());
-					System.out.println("여기는 서비스"+memberService.toString());
-				%>
+			%>
 				<tr>
 					<td><%=memberService.findNicknameByMemberNo(comment.getMemberNo())%></td>
 					<td><%=comment.getText()%></td>
-					<td><%=comment.getTimestamp()%></td>
+					<td><%=comment.getTimestamp()%>
+					<div class="row" style= "align-items: flex-end;">
+					<button type="button" class="update-btn"
+					onclick="updateCommentAndShowAlbumView(<%=comment.getCommentId()%>)">댓글 수정
+					</button>
+					<button type="button" class="delete-btn"
+					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>)">댓글 삭제
+					</button>
+					</div>
+					</td>
 				</tr>
 				<%
 				}
@@ -135,13 +141,10 @@ memberService = (MemberDAO) session.getAttribute("memberService");
 			<textarea id="comment" name="comment" rows="4" cols="100" required></textarea><br>
 
 			<!-- 댓글 작성, 수정, 삭제 버튼 -->
-
 			<div class="comment-sub-upd-del-btn">
-				<button class="btn btn-primary"
+				<button type="button" class="btn btn-primary"
 				onclick="submitCommentAndShowAlbumView(<%=albumId%>)">댓글 작성
 				</button>
-<!-- 				<input type="button" value="댓글 수정"> -->
-<!-- 				<input type="button" value="댓글 삭제"> -->
 			</div>
 		</form>
 		<%

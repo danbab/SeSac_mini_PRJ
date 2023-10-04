@@ -2,6 +2,8 @@
 <%@ page import="iuiProject.*,java.sql.*,java.util.*"%>
 <jsp:useBean id="album" class="iuiProject.AlbumDTO" scope="session"/>
 <jsp:useBean id="albumService" class="iuiProject.AlbumDAO" scope="session"/>
+<jsp:useBean id="memberService" class="iuiProject.MemberDAO" scope="application"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +42,7 @@
     
     <aside>
 		<div class="logo">
-			<a href="main.jsp" > 
+			<a href="main.jsp"> 
 			<img src="image/logo2.webp" alt="iui 홈페이지">
 			</a>
 		</div>
@@ -113,8 +115,6 @@
        /*  마우스가 드롭다운 영역을 벗어날 때 활성화된 드롭다운을 숨김 */
         document.getElementById(year + "-dropdown").style.display = "none";
     }
-    
-    
 	</script>
 </body>
 </html>

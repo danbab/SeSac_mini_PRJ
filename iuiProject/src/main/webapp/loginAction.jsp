@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
-<jsp:useBean id="memberService" class="iuiProject.MemberDAO" scope="application" />
+<jsp:useBean id="memberService" type="iuiProject.MemberDAO" scope="application" />
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +27,6 @@
 		location.href = "main.jsp"
 	</script>
 	<%
-	/* response.sendRedirect("testmain.jsp"); 얘가 먼저 실행돼버림 */
 	} else {
 	// 아이디가 없음 처리
 	%>
