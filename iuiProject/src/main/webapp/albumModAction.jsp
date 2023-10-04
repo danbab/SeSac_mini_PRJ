@@ -32,8 +32,6 @@ m.setAlbumIntro(newAlbumIntro);
 m.setAlbumId(newAlbumId);
 
 albumService.updateAlbum(m);
-
 %>
-
 </body>
 </html>

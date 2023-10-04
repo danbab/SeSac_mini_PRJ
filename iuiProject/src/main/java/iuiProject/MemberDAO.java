@@ -109,7 +109,26 @@ public class MemberDAO {
 		pool.releaseConnection(conn);
 		return member;
 	}
+	
+	// 회원번호로 닉네임 찾기
+	public String findNicknameByMemberNo(int memberNo) throws SQLException {
+	    Connection conn = pool.getConnection();
+	    String nickname = null;
+	    String sql = "SELECT nickname FROM member WHERE member_no = ?";
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setInt(1, memberNo);
+	    ResultSet rs = pstmt.executeQuery();
 
+	    if (rs.next()) {
+	        nickname = rs.getString("nickname");
+	    }
+
+	    rs.close();
+	    pstmt.close();
+	    pool.releaseConnection(conn);
+	    return nickname;
+	}
+	
 	// 회원정보 수정
 	public int updateMemberInfo(MemberDTO member) throws SQLException {
 		Connection conn = pool.getConnection();
