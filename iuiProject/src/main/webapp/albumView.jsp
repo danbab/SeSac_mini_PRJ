@@ -140,10 +140,10 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 			<label for="comment">내용:</label>
 			<textarea id="comment" name="comment" rows="4" cols="100" required></textarea><br>
 
-			<!-- 댓글 작성, 수정, 삭제 버튼 -->
-			<div class="comment-sub-upd-del-btn">
+			<!-- 댓글 작성 -->
+			<div  class="comment-sub-upd-del-btn">
 				<button type="button" class="btn btn-primary"
-				onclick="submitCommentAndShowAlbumView(<%=albumId%>)">댓글 작성
+					onclick="submitCommentAndShowAlbumView(<%=albumId%>);">댓글 작성
 				</button>
 			</div>
 		</form>
