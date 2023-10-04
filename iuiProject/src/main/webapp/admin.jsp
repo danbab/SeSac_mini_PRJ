@@ -78,8 +78,6 @@
     function gotoAdminPage() {
         window.location.href = 'admin.jsp';
     }
-
-    
 	</script>
 </body>
 </html>

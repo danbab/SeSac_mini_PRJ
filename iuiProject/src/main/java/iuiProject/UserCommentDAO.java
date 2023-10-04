@@ -35,15 +35,14 @@ public class UserCommentDAO {
 	// 댓글 추가
 	public int addComment(UserCommentDTO comment) throws SQLException {
 		Connection conn = pool.getConnection();
-		String sql = "INSERT INTO user_comment (album_id, member_no, text, timestamp) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO user_comment (album_id, comment_id, member_no, text, timestamp1) VALUES (?,comment_id_seq.nextval, ?, ?, sysdate)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, comment.getAlbumId());
 		pstmt.setInt(2, comment.getMemberNo());
 		pstmt.setString(3, comment.getText());
-		pstmt.setTimestamp(4, comment.getTimestamp());
 		int result = pstmt.executeUpdate();
-
+		
 		pstmt.close();
 		pool.releaseConnection(conn);
 		if (result > 0) {
@@ -55,11 +54,10 @@ public class UserCommentDAO {
 	// 댓글 업데이트
 	public int updateComment(UserCommentDTO comment) throws SQLException {
 	    Connection conn = pool.getConnection();
-	    String sql = "UPDATE user_comment SET text = ?, timestamp = ? WHERE comment_id = ?";
+	    String sql = "UPDATE user_comment SET text = ?, timestamp1 = sysdate WHERE comment_id = ?";
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
 	    pstmt.setString(1, comment.getText());
-	    pstmt.setTimestamp(2, comment.getTimestamp());
-	    pstmt.setInt(3, comment.getCommentId());
+	    pstmt.setInt(2, comment.getCommentId());
 	    int result = pstmt.executeUpdate();
 
 	    pstmt.close();
@@ -73,42 +71,42 @@ public class UserCommentDAO {
 
 	// 댓글 삭제
 	public int deleteComment(int commentId) throws SQLException {
-		Connection conn = pool.getConnection();
-		String sql = "DELETE FROM user_comment WHERE comment_id = ?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, commentId);
-		int result = pstmt.executeUpdate();
+	    Connection conn = pool.getConnection();
+	    String sql = "DELETE FROM user_comment WHERE comment_id = ?";
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setInt(1, commentId);
+	    int result = pstmt.executeUpdate();
 
-		pstmt.close();
-		pool.releaseConnection(conn);
-		if (result > 0) {
-			return 1;
-		} else
-			return 0;
+	    pstmt.close();
+	    pool.releaseConnection(conn);
+	    if (result > 0) {
+	        return 1;
+	    } else {
+	        return 0;
+	    }
 	}
 
-	// 특정 앨범의 모든 댓글 조회
 	public List<UserCommentDTO> getCommentsByAlbum(int albumId) throws SQLException, ClassNotFoundException {
-		Connection conn = pool.getConnection();
-		List<UserCommentDTO> comments = new ArrayList<>();
-		String sql = "SELECT * FROM user_comment WHERE album_id = ?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, albumId);
-		ResultSet rs = pstmt.executeQuery();
-		UserCommentDTO comment = null;
-		while (rs.next()) {
-					comment = new UserCommentDTO(
-					rs.getInt("comment_id"), 
-					rs.getInt("album_id"),
-					rs.getInt("member_no"), 
-					rs.getString("text"), 
-					rs.getTimestamp("timestamp"));
-					comments.add(comment);
-		}
-		
-		rs.close();
-		pstmt.close();
-		pool.releaseConnection(conn);
-		return comments;
+	    Connection conn = pool.getConnection();
+	    List<UserCommentDTO> comments = new ArrayList<>();
+	    String sql = "SELECT * FROM user_comment WHERE album_id = ? ORDER BY timestamp1 DESC";
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setInt(1, albumId);
+	    ResultSet rs = pstmt.executeQuery();
+	    UserCommentDTO comment = null;
+	    while (rs.next()) {
+	        comment = new UserCommentDTO(
+	                rs.getInt("comment_id"),
+	                rs.getInt("album_id"),
+	                rs.getInt("member_no"),
+	                rs.getString("text"),
+	                rs.getTimestamp("timestamp1"));
+	        comments.add(comment);
+	    }
+
+	    rs.close();
+	    pstmt.close();
+	    pool.releaseConnection(conn);
+	    return comments;
 	}
 }

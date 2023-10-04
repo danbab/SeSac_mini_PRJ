@@ -1,36 +1,75 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="iuiProject.*" %>
-<% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="comment" class="iuiProject.UserCommentDTO" />
-<jsp:useBean id="CommentService" class="iuiProject.UserCommentDAO" />
-<jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session"/>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page import="iuiProject.*, java.sql.SQLException"%>
 
 <%
-try {
-    String nickname = request.getParameter("nickname");
-    String text = request.getParameter("text");
+String action = request.getParameter("action");
+
+// 댓글 작성
+if (action.equals("addComment")) {
+    String commentContent = request.getParameter("comment");
     int albumId = Integer.parseInt(request.getParameter("albumId"));
+    MemberDTO member = (MemberDTO) session.getAttribute("member");
 
-    comment.setAlbumId(albumId);
-    comment.setMemberNo(member.getMemberNo()); // 세션을 통해 가져온 값으로 설정
-    comment.setText(text);
+    if (member != null && member.getStatus() == 1) {
+        UserCommentDTO comment = new UserCommentDTO();
+        comment.setAlbumId(albumId);
+        comment.setMemberNo(member.getMemberNo());
+        comment.setText(commentContent);
 
-    int isCommentAdded = CommentService.addComment(comment);
-
-    if (isCommentAdded > 0) {
-        // 댓글 추가 성공 시, 앨범 페이지로 리다이렉트
-    	response.sendRedirect("albumView.jsp?albumId=" + comment.getAlbumId());
-
+        UserCommentDAO commentDAO = new UserCommentDAO();
+        try {
+            int result = commentDAO.addComment(comment);
+            if (result > 0) {
+                response.getWriter().write("success");
+            } else {
+                response.getWriter().write("댓글 추가에 실패했습니다.");
+            }
+        } catch (SQLException e) {
+            response.getWriter().write("댓글 추가 중 오류가 발생했습니다.");
+            e.printStackTrace();
+        }
     } else {
-        // 댓글 추가 실패 시, 에러 메시지를 표시하거나 다른 처리를 수행
-        out.println("댓글 추가에 실패했습니다.");
+        response.getWriter().write("로그인이 필요합니다.");
     }
-} catch (Exception e) {
-    // 예외 처리: 데이터베이스 오류 또는 파라미터 오류 등에 대한 처리
-    e.printStackTrace();
-    out.println("오류가 발생했습니다.");
-} finally {
-    // 필요한 자원을 닫는다 (예: 데이터베이스 연결 등)
-    // CommentService.close(); // CommentService가 자원을 닫는 메서드를 제공하는 경우 호출
+}
+
+//댓글 수정
+else if (action.equals("updateComment")) {
+    int commentId = Integer.parseInt(request.getParameter("commentId"));
+    String commentContent = request.getParameter("comment");
+    UserCommentDTO comment = new UserCommentDTO();
+    comment.setCommentId(commentId);
+    comment.setText(commentContent);
+
+    UserCommentDAO commentDAO = new UserCommentDAO();
+    try {
+        int result = commentDAO.updateComment(comment);
+        if (result > 0) {
+            response.getWriter().write("success");
+        } else {
+            response.getWriter().write("댓글 수정에 실패했습니다.");
+        }
+    } catch (SQLException e) {
+        response.getWriter().write("댓글 수정 중 오류가 발생했습니다.");
+        e.printStackTrace();
+    }
+}
+
+// 댓글 삭제
+else if (action.equals("deleteComment")) {
+    int commentId = Integer.parseInt(request.getParameter("commentId"));
+
+    UserCommentDAO commentDAO = new UserCommentDAO();
+    try {
+        int result = commentDAO.deleteComment(commentId);
+        if (result > 0) {
+            response.getWriter().write("success");
+        } else {
+            response.getWriter().write("댓글 삭제에 실패했습니다.");
+        }
+    } catch (SQLException e) {
+        response.getWriter().write("댓글 삭제 중 오류가 발생했습니다.");
+        e.printStackTrace();
+    }
 }
 %>

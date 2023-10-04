@@ -4,6 +4,8 @@
 <jsp:useBean id="albumService" type="iuiProject.AlbumDAO" scope="session" />
 <jsp:useBean id="song" class="iuiProject.SongDTO" scope="session"/>
 <jsp:useBean id="songService" class="iuiProject.SongDAO" scope="session"/>
+<jsp:useBean id="comment" class="iuiProject.UserCommentDTO" scope="session"/>
+<jsp:useBean id="commentService" class="iuiProject.UserCommentDAO" scope="session"/>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"
@@ -18,6 +20,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 int albumId = Integer.parseInt(request.getParameter("albumId"));
 album = albumService.selectAlbum(albumId);
 MemberDTO member = (MemberDTO) session.getAttribute("member");
+MemberDTO memberNo = (MemberDTO) session.getAttribute("memberNo");
 %>
 <body>
 	<!-- 앨범 정보 -->
@@ -41,7 +44,9 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 			<%if (member != null) {%>
 			<button type="button" class="btn btn-primary"
 				onclick="albumview('albumMod.jsp?albumId=<%=album.getAlbumId()%>')">정보수정</button>
-			<%}%>
+			<%
+			}
+			%>
 		</div>
 		<%
 		} else {
@@ -84,7 +89,7 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 	</div>
 
 	<!-- 댓글 컨테이너 -->
-	<div class="comment-container" style="overflow:auto;">
+	<div class="comment-container">
 		<h4>댓글</h4>
 		<table class="table" border="1">
 			<thead class="table-light">
@@ -98,16 +103,17 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 		<%if (member != null && member.getStatus() == 1) {%>
 		<form class="comment-form">
 			<!-- 댓글 ID (수정 시 사용) -->
-			<input type="hidden" id="commentId" name="commentId" value="">
-			<label for="nickname">닉네임:</label> <input type="text" id="nickname"
-				name="nickname" value="<%=member.getNickname()%>" readonly required><br>
+			<input type="hidden" id="albumId" name="albumId" value="<%=albumId%>">
+			<input type="hidden" id="commentId" name="commentId" value="<%=comment.getCommentId()%>">
+			<label for="nickname">닉네임:</label>
+			<input type="text" id="nickname" name="nickname" value="<%=member.getNickname()%>" readonly required><br>
 			<!-- 댓글 내용 입력란 -->
 			<label for="comment">내용:</label>
-			<textarea id="commentText" name="comment" rows="4" cols="100" required></textarea><br>
+			<textarea id="comment" name="comment" rows="4" cols="100" required></textarea><br>
 
 			<!-- 댓글 작성, 수정, 삭제 버튼 -->
-			<div class="comment-sub-upd-del-btn" style="margin-bottom: 5px;">
-				<input type="button" value="댓글 작성"> 
+			<div class="comment-sub-upd-del-btn">
+				<input type="button" value="댓글 작성">
 				<input type="button" value="댓글 수정"> 
 				<input type="button" value="댓글 삭제">
 			</div>
@@ -116,19 +122,9 @@ MemberDTO member = (MemberDTO) session.getAttribute("member");
 		}
 		%>
 	</div>
-
-	<script>
-		window.onpopstate = function(event) {
-			if (event.state && event.state.page === "album") {
-				test(event.state.albumId);
-			} else {
-				// 이전 페이지가 없거나 album 페이지가 아닌 경우 메인 페이지로 이동
-				if (member == null) {
-					window.location.href = 'main.jsp';
-				} else
-					window.location.href = 'home.jsp';
-			}
-		};
-	</script>
+	<!-- 부트스트랩 JavaScript 및 j Query 스크립트 링크 -->
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

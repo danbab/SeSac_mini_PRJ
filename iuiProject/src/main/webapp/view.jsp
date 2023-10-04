@@ -26,7 +26,6 @@
 						alt="앨범 재킷">
 					<div class="card-body">
 						<h5 class="card-title"><%=a.getAlbumName()%></h5>
-						<!-- 모달 트리거 버튼 -->
 						<button type="button" class="btn btn-primary" 
 						 onclick="albumview('albumView.jsp?albumId=<%=a.getAlbumId()%>')">앨범 정보</button>
 						

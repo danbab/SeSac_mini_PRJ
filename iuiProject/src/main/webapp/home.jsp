@@ -91,34 +91,6 @@
     function gotoAdminPage() {
         window.location.href = 'admin.jsp';
     }
-    
-    function albumview(i) {
-		console.log('함수가 albumId와 함께 호출되었습니다:', i);
-	    // AJAX 요청 생성
-	    const xhr = new XMLHttpRequest();
-	 //   const target = 'albumView.jsp?albumId=' + i;
-	    const target = i;
-	    console.log(target);
-	    
-	    // 요청을 보낼 페이지 URL 설정
-	    xhr.open('GET', target, true);
-
-	    // 요청이 완료되면 실행될 함수 정의
-	    xhr.onload = function () {
-	        if (xhr.status === 200) {
-	            // 응답으로 받은 HTML을 section 요소에 삽입
-	            document.querySelector('section').innerHTML = xhr.responseText;
-	            // 이전 페이지로 돌아가기 기능 활성화
-	            /* window.history.pushState({ page: "album", albumId: i }, null, target); */
-	        } else {
-	            alert('페이지 로드 중 오류가 발생했습니다.');
-	        }
-	    };
-	    
-	    // 요청 보내기
-	    xhr.send();
-	}
-    
 	</script>
 </body>
 </html>
