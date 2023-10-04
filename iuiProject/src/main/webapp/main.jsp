@@ -2,6 +2,7 @@
 <%@ page import="iuiProject.*,java.sql.*,java.util.*"%>
 <jsp:useBean id="album" class="iuiProject.AlbumDTO" scope="session"/>
 <jsp:useBean id="albumService" class="iuiProject.AlbumDAO" scope="session"/>
+<jsp:useBean id="memberService" class="iuiProject.MemberDAO" scope="application"/>
 <!DOCTYPE html>
 <html>
 <head>

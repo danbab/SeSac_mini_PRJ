@@ -87,7 +87,7 @@
 		    }
 		 
 		 function submitCommentAndShowAlbumView(albumId) {
-		        // submitComment 함수 호출
+			 // submitComment 함수 호출
 		        submitComment(albumId, function() {
 		            // submitComment이 완료되면 albumView 함수 호출
 		            albumview('albumView.jsp?albumId=' + albumId);
@@ -129,6 +129,7 @@
 		
 		  
 		  function submitComment(i,callback) {
+			  console.log('submitComment 함수 호출');
 	            var albumId = document.getElementById("albumId").value;
 	            var memberNo = document.getElementById("memberNo").value; 
 	            var comment = document.getElementById("comment").value;
@@ -138,16 +139,20 @@
 	            xhr.open("POST", "commentSubmitAction.jsp", true);
 	            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 	            xhr.onreadystatechange = function() {
-	                if (xhr.readyState == 4 && xhr.status == 200) {
+	                if (xhr.readyState == 4) {
 	                    // 성공적으로 응답을 받았을 때의 동작
-	                    alert("댓글이 작성되었습니다.");
-	                    alert(albumId);
-	                    alert(comment);
-	                    if (callback && typeof callback === 'function') {
-	                        callback();
+	                    if (xhr.status == 200) {
+	                    	console.log('submitComment 성공');
+	                        if (callback && typeof callback === 'function') {
+	                            callback();
+	                        }
+	                    } else {
+	                        // 에러 처리
+	                        alert('댓글 작성 중 오류가 발생했습니다.');
 	                    }
 	                }
 	            };
+
 
 	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
 	            var data = "albumId=" + encodeURIComponent(albumId) +
