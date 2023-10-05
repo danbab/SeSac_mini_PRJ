@@ -161,7 +161,7 @@ public class AlbumDAO {
         }
     }
     
-    
+    // 연도별로 앨범 로드
     public Map<String, List<AlbumDTO>> loadAlbumByYear(List<AlbumDTO> albums) {
     	Map<String, List<AlbumDTO>> years = new HashMap<>();
     	SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");

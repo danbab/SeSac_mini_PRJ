@@ -5,6 +5,8 @@
 <jsp:useBean id="song" class="iuiProject.SongDTO" scope="session"/>
 <jsp:useBean id="songService" class="iuiProject.SongDAO" scope="session"/>
 <jsp:useBean id="commentService" type="iuiProject.UserCommentDAO" scope="session"/>
+
+
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"
@@ -87,7 +89,7 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 		</div>
 	</div>
 
-	<!-- 댓글 컨테이너 -->
+	<!-- 	댓글 컨테이너 -->
 	<div class="comment-container">
 		<h4>댓글</h4>
 		<div>
@@ -98,16 +100,16 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 				<th>작성일자</th>
 			</thead>
 			<%
-			List<UserCommentDTO> comments =commentService.getCommentsByAlbum(albumId);
-			if(comments.size() != 0) {	
-			for (int i = 0; i < comments.size(); i++) {
-					UserCommentDTO comment = comments.get(i);
+ 			List<UserCommentDTO> comments =commentService.getCommentsByAlbum(albumId);
+ 			if(comments.size() != 0) {	
+ 			for (int i = 0; i < comments.size(); i++) {
+ 					UserCommentDTO comment = comments.get(i);
 			%>
 				<tr>
 					<td><%=memberService.findNicknameByMemberNo(comment.getMemberNo())%></td>
 					<td><%=comment.getText()%></td>
-					<td><%=comment.getTimestamp()%>
-					<div class="row" style= "align-items: flex-end;">
+					<td class="regdate"><%=comment.getTimestamp()%>
+					<div class="row">
 					<!-- 로그인 되어 있고, 댓글 작성자이면 수정,삭제 가능 -->
 					<%if( member!=null &&comment.getMemberNo()==member.getMemberNo() ){ %>
 					<button type="button" class="update-btn"
@@ -119,7 +121,7 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 					<% } %>
 					
 					<!-- 관리자면 삭제가능 -->
-					<%if( member!=null && member.getStatus() == 2 ){ %>
+					<%if(member!=null && member.getStatus() == 2){ %>
 					<button type="button" class="delete-btn"
 					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=albumId%>)">댓글 삭제
 					</button>
@@ -129,12 +131,10 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 				</tr>
 				<%
 				}
-					} else {
+				} else {
 				%>
 				<p>댓글이 없습니다.</p>
-				<%
-				}
-				%>
+				<% } %>
 			</table>
 		</div>
 		
@@ -160,6 +160,5 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 		<%
 		}
 		%>
-	</div>
 </body>
 </html>
