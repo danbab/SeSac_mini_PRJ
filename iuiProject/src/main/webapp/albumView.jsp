@@ -114,7 +114,7 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 					<button type="button" class="delete-btn"
 					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>)">댓글 삭제
 					</button>
-					</div>
+					</div> 
 					</td>
 				</tr>
 				<%
