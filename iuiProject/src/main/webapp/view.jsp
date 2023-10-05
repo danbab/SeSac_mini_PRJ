@@ -124,7 +124,6 @@
 		
 		  
 		  function submitComment(i,callback) {
-			  console.log('submitComment 함수 호출');
 	            var albumId = document.getElementById("albumId").value;
 	            var memberNo = document.getElementById("memberNo").value; 
 	            var comment = document.getElementById("comment").value;
@@ -136,12 +135,7 @@
 	            xhr.onreadystatechange = function() {
 	                if (xhr.readyState == 4) {
 	                    // 성공적으로 응답을 받았을 때의 동작
-	                    alert("댓글이 작성되었습니다.");
-	                    if (callback && typeof callback === 'function') {
-	                        callback();
-	                    
-	                        if (xhr.status == 200) {
-	                    	console.log('submitComment 성공');
+	                    if (xhr.status == 200) {
 	                        if (callback && typeof callback === 'function') {
 	                            callback();
 	                        }
@@ -151,8 +145,6 @@
 	                    }
 	                }
 	            };
-
-
 	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
 	            var data = "albumId=" + encodeURIComponent(albumId) +
 	                       "&memberNo=" + encodeURIComponent(memberNo) +
@@ -189,7 +181,6 @@
 			               "&comment=" + encodeURIComponent(comment);
 	            xhr.send(data);
 	        }
-		
 		
 	</script>
 	<!-- 부트스트랩 JavaScript 및 j Query 스크립트 링크 -->
