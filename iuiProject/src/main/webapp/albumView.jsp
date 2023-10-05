@@ -108,12 +108,22 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 					<td><%=comment.getText()%></td>
 					<td><%=comment.getTimestamp()%>
 					<div class="row" style= "align-items: flex-end;">
+					<!-- 로그인 되어 있고, 댓글 작성자이면 수정,삭제 가능 -->
+					<%if( member!=null &&comment.getMemberNo()==member.getMemberNo() ){ %>
 					<button type="button" class="update-btn"
 					onclick="updateCommentAndShowAlbumView(<%=comment.getCommentId()%>)">댓글 수정
 					</button>
 					<button type="button" class="delete-btn"
 					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>)">댓글 삭제
 					</button>
+					<% } %>
+					
+					<!-- 관리자면 삭제가능 -->
+					<%if( member!=null && member.getStatus() == 2 ){ %>
+					<button type="button" class="delete-btn"
+					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>)">댓글 삭제
+					</button>
+					<% } %>
 					</div>
 					</td>
 				</tr>
