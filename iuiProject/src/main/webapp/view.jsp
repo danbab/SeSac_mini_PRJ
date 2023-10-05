@@ -65,31 +65,8 @@
 		        });
 		    }
 		 
-		 function submitCommentAndShowAlbumView(albumId) {
-			 // submitComment 함수 호출
-		        submitComment(albumId, function() {
-		            // submitComment이 완료되면 albumView 함수 호출
-		            albumview('albumView.jsp?albumId=' + albumId);
-		        });
-		    }
 		 
-		 function updateCommentAndShowAlbumView(commentId) {
-		        // updateComment 함수 호출
-		        updateComment(commentId, function() {
-		            // updateComment이 완료되면 albumView 함수 호출
-		            albumview('albumView.jsp?albumId=' + albumId);
-		        });
-		    }
-		 
-		 function deleteCommentAndShowAlbumView(commentId) {
-		        // updateComment 함수 호출
-		        deleteComment(commentId, function() {
-		            // updateComment이 완료되면 albumView 함수 호출
-		            albumview('albumView.jsp?albumId=' + albumId);
-		        });
-		    }
-		 
-		  function updateAlbum(i,callback) {
+		 function updateAlbum(i,callback) {
 	            var newAlbumName = document.getElementById("new_albumName").value;
 	            var newAlbumType = document.getElementById("new_albumType").value; 
 	            var newReleaseDate = document.getElementById("new_releaseDate").value;
@@ -120,7 +97,30 @@
 	                       "&newAlbumId=" + encodeURIComponent(i);
 
 	            xhr.send(data);
-	        }
+	        } 
+		 function submitCommentAndShowAlbumView(albumId) {
+			 // submitComment 함수 호출
+		        submitComment(albumId, function() {
+		            // submitComment이 완료되면 albumView 함수 호출
+		            albumview('albumView.jsp?albumId=' + albumId);
+		        });
+		    }
+		 function updateCommentAndShowAlbumView(commentId,albumId) {
+		        // updateComment 함수 호출
+		        updateComment(commentId, function() {
+		            // updateComment이 완료되면 albumView 함수 호출
+		            albumview('albumView.jsp?albumId=' + albumId);
+		        });
+		    }
+		 function deleteCommentAndShowAlbumView(commentId,albumId) {
+		        // updateComment 함수 호출
+		        deleteComment(commentId, function() {
+		            // updateComment이 완료되면 albumView 함수 호출
+		            albumview('albumView.jsp?albumId=' + albumId);
+		        });
+		    }
+		 
+		 
 		
 		  
 		  function submitComment(i,callback) {
@@ -179,6 +179,29 @@
 			               "&albumId=" + encodeURIComponent(albumId) +
 			               "&memberNo=" + encodeURIComponent(memberNo) +
 			               "&comment=" + encodeURIComponent(comment);
+	            xhr.send(data);
+	        }
+		  
+		  function deleteComment(i,callback) {
+	            // AJAX를 사용하여 commentDeleteAction.jsp로 데이터 전송
+	            var xhr = new XMLHttpRequest();
+	            xhr.open("POST", "commentDeleteAction.jsp", true);
+	            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+	            xhr.onreadystatechange = function() {
+	                if (xhr.readyState == 4) {
+	                    // 성공적으로 응답을 받았을 때의 동작
+	                    if (xhr.status == 200) {
+	                        if (callback && typeof callback === 'function') {
+	                            callback();
+	                        }
+	                    } else {
+	                        // 에러 처리
+	                        alert('댓글 삭제 중 오류가 발생했습니다.');
+	                    }
+	                }
+	            };
+	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
+	            var data = "&commentId=" + encodeURIComponent(i);
 	            xhr.send(data);
 	        }
 		
