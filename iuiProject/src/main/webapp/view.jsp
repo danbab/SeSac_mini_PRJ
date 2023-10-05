@@ -143,7 +143,7 @@
 		    }
 	        
 	        function updateComment(i, callback) {
-			    var commentId = document.getElementById("commentId").value; // Assuming you have an element with id "commentId"
+			    var commentId = document.getElementById("commentId").value;
 			    var newComment = document.getElementById("comment").value;
 
 			    // AJAX를 사용하여 updateCommentAction.jsp로 데이터 전송
@@ -166,7 +166,7 @@
 			    };
 
 			    // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
-			    var data = "commentId=" + encodeURIComponent(commentId) +
+			    var data = "commentId=" + encodeURIComponent(i) +
 			               "&comment=" + encodeURIComponent(newComment);
 			    xhr.send(data);
 			}
@@ -178,13 +178,6 @@
 		            albumview('albumView.jsp?albumId=' + albumId);
 		        });
 		    }
-	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
-	            var data = "commentId=" + encodeURIComponent(commentId) +
-			               "&albumId=" + encodeURIComponent(albumId) +
-			               "&memberNo=" + encodeURIComponent(memberNo) +
-			               "&comment=" + encodeURIComponent(comment);
-	            xhr.send(data);
-	        }
 		  
 		  function deleteComment(i,callback) {
 	            // AJAX를 사용하여 commentDeleteAction.jsp로 데이터 전송
