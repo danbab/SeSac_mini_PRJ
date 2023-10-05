@@ -5,6 +5,7 @@
 <jsp:useBean id="song" class="iuiProject.SongDTO" scope="session"/>
 <jsp:useBean id="songService" class="iuiProject.SongDAO" scope="session"/>
 <jsp:useBean id="commentService" class="iuiProject.UserCommentDAO" scope="session"/>
+
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"
@@ -109,28 +110,27 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 					<td class="regdate"><%=comment.getTimestamp()%>
 					<div class="row">
 					<!-- 로그인 되어 있고, 댓글 작성자이면 수정,삭제 가능 -->
-					<%if(member!=null && comment.getMemberNo() == member.getMemberNo()){ %>
-					<button type="button" class="comment-upd-btn"
-					onclick="updateCommentAndShowForm(<%=comment.getCommentId()%>, <%=albumId%>)">댓글 수정
+					<%if( member!=null &&comment.getMemberNo()==member.getMemberNo() ){ %>
+					<button type="button" class="update-btn"
+					onclick="updateCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=albumId%>)">댓글 수정
 					</button>
-					
-					<button type="button" class="comment-del-btn"
-					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>)">댓글 삭제
+					<button type="button" class="delete-btn"
+					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=albumId%>)">댓글 삭제
 					</button>
 					<% } %>
 					
 					<!-- 관리자면 삭제가능 -->
 					<%if(member!=null && member.getStatus() == 2){ %>
 					<button type="button" class="delete-btn"
-					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>)">댓글 삭제
+					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=albumId%>">댓글 삭제
 					</button>
 					<% } %>
 					</div>
 					</td>
 				</tr>
 				<%
- 				}
- 				} else {
+				}
+				} else {
 				%>
 				<p>댓글이 없습니다.</p>
 				<% } %>
