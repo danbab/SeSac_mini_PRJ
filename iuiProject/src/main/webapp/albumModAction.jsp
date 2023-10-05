@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date,java.text.*"%>
-
 <jsp:useBean id="album" type="iuiProject.AlbumDTO" scope="session" />
 <jsp:useBean id="albumService" type="iuiProject.AlbumDAO" scope="session" />
+
 <!DOCTYPE html>
 <html>
 <head>

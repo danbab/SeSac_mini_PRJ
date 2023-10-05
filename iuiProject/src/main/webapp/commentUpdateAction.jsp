@@ -10,14 +10,11 @@
 <html>
 <body>
 	<%
-	int albumId = Integer.parseInt(request.getParameter("albumId"));
-	int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-	String text = request.getParameter("comment");
-	UserCommentDTO c = new UserCommentDTO();
-	c.setAlbumId(albumId);
-	c.setMemberNo(memberNo);
-	c.setText(text);
-	commentService.updateComment(c);
+	int commentId = Integer.parseInt(request.getParameter("commentId"));
+	String newText = request.getParameter("comment");
+
+	UserCommentDTO c = commentService.selectComment(commentId);
+	commentService.updateComment(c, newText);
 	%>
 </body>
 </html>
