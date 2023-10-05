@@ -4,7 +4,8 @@
 <jsp:useBean id="albumService" type="iuiProject.AlbumDAO" scope="session" />
 <jsp:useBean id="song" class="iuiProject.SongDTO" scope="session"/>
 <jsp:useBean id="songService" class="iuiProject.SongDAO" scope="session"/>
-<jsp:useBean id="commentService" class="iuiProject.UserCommentDAO" scope="session"/>
+<jsp:useBean id="commentService" type="iuiProject.UserCommentDAO" scope="session"/>
+
 
 <!DOCTYPE html>
 <html>
@@ -122,7 +123,7 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 					<!-- 관리자면 삭제가능 -->
 					<%if(member!=null && member.getStatus() == 2){ %>
 					<button type="button" class="delete-btn"
-					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=albumId%>">댓글 삭제
+					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=albumId%>)">댓글 삭제
 					</button>
 					<% } %>
 					</div>
