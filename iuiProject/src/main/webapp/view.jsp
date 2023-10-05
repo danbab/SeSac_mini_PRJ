@@ -127,7 +127,7 @@
 	                        // 에러 처리
 	                        alert('댓글 작성 중 오류가 발생했습니다.');
 	                    }
-	                }
+	                
 	            };
 	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
 	            var data = "albumId=" + encodeURIComponent(i) +
@@ -159,7 +159,7 @@
 			                if (callback && typeof callback === 'function') {
 			                    callback(commentId);
 			                }
-			            } else {
+			             else {
 			                // 에러 처리 코드
 			                alert('댓글 수정이 실패했습니다.');
 			                console.error("댓글 수정 실패: " + xhr.status);
@@ -179,7 +179,7 @@
 		            // updateComment이 완료되면 albumView 함수 호출
 		            albumview('albumView.jsp?albumId=' + albumId);
 		        });
-		    }
+		    
 	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
 	            var data = "commentId=" + encodeURIComponent(commentId) +
 			               "&albumId=" + encodeURIComponent(albumId) +
