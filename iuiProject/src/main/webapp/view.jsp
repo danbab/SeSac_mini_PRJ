@@ -2,6 +2,7 @@
 <%@ page import="iuiProject.*,java.sql.*,java.util.*"%>
 <jsp:useBean id="album" type="iuiProject.AlbumDTO" scope="session"/>
 <jsp:useBean id="albumService" type="iuiProject.AlbumDAO" scope="session"/>
+<jsp:useBean id="commentService" class="iuiProject.UserCommentDAO" scope="session"/>
 
 <!DOCTYPE html>
 <html>
@@ -14,7 +15,8 @@
 <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<% List<AlbumDTO> albums = albumService.getAllAlbums(); %>
+<% List<AlbumDTO> albums = albumService.getAllAlbums();
+%>
 	<div class="container">
 		<h3 align="center" style="margin-top: 10px;">아이유 앨범 갤러리</h3>
 		<div class="row">
@@ -36,7 +38,7 @@
 			
 		</div>
 	</div>
-	
+
 	<script>
 	function albumview(i) {
 	    // AJAX 요청 생성
@@ -204,8 +206,15 @@
 	            var data = "&commentId=" + encodeURIComponent(i);
 	            xhr.send(data);
 	        }
+		  
+		 
+		  
+		  
+		  
+		  
 		
 	</script>
+	
 	<!-- 부트스트랩 JavaScript 및 j Query 스크립트 링크 -->
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
