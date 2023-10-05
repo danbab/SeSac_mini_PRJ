@@ -93,13 +93,13 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 	<div class="comment-container">
 		<h4>댓글</h4>
 		<div>
-		<table class="table" border="1">
-			<thead class="table-light">
-				<th>사용자</th>
-				<th>댓글 내용</th>
-				<th>작성일자</th>
-			</thead>
-			<%
+			<table class="table" border="1">
+				<thead class="table-light">
+					<th>사용자</th>
+					<th>댓글 내용</th>
+					<th>작성일자</th>
+				</thead>
+				<%
  			List<UserCommentDTO> comments =commentService.getCommentsByAlbum(albumId);
  			if(comments.size() != 0) {	
  			for (int i = 0; i < comments.size(); i++) {
@@ -109,25 +109,24 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 					<td><%=memberService.findNicknameByMemberNo(comment.getMemberNo())%></td>
 					<td><%=comment.getText()%></td>
 					<td class="regdate"><%=comment.getTimestamp()%>
-					<div class="row">
-					<!-- 로그인 되어 있고, 댓글 작성자이면 수정,삭제 가능 -->
-					<%if( member!=null &&comment.getMemberNo()==member.getMemberNo() ){ %>
-					<button type="button" class="update-btn"
-					onclick="updateCommentAndShowAlbumView(<%=comment.getCommentId()%>)">댓글 수정
-					</button>
-					<button type="button" class="delete-btn"
-					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>)">댓글 삭제
-					</button>
-					<% } %>
-					
-					<!-- 관리자면 삭제가능 -->
-					<%if(member!=null && member.getStatus() == 2){ %>
-					<button type="button" class="delete-btn"
-					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=albumId%>)">댓글 삭제
-					</button>
-					<% } %>
-					</div>
-					</td>
+						<div class="row">
+							<!-- 로그인 되어 있고, 댓글 작성자이면 수정,삭제 가능 -->
+							<%if( member!=null &&comment.getMemberNo()==member.getMemberNo() ){ %>
+							<button type="button" class="update-btn"
+								onclick="updateCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=album.getAlbumId()%>)">
+							댓글 수정</button>
+							<button type="button" class="delete-btn"
+								onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=album.getAlbumId()%>)">
+							댓글 삭제</button>
+							<% } %>
+
+							<!-- 관리자면 삭제가능 -->
+							<%if(member!=null && member.getStatus() == 2){ %>
+							<button type="button" class="delete-btn"
+								onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=album.getAlbumId()%>)">댓글
+								삭제</button>
+							<% } %>
+						</div></td>
 				</tr>
 				<%
 				}
@@ -137,28 +136,28 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 				<% } %>
 			</table>
 		</div>
-		
+
 		<!-- 댓글 작성 폼(로그인한 회원만 댓글작성창 뜸) -->
 		<%if (member != null && member.getStatus() == 1) {%>
 		<form class="comment-form">
 			<!-- 댓글 ID (수정 시 사용) -->
-			<input type="hidden" id="albumId" name="albumId" value="<%=albumId%>">
-			<input type="hidden" id="memberNo" name="memberNo" value="<%=member.getMemberNo()%>">
-			<label for="nickname">닉네임:</label>
-			<input type="text" id="nickname" name="nickname" value="<%=member.getNickname()%>" readonly required><br>
+			<input type="hidden" id="albumId" name="albumId"
+				value="<%=album.getAlbumId()%>"> <input type="hidden"
+				id="memberNo" name="memberNo" value="<%=member.getMemberNo()%>">
+			<label for="nickname">닉네임:</label> <input type="text" id="nickname"
+				name="nickname" value="<%=member.getNickname()%>" readonly required><br>
 			<!-- 댓글 내용 입력란 -->
 			<label for="comment">내용:</label>
-			<textarea id="comment" name="comment" rows="4" cols="100" required></textarea><br>
+			<textarea id="comment" name="comment" rows="4" cols="100" required></textarea>
+			<br>
 
 			<!-- 댓글 작성 -->
-			<div  class="comment-sub-upd-del-btn">
+			<div class="comment-sub-upd-del-btn">
 				<button type="button" class="btn btn-primary"
-					onclick="submitCommentAndShowAlbumView(<%=albumId%>);">댓글 작성
-				</button>
+					onclick="submitCommentAndShowAlbumView(<%=album.getAlbumId()%>);">댓글 작성</button>
 			</div>
 		</form>
-		<%
-		}
-		%>
+		<%}%>
+	</div>
 </body>
 </html>

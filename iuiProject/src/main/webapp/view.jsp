@@ -15,8 +15,9 @@
 <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<% List<AlbumDTO> albums = albumService.getAllAlbums();
-%>
+	<%
+	List<AlbumDTO> albums = albumService.getAllAlbums();
+	%>
 	<div class="container">
 		<h3 align="center" style="margin-top: 10px;">아이유 앨범 갤러리</h3>
 		<div class="row">
@@ -51,13 +52,14 @@
 	        if (xhr.status === 200) {
 	            // 응답으로 받은 HTML을 section 요소에 삽입
 	            document.querySelector('section').innerHTML = xhr.responseText;
-	        } else {
+ 	        } 
+	        else {
 	            alert('페이지 로드 중 오류가 발생했습니다.');
 	        }
 	    };
-	    // 요청 보내기
-	    xhr.send();
-	}
+        // 요청 보내기
+        xhr.send();
+    }
 	
 		 function updateAlbumAndShowAlbumView(albumId) {
 		        // updateAlbum 함수 호출
@@ -68,174 +70,133 @@
 		    }
 		 
 		 function submitCommentAndShowAlbumView(albumId) {
-			 // submitComment 함수 호출
 		        submitComment(albumId, function() {
-		            // submitComment이 완료되면 albumView 함수 호출
 		            albumview('albumView.jsp?albumId=' + albumId);
 		        });
 		    }
 		 
-		 function updateCommentAndShowAlbumView(commentId) {
-		        // updateComment 함수 호출
+		 function updateCommentAndShowAlbumView(commentId,albumId) {
 		        updateComment(commentId, function() {
-		            // updateComment이 완료되면 albumView 함수 호출
-		            albumview('albumView.jsp?albumId=' + albumId);
+		        	albumview('albumView.jsp?commentAction=update&commentId=' + commentid + '&albumId=' + albumId);
 		        });
-		    }
-		 
-		 function deleteCommentAndShowAlbumView(commentId) {
-		        // updateComment 함수 호출
-		        deleteComment(commentId, function() {
-		            // updateComment이 완료되면 albumView 함수 호출
-		            albumview('albumView.jsp?albumId=' + albumId);
-		        });
-		    }
-		 
-		  function updateAlbum(i,callback) {
-	            var newAlbumName = document.getElementById("new_albumName").value;
-	            var newAlbumType = document.getElementById("new_albumType").value; 
-	            var newReleaseDate = document.getElementById("new_releaseDate").value;
-	            var newNumberSongs = document.getElementById("new_numberSongs").value;
-	            var newAlbumIntro = document.getElementById("new_albumIntro").value;
-	            var newAlbumId = i;
-
-	            // AJAX를 사용하여 albumModAction.jsp로 데이터 전송
-	            var xhr = new XMLHttpRequest();
-	            xhr.open("POST", "albumModAction.jsp", true);
-	            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-	            xhr.onreadystatechange = function() {
-	                if (xhr.readyState == 4 && xhr.status == 200) {
-	                    // 성공적으로 응답을 받았을 때의 동작
-	                    alert('앨범이 성공적으로 수정되었습니다.');
-	                    if (callback && typeof callback === 'function') {
-	                        callback();
-	                    }
-	                }
-	            };
-
-	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
-	            var data = "newAlbumName=" + encodeURIComponent(newAlbumName) +
-	                       "&newAlbumType=" + encodeURIComponent(newAlbumType) +
-	                       "&newReleaseDate=" + encodeURIComponent(newReleaseDate) +
-	                       "&newNumberSongs=" + encodeURIComponent(newNumberSongs) +
-	                       "&newAlbumIntro=" + encodeURIComponent(newAlbumIntro)+
-	                       "&newAlbumId=" + encodeURIComponent(i);
-
-	            xhr.send(data);
-	        } 
-		 
-		 function submitCommentAndShowAlbumView(albumId) {
-			 // submitComment 함수 호출
-		        submitComment(albumId, function() {
-		            // submitComment이 완료되면 albumView 함수 호출
-		            albumview('albumView.jsp?albumId=' + albumId);
-		        });
-		    }
-
-		 function submitComment(i,callback) {
-	            var memberNo = document.getElementById("memberNo").value; 
-	            var comment = document.getElementById("comment").value;
-
-	            // AJAX를 사용하여 submitCommentAction.jsp로 데이터 전송
-	            var xhr = new XMLHttpRequest();
-	            xhr.open("POST", "commentSubmitAction.jsp", true);
-	            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-	            xhr.onreadystatechange = function() {
-	                if (xhr.readyState == 4 && xhr.status == 200) {
-	                    // 성공적으로 응답을 받았을 때의 동작
-	                        if (callback && typeof callback === 'function') {
-	                            callback();
-	                        }
-	                    } else {
-	                        // 에러 처리
-	                        alert('댓글 작성 중 오류가 발생했습니다.');
-	                    }
-	                
-	            };
-	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
-	            var data = "albumId=" + encodeURIComponent(i) +
-	                       "&memberNo=" + encodeURIComponent(memberNo) +
-	                       "&comment=" + encodeURIComponent(comment);
-	            xhr.send(data);
-	        }
-		 
-	        function updateCommentAndShowAlbumView(commentId,albumId) {
-		        // updateComment 함수 호출
-		        updateComment(commentId, function() {
-		            // updateComment이 완료되면 albumView 함수 호출
-		            albumview('albumView.jsp?albumId=' + albumId);
-		        });
-		    }
-	        
-	        function updateComment(i, callback) {
-			    var commentId = document.getElementById("commentId").value;
-			    var newComment = document.getElementById("comment").value;
-
-			    // AJAX를 사용하여 updateCommentAction.jsp로 데이터 전송
-			    var xhr = new XMLHttpRequest();
-			    xhr.open("POST", "commentUpdateAction.jsp", true);
-			    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-			    xhr.onreadystatechange = function() {
-			        if (xhr.readyState == 4 && xhr.status == 200) {
-			                // 성공적으로 응답을 받았을 때의 동작
-			                alert('댓글이 수정되었습니다.');
-			                if (callback && typeof callback === 'function') {
-			                    callback(commentId);
-			                }
-			             else {
-			                // 에러 처리 코드
-			                alert('댓글 수정이 실패했습니다.');
-			                console.error("댓글 수정 실패: " + xhr.status);
-			            }
-			        }
-			    };
-
-			    // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
-			    var data = "commentId=" + encodeURIComponent(i) +
-			               "&comment=" + encodeURIComponent(newComment);
-			    xhr.send(data);
 			}
-		  
-		  function deleteCommentAndShowAlbumView(commentId) {
-		        // updateComment 함수 호출
-		        deleteComment(commentId, function() {
-		            // updateComment이 완료되면 albumView 함수 호출
-		            albumview('albumView.jsp?albumId=' + albumId);
-		        });
-		    
-	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
-	            var data = "commentId=" + encodeURIComponent(commentId) +
-			               "&albumId=" + encodeURIComponent(albumId) +
-			               "&memberNo=" + encodeURIComponent(memberNo) +
-			               "&comment=" + encodeURIComponent(comment);
-	            xhr.send(data);
-	        }
-		  
-		  function deleteComment(i,callback) {
-	            // AJAX를 사용하여 commentDeleteAction.jsp로 데이터 전송
-	            var xhr = new XMLHttpRequest();
-	            xhr.open("POST", "commentDeleteAction.jsp", true);
-	            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-	            xhr.onreadystatechange = function() {
-	                if (xhr.readyState == 4) {
-	                    // 성공적으로 응답을 받았을 때의 동작
-	                    if (xhr.status == 200) {
-	                        if (callback && typeof callback === 'function') {
-	                            callback();
-	                        }
-	                    } else {
-	                        // 에러 처리
-	                        alert('댓글 삭제 중 오류가 발생했습니다.');
-	                    }
-	                }
-	            };
-	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
-	            var data = "&commentId=" + encodeURIComponent(i);
-	            xhr.send(data);
-	        }
+		 
+		 function deleteCommentAndShowAlbumView(commentId, albumId) {
+				var xhr = new XMLHttpRequest();
+				xhr.open("POST", "commentDeleteAction.jsp", true);
+				xhr.setRequestHeader("Content-Type",
+						"application/x-www-form-urlencoded; charset=UTF-8");
 
+				// Delete action 완료 후 콜백함수 실행
+				xhr.onload = function() {
+					if (xhr.status === 200) {
+						// 댓글 삭제가 완료되었으므로 앨범 뷰 새로고침
+						albumview('albumView.jsp?albumId=' + albumId);
+					} else {
+						alert('페이지 로드 중 오류가 발생했습니다.');
+					}
+				};
+
+				// 전송할 데이터 설정
+				var data = "commentId=" + encodeURIComponent(commentId);
+
+				// 요청 보내기
+				xhr.send(data);
+			}
+
+		function updateAlbum(i, callback) {
+			var newAlbumName = document.getElementById("new_albumName").value;
+			var newAlbumType = document.getElementById("new_albumType").value;
+			var newReleaseDate = document.getElementById("new_releaseDate").value;
+			var newNumberSongs = document.getElementById("new_numberSongs").value;
+			var newAlbumIntro = document.getElementById("new_albumIntro").value;
+			var newAlbumId = i;
+
+			// AJAX를 사용하여 albumModAction.jsp로 데이터 전송
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "albumModAction.jsp", true);
+			xhr.setRequestHeader("Content-Type",
+					"application/x-www-form-urlencoded; charset=UTF-8");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == XMLHttpRequest.DONE) { // 요청이 완료되었을 때
+					if (xhr.status == 200) {
+						// 성공적으로 응답을 받았을 때의 동작
+						alert('앨범이 성공적으로 수정되었습니다.');
+						if (callback && typeof callback === 'function') {
+							callback();
+						}
+					}
+				}
+			};
+
+			// 전송할 데이터를 URL-encoded 형식으로 만듭니다.
+			var data = "newAlbumName=" + encodeURIComponent(newAlbumName)
+					+ "&newAlbumType=" + encodeURIComponent(newAlbumType)
+					+ "&newReleaseDate=" + encodeURIComponent(newReleaseDate)
+					+ "&newNumberSongs=" + encodeURIComponent(newNumberSongs)
+					+ "&newAlbumIntro=" + encodeURIComponent(newAlbumIntro)
+					+ "&newAlbumId=" + encodeURIComponent(i);
+
+			xhr.send(data);
+		}
+
+		function submitComment(i, callback) {
+			var memberNo = document.getElementById("memberNo").value;
+			var comment = document.getElementById("comment").value;
+
+			// AJAX를 사용하여 submitCommentAction.jsp로 데이터 전송
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "commentSubmitAction.jsp", true);
+			xhr.setRequestHeader("Content-Type",
+					"application/x-www-form-urlencoded; charset=UTF-8");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == XMLHttpRequest.DONE) { // 요청이 완료되었을 때
+					if (xhr.status == 200) { // 성공적으로 응답을 받았을 때의 동작
+						if (callback && typeof callback === 'function') {
+							callback();
+						}
+					} else {
+						// 에러 처리
+						alert('댓글 작성 중 오류가 발생했습니다.');
+					}
+				}
+			};
+			// 전송할 데이터를 URL-encoded 형식으로 만듭니다.
+			var data = "albumId=" + encodeURIComponent(i) + 
+					   "&memberNo=" + encodeURIComponent(memberNo) + 
+					   "&comment=" + encodeURIComponent(comment);
+			xhr.send(data);
+		}
+
+		function updateComment(i, callback) {
+			var commentId = document.getElementById("commentId").value;
+			var newComment = document.getElementById("comment").value;
+
+			// AJAX를 사용하여 updateCommentAction.jsp로 데이터 전송
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "commentUpdateAction.jsp", true);
+			xhr.setRequestHeader("Content-Type",
+					"application/x-www-form-urlencoded; charset=UTF-8");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == XMLHttpRequest.DONE) { // 요청이 완료되었을 때 
+					if (xhr.status == 200) { // 성공적으로 응답을 받았을 때의 동작
+						alert('댓글이 수정되었습니다.');
+						if (callback && typeof callback === 'function') {
+							callback();
+						}
+					} else {
+						alert('댓글 수정이 실패했습니다.');
+						console.error("댓글 수정 실패: " + xhr.status);
+					}
+				}
+			}
+			// 전송할 데이터를 URL-encoded 형식으로 만듭니다.
+			var data = "commentId=" + encodeURIComponent(i) + "&comment="
+					+ encodeURIComponent(newComment);
+			xhr.send(data);
+		}
+		
 	</script>
-	
 	<!-- 부트스트랩 JavaScript 및 j Query 스크립트 링크 -->
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
