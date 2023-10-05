@@ -113,10 +113,10 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 					<!-- 로그인 되어 있고, 댓글 작성자이면 수정,삭제 가능 -->
 					<%if( member!=null &&comment.getMemberNo()==member.getMemberNo() ){ %>
 					<button type="button" class="update-btn"
-					onclick="updateCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=albumId%>)">댓글 수정
+					onclick="updateCommentAndShowAlbumView(<%=comment.getCommentId()%>)">댓글 수정
 					</button>
 					<button type="button" class="delete-btn"
-					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=albumId%>)">댓글 삭제
+					onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>)">댓글 삭제
 					</button>
 					<% } %>
 					

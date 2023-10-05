@@ -67,8 +67,31 @@
 		        });
 		    }
 		 
-
-		 function updateAlbum(i,callback) {
+		 function submitCommentAndShowAlbumView(albumId) {
+			 // submitComment 함수 호출
+		        submitComment(albumId, function() {
+		            // submitComment이 완료되면 albumView 함수 호출
+		            albumview('albumView.jsp?albumId=' + albumId);
+		        });
+		    }
+		 
+		 function updateCommentAndShowAlbumView(commentId) {
+		        // updateComment 함수 호출
+		        updateComment(commentId, function() {
+		            // updateComment이 완료되면 albumView 함수 호출
+		            albumview('albumView.jsp?albumId=' + albumId);
+		        });
+		    }
+		 
+		 function deleteCommentAndShowAlbumView(commentId) {
+		        // updateComment 함수 호출
+		        deleteComment(commentId, function() {
+		            // updateComment이 완료되면 albumView 함수 호출
+		            albumview('albumView.jsp?albumId=' + albumId);
+		        });
+		    }
+		 
+		  function updateAlbum(i,callback) {
 	            var newAlbumName = document.getElementById("new_albumName").value;
 	            var newAlbumType = document.getElementById("new_albumType").value; 
 	            var newReleaseDate = document.getElementById("new_releaseDate").value;
@@ -108,8 +131,8 @@
 		            albumview('albumView.jsp?albumId=' + albumId);
 		        });
 		    }
-		 
-		  function submitComment(i,callback) {
+
+		 function submitComment(i,callback) {
 	            var memberNo = document.getElementById("memberNo").value; 
 	            var comment = document.getElementById("comment").value;
 
@@ -187,7 +210,6 @@
 			               "&comment=" + encodeURIComponent(comment);
 	            xhr.send(data);
 	        }
-
 		  
 		  function deleteComment(i,callback) {
 	            // AJAX를 사용하여 commentDeleteAction.jsp로 데이터 전송
