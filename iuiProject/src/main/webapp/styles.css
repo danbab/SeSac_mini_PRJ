@@ -387,7 +387,11 @@ aside a img {
 	text-align: center;
 }
 
-.comment-sub-upd-del-btn input {
+.comment-sub-upd-del-btn {
+	display:contents;
+}
+
+.comment-sub-upd-del-btn button {
 	padding: 5px;
 	background-color: #007bff;
 	color: #fff;
@@ -397,11 +401,10 @@ aside a img {
 	margin-bottom: 5px;
 }
 
-.comment-sub-upd-del-btn input:hover {
+.comment-sub-upd-del-btn button:hover {
 	background-color: #0056b3;
 }
 
 .comment-form label, input, textarea{
 	border-radius: 3px;
 }
-

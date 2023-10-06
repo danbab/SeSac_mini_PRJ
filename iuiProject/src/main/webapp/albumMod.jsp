@@ -41,7 +41,7 @@ album = albumService.selectAlbum(albumId);
 				<textarea rows="8" cols="80" id="new_albumIntro"><%=album.getAlbumIntro()%></textarea>
 			</div>
 			<button type="button" class="btn btn-primary"
-				onclick="updateAlbumAndShowAlbumView(<%=albumId%>);">수정완료
+				onclick="updateAlbumAndShowAlbumView(<%=album.getAlbumId()%>);">수정완료
 			</button>
 		</div>
 		<%	} else { %>
