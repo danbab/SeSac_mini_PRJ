@@ -73,9 +73,10 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 				<%
 				for (int i = 0; i < album.getNumberSongs(); i++) {
 					song = songService.selectSong(albumId, i + 1);
+					if(song!=null){
 				%>
 				<tr>
-					<td><%=song.getTrackNo()%></td>
+					<td><%=i+1%></td>
 					<td><%=song.getTitle()%></td>
 					<td><%=song.getWriter()%></td>
 					<td><%=song.getComposer()%></td>
@@ -83,8 +84,13 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 					<td><%=song.getTitleCheck() == 0 ? "" : "&#10003"%></td>
 				</tr>
 				<%
-				}
-				%>
+					}else {%> 
+					<tr>
+					<td><%=i+1%></td>
+					<td colspan="5">곡 정보가 없습니다</td>
+					</tr>
+				<% }
+				} %>
 			</table>
 		</div>
 	</div>
