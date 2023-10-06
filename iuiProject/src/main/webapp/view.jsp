@@ -200,6 +200,39 @@
 					   "&comment="	+ encodeURIComponent(newComment);
 			xhr.send(data);
 		}
+		
+		function showEditForm(commentId) {
+		    // 기존에 수정 폼이 열려있다면 제거
+		    var existingForm = document.getElementById('edit-comment-form');
+		    if (existingForm) {
+		        existingForm.remove();
+		    }
+
+		    // 선택한 댓글의 row 선택
+		    var commentRow = document.querySelector(`[data-comment-id="${commentId}"]`);
+
+			// 새로운 div 생성 (댓글 수정 폼)
+			var editDiv = document.createElement('div');
+			editDiv.id = 'edit-comment-form';
+
+			// form 안에 들어갈 HTML 설정
+			editDiv.innerHTML = `
+				<form onsubmit="event.preventDefault(); submitEdit(${commentId}, ${albumId});">
+					<label for="edit-comment">수정할 내용:</label>
+					<textarea id="edit-comment" name="edit-comment" rows="4" cols="50">${comment.getText()}</textarea>
+					<button type="submit">수정 완료</button>
+					<button type="button" onclick="(function() { var form = document.getElementById('edit-comment-form'); form.parentNode.removeChild(form); })()">취소</button>
+				</form>`;
+
+		   // 생성한 div를 선택한 댓글 바로 아래에 삽입
+		   commentRow.parentNode.insertBefore(editDiv, commentRow.nextSibling);
+		}
+
+	
+		
+		
+		
+		
 	</script>
 	<!-- 부트스트랩 JavaScript 및 j Query 스크립트 링크 -->
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
