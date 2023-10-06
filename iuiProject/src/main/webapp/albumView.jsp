@@ -5,8 +5,6 @@
 <jsp:useBean id="song" class="iuiProject.SongDTO" scope="session"/>
 <jsp:useBean id="songService" class="iuiProject.SongDAO" scope="session"/>
 <jsp:useBean id="commentService" type="iuiProject.UserCommentDAO" scope="session"/>
-<jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session" />
-<jsp:useBean id="memberService" type="iuiProject.MemberDAO" scope="application" />
 
 <!DOCTYPE html>
 <html>
@@ -21,6 +19,9 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <%
 int albumId = Integer.parseInt(request.getParameter("albumId"));
 album = albumService.selectAlbum(albumId);
+//member랑 memberService 수정x , 로그인이 안되어 있는 상태에서 넘어갈 때 문제가 발생함
+MemberDTO member = (MemberDTO) session.getAttribute("member");
+MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 %>
 <body>
 	<!-- 앨범 정보 -->
