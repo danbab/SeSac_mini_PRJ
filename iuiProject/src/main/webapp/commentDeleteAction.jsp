@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.Date,java.text.*"%>
 <jsp:useBean id="commentService" type="iuiProject.UserCommentDAO" scope="session" />
 
@@ -7,7 +7,12 @@
 <title>commentDeleteAction.jsp</title>
 </head>
 
-<%
-int commentId = Integer.parseInt(request.getParameter("commentId"));
-commentService.deleteComment(commentId);
-%>
+<html>
+<body>
+	<%
+	int commentId = Integer.parseInt(request.getParameter("commentId"));
+	
+	commentService.deleteComment(commentId);
+	%>
+</body>
+</html>
