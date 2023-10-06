@@ -156,6 +156,6 @@ album = albumService.selectAlbum(albumId);
 			</div>
 		</form>
 		<%}%>
-	</div>+
+	</div>
 </body>
 </html>
