@@ -59,6 +59,7 @@ section {
 	margin-left: 200px;
 	display: grid;
 	justify-content: center;
+	overflow: auto;
 }
 
 .card-title {
@@ -185,6 +186,9 @@ aside a img {
 	padding: 0;
 	margin: 0;
 }
+
+
+
 
 /* 드롭다운 메뉴 스타일 */
 .dropdown {
@@ -335,11 +339,14 @@ aside a img {
 	background-color: #0056b3;
 }
 
+
+
 .album-container {
 	display: inline-flex;
 	margin-top: 20px;
 	align-items: center;
 }
+
 
 .album-cover {
 	width: auto;
