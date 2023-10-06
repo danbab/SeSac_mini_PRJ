@@ -89,6 +89,5 @@ album = albumService.selectAlbum(albumId);
 			</table>
 		</div>
 	</div>
-	
 </body>
 </html>

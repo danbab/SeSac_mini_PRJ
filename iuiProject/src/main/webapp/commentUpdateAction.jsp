@@ -11,7 +11,7 @@
 <body>
 	<%
 	int commentId = Integer.parseInt(request.getParameter("commentId"));
-	String newText = request.getParameter("newComment");
+	String newText = request.getParameter("comment");
 
 	UserCommentDTO c = commentService.selectComment(commentId);
 	commentService.updateComment(c, newText);

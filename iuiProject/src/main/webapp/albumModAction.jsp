@@ -17,10 +17,9 @@ String newAlbumType = request.getParameter("newAlbumType");
 String releaseDateString = request.getParameter("newReleaseDate");
 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 Date newReleaseDate = dateFormat.parse(releaseDateString);
-
 int newNumberSongs = Integer.parseInt(request.getParameter("newNumberSongs"));
 String newAlbumIntro = request.getParameter("newAlbumIntro");
-int newAlbumId = Integer.parseInt(request.getParameter("albumId"));
+int newAlbumId = Integer.parseInt(request.getParameter("newAlbumId"));
 
 AlbumDTO m = new AlbumDTO();
 m.setAlbumName(newAlbumName);
