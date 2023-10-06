@@ -48,7 +48,7 @@
 	    xhr.open('GET', target, true);
 	    // 요청이 완료되면 실행될 함수 정의
 	    xhr.onload = function () {
-	        if (xhr.status === 200) {
+	        if (xhr.readyState == 4 &&xhr.status === 200) {
 	            // 응답으로 받은 HTML을 section 요소에 삽입
 	            document.querySelector('section').innerHTML = xhr.responseText;
 	        } else {
@@ -123,10 +123,11 @@
 	                        if (callback && typeof callback === 'function') {
 	                            callback();
 	                        }
-	                    } else {
+	                } else {
 	                        // 에러 처리
 	                        alert('댓글 작성 중 오류가 발생했습니다.');
-	                    }
+	                }
+	            
 	                
 	            };
 	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
@@ -176,21 +177,15 @@
 		  function deleteCommentAndShowAlbumView(commentId) {
 		        // updateComment 함수 호출
 		        deleteComment(commentId, function() {
-		            // updateComment이 완료되면 albumView 함수 호출
+		            // deleteComment이 완료되면 albumView 함수 호출
 		            albumview('albumView.jsp?albumId=' + albumId);
-		        });
-		    
-	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
-	            var data = "commentId=" + encodeURIComponent(commentId) +
-			               "&albumId=" + encodeURIComponent(albumId) +
-			               "&memberNo=" + encodeURIComponent(memberNo) +
-			               "&comment=" + encodeURIComponent(comment);
-	            xhr.send(data);
+		        });               
 	        }
 
 		  
 		  function deleteComment(i,callback) {
 	            // AJAX를 사용하여 commentDeleteAction.jsp로 데이터 전송
+	            var commentId=i;
 	            var xhr = new XMLHttpRequest();
 	            xhr.open("POST", "commentDeleteAction.jsp", true);
 	            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -208,7 +203,7 @@
 	                }
 	            };
 	            // 전송할 데이터를 URL-encoded 형식으로 만듭니다.
-	            var data = "&commentId=" + encodeURIComponent(i);
+	            var data = "&commentId=" + encodeURIComponent(commentId);
 	            xhr.send(data);
 	        }
 
