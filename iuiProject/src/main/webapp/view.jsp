@@ -81,6 +81,12 @@
 			});
 		}
 		
+		function updateCommentAndShowAlbumView(commentId, albumId) {
+			updateComment(commentId, function() {
+				albumview('albumView.jsp?albumId=' + albumId);
+			});
+		}
+		
 		function updateAlbum(i, callback) {
 			var newAlbumName = document.getElementById("new_albumName").value;
 			var newAlbumType = document.getElementById("new_albumType").value;
@@ -174,8 +180,8 @@
 
 
 		function updateComment(i, callback) {
-			var commentId = document.getElementById("commentId").value;
-			var newComment = document.getElementById("comment").value;
+			var commentId = i;
+			var newComment = document.getElementById("edit-comment").value;
 
 			// AJAX를 사용하여 updateCommentAction.jsp로 데이터 전송
 			var xhr = new XMLHttpRequest();
@@ -185,7 +191,6 @@
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == XMLHttpRequest.DONE) { // 요청이 완료되었을 때 
 					if (xhr.status == 200) { // 성공적으로 응답을 받았을 때의 동작
-						alert('댓글이 수정되었습니다.');
 						if (callback && typeof callback === 'function') {
 							callback();
 						}
@@ -194,46 +199,72 @@
 						console.error("댓글 수정 실패: " + xhr.status);
 					}
 				}
-			}
+			};
 			// 전송할 데이터를 URL-encoded 형식으로 만듭니다.
 			var data = "commentId=" + encodeURIComponent(i) + 
 					   "&comment="	+ encodeURIComponent(newComment);
 			xhr.send(data);
 		}
-		
-		function showEditForm(commentId) {
-		    // 기존에 수정 폼이 열려있다면 제거
-		    var existingForm = document.getElementById('edit-comment-form');
-		    if (existingForm) {
-		        existingForm.remove();
-		    }
+		function showEditForm(commentId,albumId) {
+		    $(document).ready(function() {
+		        // 기존에 수정 폼이 열려있다면 제거
+		        var existingForm = document.getElementById('edit-comment-form');
+		        if (existingForm) {
+		            existingForm.remove();
+		        }
 
-		    // 선택한 댓글의 row 선택
-		    var commentRow = document.querySelector(`[data-comment-id="${commentId}"]`);
+		        // 선택한 댓글의 row 선택
+				var commentRow = document.querySelector('[data-comment-id="' + commentId + '"]');
+				var commentText = commentRow.getAttribute('data-comment-text');
 
-			// 새로운 div 생성 (댓글 수정 폼)
-			var editDiv = document.createElement('div');
-			editDiv.id = 'edit-comment-form';
+				// 새로운 div 생성 (댓글 수정 폼)
+				var editDiv = document.createElement('div');
+				editDiv.id = 'edit-comment-form';
 
-			// form 안에 들어갈 HTML 설정
-			editDiv.innerHTML = `
-				<form onsubmit="event.preventDefault(); submitEdit(${commentId}, ${albumId});">
-					<label for="edit-comment">수정할 내용:</label>
-					<textarea id="edit-comment" name="edit-comment" rows="4" cols="50">${comment.getText()}</textarea>
-					<button type="submit">수정 완료</button>
-					<button type="button" onclick="(function() { var form = document.getElementById('edit-comment-form'); form.parentNode.removeChild(form); })()">취소</button>
-				</form>`;
+				// form 안에 들어갈 HTML 설정
+				<%-- editDiv.innerHTML = `
+						<textarea id="edit-comment" name="edit-comment" rows="1" cols="50">${commentText}</textarea>
+						<button type="button" onclick="updateCommentAndShowAlbumView(<%=commentId%>,albumId)">수정</button>
+						<button type="button" onclick="(function() { var form = document.getElementById('edit-comment-form'); form.parentNode.removeChild(form); })()">취소</button>
+					`; --%>
+				editDiv.innerHTML = `
+    <textarea id="edit-comment" name="edit-comment" rows="1" cols="50">${commentText}</textarea>
+`;
 
-		   // 생성한 div를 선택한 댓글 바로 아래에 삽입
-		   commentRow.parentNode.insertBefore(editDiv, commentRow.nextSibling);
+				var updateButton = document.createElement('button');
+				updateButton.type = 'button';
+				updateButton.textContent = '수정';
+				updateButton.addEventListener('click', function() {
+  				updateCommentAndShowAlbumView(commentId, albumId);
+				});
+				editDiv.appendChild(updateButton);
+
+				var cancelButton = document.createElement('button');
+				cancelButton.type = 'button';
+				cancelButton.textContent = '취소';
+				cancelButton.addEventListener('click', function() {
+ 				   var form = document.getElementById('edit-comment-form'); 
+				    form.parentNode.removeChild(form);
+				});
+				editDiv.appendChild(cancelButton);
+				
+					
+				var textarea = editDiv.querySelector('#edit-comment');
+				textarea.addEventListener('input', autoResizeTextarea);
+
+			   // 생성한 div를 선택한 댓글 바로 아래에 삽입
+			   commentRow.parentNode.insertBefore(editDiv, commentRow.nextSibling);
+		    });
 		}
-
+		
+		 function autoResizeTextarea() {
+				this.style.height = 'auto';
+				this.style.height = (this.scrollHeight) + 'px';
+			}
+		 
 	
-		
-		
-		
-		
-	</script>
+</script>
+	
 	<!-- 부트스트랩 JavaScript 및 j Query 스크립트 링크 -->
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

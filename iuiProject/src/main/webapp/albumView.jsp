@@ -105,7 +105,7 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
  			for (int i = 0; i < comments.size(); i++) {
  					UserCommentDTO comment = comments.get(i);
 			%>
-				<tr data-comment-id="<%=comment.getCommentId()%>">
+				<tr data-comment-id="<%=comment.getCommentId()%>" data-comment-text="<%=comment.getText()%>">
 					<td><%=memberService.findNicknameByMemberNo(comment.getMemberNo())%></td>
 					<td><%=comment.getText()%></td>
 					<td class="regdate"><%=comment.getTimestamp()%>
@@ -113,7 +113,7 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 							<!-- 로그인 되어 있고, 댓글 작성자이면 수정,삭제 가능 -->
 							<%if( member!=null &&comment.getMemberNo()==member.getMemberNo() ){ %>
 							<button type="button" class="update-btn"
-								onclick="showEditForm(<%=comment.getCommentId()%>)">수정</button>
+								onclick="showEditForm(<%=comment.getCommentId()%>,<%=albumId%>)">수정</button>
 							<button type="button" class="delete-btn"
 								onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=album.getAlbumId()%>)">
 							삭제</button>
@@ -147,7 +147,7 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 				name="nickname" value="<%=member.getNickname()%>" readonly required><br>
 			<!-- 댓글 내용 입력란 -->
 			<label for="comment">내용:</label>
-			<textarea id="comment" name="comment" rows="4" cols="100" required></textarea>
+			<textarea id="comment" name="comment" rows="1" cols="50" required></textarea>
 			<br>
 
 			<!-- 댓글 작성 -->

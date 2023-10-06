@@ -79,7 +79,7 @@ public class UserCommentDAO {
 	// 댓글 업데이트
 	public int updateComment(UserCommentDTO comment, String newText) throws SQLException {
 	    Connection conn = pool.getConnection();
-	    String sql = "UPDATE user_comment SET text = ?, timestamp1 = sysdate WHERE comment_id = ?";
+	    String sql = "UPDATE user_comment SET text = ? WHERE comment_id = ?";
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
 	    pstmt.setString(1, newText);
 	    pstmt.setInt(2, comment.getCommentId());
