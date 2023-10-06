@@ -40,8 +40,7 @@
 		</div>
 	</div>
 
-	<script>
-	
+<script>
 		function albumview(i) {
 			// AJAX 요청 생성
 			const xhr = new XMLHttpRequest();
@@ -95,11 +94,7 @@
 					+ "&newAlbumId=" + encodeURIComponent(newAlbumId);
 
 			xhr.send(data);
-				
-			
 		}
-		
-		
 
 		function submitCommentAndShowAlbumView(albumId) {
 			var memberNo = document.getElementById("memberNo").value;
@@ -171,11 +166,8 @@
 			var data = "commentId=" + encodeURIComponent(commentId) + 
 					   "&comment="	+ encodeURIComponent(newComment);
 			xhr.send(data);
-			
-				
 		}
 		
-	
 		function showEditForm(commentId,albumId) {
 		    $(document).ready(function() {
 		        // 기존에 수정 폼이 열려있다면 제거
@@ -193,14 +185,7 @@
 				editDiv.id = 'edit-comment-form';
 
 				// form 안에 들어갈 HTML 설정
-				<%-- editDiv.innerHTML = `
-						<textarea id="edit-comment" name="edit-comment" rows="1" cols="50">${commentText}</textarea>
-						<button type="button" onclick="updateCommentAndShowAlbumView(<%=commentId%>,albumId)">수정</button>
-						<button type="button" onclick="(function() { var form = document.getElementById('edit-comment-form'); form.parentNode.removeChild(form); })()">취소</button>
-					`; --%>
-				editDiv.innerHTML = `
-    <textarea id="edit-comment" name="edit-comment" rows="1" cols="50">${commentText}</textarea>
-`;
+				editDiv.innerHTML = `<textarea id="edit-comment" name="edit-comment" rows="1" cols="50">${commentText}</textarea>`;
 
 				var updateButton = document.createElement('button');
 				updateButton.type = 'button';
@@ -214,11 +199,10 @@
 				cancelButton.type = 'button';
 				cancelButton.textContent = '취소';
 				cancelButton.addEventListener('click', function() {
- 				   var form = document.getElementById('edit-comment-form'); 
+ 				var form = document.getElementById('edit-comment-form'); 
 				    form.parentNode.removeChild(form);
 				});
 				editDiv.appendChild(cancelButton);
-				
 					
 				var textarea = editDiv.querySelector('#edit-comment');
 				textarea.addEventListener('input', autoResizeTextarea);
@@ -231,9 +215,7 @@
 		 function autoResizeTextarea() {
 				this.style.height = 'auto';
 				this.style.height = (this.scrollHeight) + 'px';
-			}
-		 
-	
+		}
 </script>
 	
 	<!-- 부트스트랩 JavaScript 및 j Query 스크립트 링크 -->
