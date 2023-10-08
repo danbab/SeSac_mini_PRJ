@@ -1,14 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="iuiProject.*,java.sql.*,java.util.*"%>
- 
 <jsp:useBean id="memberService" type="iuiProject.MemberDAO" scope = "application"/>
 <jsp:useBean id="member" type="iuiProject.MemberDTO" scope="session"/>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 페이지</title>
 <script type="text/javascript">
 function black(member_no) {
 	window.location.href = 'blackAction.jsp?member_no='+member_no;
@@ -19,11 +18,10 @@ function revokeblack(member_no) {
 </script>
 </head>
 
-<body>
- <h1>관리자 페이지</h1>
-    
-    <h2>전체 회원 리스트</h2>
-    <table border="1">
+<body class="adminview">
+ <h2>관리자 페이지</h2>
+    <h3>전체 회원 리스트</h3>
+    <table border="1" class="admin-member-table">
         <thead>
             <tr>
                 <th>회원 ID</th>
@@ -55,8 +53,8 @@ function revokeblack(member_no) {
         </tbody>
     </table>
     
-    <h2>블랙리스트</h2>
-    <table border="1">
+    <h3>블랙리스트</h3>
+    <table border="1" class="admin-member-table">
         <thead>
             <tr>
                 <th>회원 ID</th>
@@ -71,7 +69,6 @@ function revokeblack(member_no) {
             <%
                 // memberService를 사용하여 전체 회원 목록을 가져옵니다.
                 ArrayList<MemberDTO> blackList = memberService.getAllBlacks();
-                
                 for (MemberDTO m : blackList) {
             %>
             <tr>

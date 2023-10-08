@@ -413,6 +413,30 @@ aside a img {
 	background-color: #0056b3;
 }
 
+
+
 .comment-form label, input, textarea{
 	border-radius: 3px;
+}
+
+.adminview h2, h3 {
+	text-align: center;
+}
+
+.admin-member-table {
+	margin-top: 5%;
+	margin-bottom: 10%;
+}
+
+.adminview button {
+	padding: 5px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.adminview button:hover {
+	background-color: #0056b3;
 }

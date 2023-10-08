@@ -34,13 +34,8 @@
 
 	int result = memberService.updateMemberInfo(member);
 	%>
-
+</body>
 <body onload="showAlertAndRedirect('<%=(result == 1) ? "회원정보가 수정되었습니다." : "회원정보 수정에 실패하였습니다. 다시 시도해주세요."%>',
 	 '<%=(result == 1) ? "home.jsp" : "modInfo.jsp"%>');">
-	result:<%=result%><br>
-    아이디:<%=member.getId()%><br>
-    새 비밀번호:<%=member.getPw()%><br>
-    닉네임:<%=member.getNickname()%><br>
-    이메일:<%=member.getEmail()%>
 </body>
 </html>

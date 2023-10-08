@@ -24,7 +24,6 @@ int result = memberService.join(member);
 if (result == 1) { // 회원가입이 성공한 경우
 %>
 <body onload="showAlertAndRedirect('회원가입이 완료되었습니다.', 'main.jsp');">
-
 </body>
 <%
 } else { // 회원가입 실패한 경우
