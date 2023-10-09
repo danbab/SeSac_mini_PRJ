@@ -399,7 +399,25 @@ aside a img {
 	display:contents;
 }
 
+.regdate div {
+	display: contents;
+}
+
 .comment-sub-upd-del-btn button {
+	padding: 5px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+	margin-bottom: 5px;	
+}
+
+.comment-sub-upd-del-btn button:hover {
+	background-color: #0056b3;
+}
+
+.comment-row button {
 	padding: 5px;
 	background-color: #007bff;
 	color: #fff;
@@ -409,11 +427,9 @@ aside a img {
 	margin-bottom: 5px;
 }
 
-.comment-sub-upd-del-btn button:hover {
+.comment-row button:hover {
 	background-color: #0056b3;
 }
-
-
 
 .comment-form label, input, textarea{
 	border-radius: 3px;
