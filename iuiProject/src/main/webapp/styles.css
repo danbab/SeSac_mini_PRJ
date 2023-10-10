@@ -195,6 +195,7 @@ aside a img {
 .dropdown {
 	position: relative;
 	display: inline-block;
+	width: 100%;
 }
 
 .dropdown-content {
