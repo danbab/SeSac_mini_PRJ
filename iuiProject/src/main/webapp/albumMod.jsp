@@ -32,9 +32,9 @@ album = albumService.selectAlbum(albumId);
 			value="<%= album.getAlbumName()%>" required></h1>
 			<p>앨범타입: <input type="text" id="new_albumType" name="new_albumType"  
 			value="<%= album.getAlbumType()%>" required></p>
-			<p>발매일: <input type="text" id="new_releaseDate" name="new_releaseDate"  
+			<p>발매일: <input type="text" id="new_releaseDate" name="new_releaseDate"
 			value="<%= album.getReleaseDate()%>" required></p>
-			<p>곡 수: <input type="text" id="new_numberSongs" name="new_numberSongs"  
+			<p>곡 수: <input type="text" id="new_numberSongs" name="new_numberSongs"
 			value="<%= album.getNumberSongs()%>" required></p>
 			<p>앨범소개</p>
 			<div class="album-intro">
