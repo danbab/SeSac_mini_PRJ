@@ -30,9 +30,9 @@
             <h2>로그인</h2>
             <br>
             <form class="login-form" action="loginAction.jsp" method="GET">
-                <label for="id">아이디:</label>
+                <label for="id">아이디</label>
                 <input type="text" id="id" name="id" placeholder="아이디" required>
-                <label for="password">비밀번호:</label>
+                <label for="password">비밀번호</label>
                 <input type="password" id="pw" name="pw"  placeholder="비밀번호" required>
 				<br>
                 <button type="submit">로그인</button>
@@ -59,8 +59,8 @@
 		
 		<% for(String year : yearList) {%>
 		<div class="dropdown">
-			<a href="#"><%=year%>년</a>
 			<div class="dropdown-content">
+			<a href="#"><%=year%>년</a>
 				<% for (int i=years.get(year).size()-1 ;i>=0; i--){%>
 				<a href="#"
 					onclick="albumview('albumView.jsp?albumId=<%=years.get(year).get(i).getAlbumId()%>')">
