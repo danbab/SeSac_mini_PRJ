@@ -52,7 +52,7 @@ header {
 /* 섹션 스타일 */
 section {
 	position: relative;
-	border: 5px solid rgb(128, 128, 255);
+	/*border: 5px solid rgb(128, 128, 255);*/
 	border-radius: 3%;
 	margin-top: 55px;
 	float: inline-start;

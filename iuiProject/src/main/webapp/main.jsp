@@ -59,9 +59,9 @@
 		
 		<% for(String year : yearList) {%>
 			<div class="dropdown">
-			<a href="#"><%=year%>년</a>
-			<div class="dropdown-content">
+		  	<a href="#"><%=year%>년</a>
 			<% for (int i=years.get(year).size()-1 ;i>=0; i--){%>
+			<div class="dropdown-content">
 				<a href="#" onclick="albumview('albumView.jsp?albumId=<%=years.get(year).get(i).getAlbumId()%>')">
 				<%=years.get(year).get(i).getAlbumName()%></a>
 			<% }%>			
