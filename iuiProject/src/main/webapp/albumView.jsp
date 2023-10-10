@@ -57,7 +57,6 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 		}
 		%>
 	</div>
-
 	<!-- 곡 정보 -->
 	<div class="song-container">
 		<div class="song-info">
@@ -164,6 +163,6 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 			</div>
 		</form>
 		<%}%>
-	</div>
+	</div>	
 </body>
 </html>

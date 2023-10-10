@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="iuiProject.*,java.sql.*,java.util.Date"%>
+<%@ page import="iuiProject.*,java.sql.*,java.util.*"%>
 <jsp:useBean id="member" class="iuiProject.MemberDTO" />
 <jsp:useBean id="memberService" class="iuiProject.MemberDAO" />
 <!DOCTYPE html>
@@ -19,6 +19,8 @@
 <%
 // 회원가입 로직 수행
 System.out.println("여기는 registerAction: " + member.toString());
+ArrayList<String> ids = memberService.getAllIds();
+if(!ids.contains(member.getId())){
 int result = memberService.join(member);
 
 if (result == 1) { // 회원가입이 성공한 경우
@@ -33,5 +35,10 @@ if (result == 1) { // 회원가입이 성공한 경우
 </body>
 <%
 }
+}else{%>
+	<body
+	onload="showAlertAndRedirect('이미 존재하는 아이디입니다. 다시 시도해주세요.', 'register.jsp');">
+</body>
+<%}
 %>
 </html>

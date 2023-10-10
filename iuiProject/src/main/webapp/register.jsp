@@ -9,6 +9,20 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="styles.css">
 
+<script type='text/javascript'>
+function checkPasswordMatch() {
+    var password = document.getElementById("pw").value;
+    var confirmPassword = document.getElementById("pwc").value;
+
+    if (password != confirmPassword) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return false;
+    }
+    
+    return true;
+}
+</script>
+
 </head>
 <body>
 
@@ -19,7 +33,7 @@
 
 	<div class="signup-container">
 		<h2>회원가입</h2>
-		<form class="signup-form" action="registerAction.jsp" method="GET">
+		<form onsubmit='return checkPasswordMatch()' class="signup-form" action="registerAction.jsp" method="GET">
 			<label for="id">아이디:</label> 
 			<input type="text" id="id" name="id" placeholder="아이디" required> 
 			<label for="pw">비밀번호:</label>

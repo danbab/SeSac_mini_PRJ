@@ -14,6 +14,10 @@
 
 </head>
 <body>
+<%if(member.getStatus()!=2){%>
+	<script>alert("잘못된 접근입니다."); window.location.href = "home.jsp"; </script>
+<%}%>
+
 	<header>
 		<div style="margin-right: 10px; margin-top:5px;"> <%=member.getNickname()%>님 </div>
 		<div class="login-button" onclick="logout()">로그아웃</div>
@@ -23,7 +27,6 @@
         <% if (member.getStatus() == 2) { %>
         <div class="register-button" onclick="gotoAdminPage()">관리자 페이지</div>
         <% } %>
-        
 	</header>
 
     

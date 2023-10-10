@@ -145,6 +145,22 @@ public class MemberDAO {
 		return result;
 	}
 	
+	public ArrayList<String> getAllIds() throws SQLException{
+		ArrayList<String> ids = new ArrayList<String>();
+		Connection conn = pool.getConnection();
+		String sql = "SELECT id FROM member";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+				ids.add(rs.getString("id"));
+		}
+		rs.close();
+		pstmt.close();
+		pool.releaseConnection(conn);
+		
+		return ids;
+	}
+	
 	public ArrayList<MemberDTO> getAllMembers() throws SQLException{
 		ArrayList<MemberDTO> members = new ArrayList<MemberDTO>();
 		Connection conn = pool.getConnection();
