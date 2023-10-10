@@ -115,7 +115,7 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 					<td><%=memberService.findNicknameByMemberNo(comment.getMemberNo())%></td>
 					<td><%=comment.getText()%></td>
 					<td class="regdate"><%=comment.getTimestamp()%>
-						<div class="row">
+						<div class="comment-row">
 							<!-- 로그인 되어 있고, 댓글 작성자이면 수정,삭제 가능 -->
 							<%if( member!=null &&comment.getMemberNo()==member.getMemberNo() ){ %>
 							<button type="button" class="update-btn"
@@ -128,10 +128,11 @@ MemberDAO memberService = (MemberDAO) application.getAttribute("memberService");
 							<!-- 관리자면 삭제가능 -->
 							<%if(member!=null && member.getStatus() == 2){ %>
 							<button type="button" class="delete-btn"
-								onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=album.getAlbumId()%>)">댓글
-								삭제</button>
+								onclick="deleteCommentAndShowAlbumView(<%=comment.getCommentId()%>,<%=album.getAlbumId()%>)">
+							삭제</button>
 							<% } %>
-						</div></td>
+						</div>
+					</td>
 				</tr>
 				<%
 				}

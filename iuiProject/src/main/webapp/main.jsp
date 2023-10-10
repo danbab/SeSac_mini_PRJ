@@ -64,10 +64,10 @@
 			<div class="dropdown-content">
 				<a href="#" onclick="albumview('albumView.jsp?albumId=<%=years.get(year).get(i).getAlbumId()%>')">
 				<%=years.get(year).get(i).getAlbumName()%></a>
-			<% }%>			
+			<%}%>			
     		</div>
     		<%}%>
-			</div>
+		</div>
 	</aside>
 	
 	<section>
