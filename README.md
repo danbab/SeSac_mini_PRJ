@@ -1,7 +1,7 @@
-# <h1>DB 모델</h1>
+# DB 모델
 ![DB모델](https://github.com/danbab/SeSac_mini_PRJ/assets/75743050/5f8b2c9e-952f-4e00-8e9b-9e8a0406b08f)
 
-# <h1>새싹 미니 프로젝트 IUI</h1>
+# 새싹 미니 프로젝트 IUI
 ### 메인 페이지
 ![main](https://github.com/danbab/SeSac_mini_PRJ/assets/75743050/785605ec-b634-4516-8a30-4c987fb18736)
 
